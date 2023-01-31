@@ -77,20 +77,19 @@ const LoginPage = ({ loading, error, ...props }) => {
                                             </div>
                                         </div>
                                         <div className="form-group">
-                                            <label>Password
-                                                <a href="forgot.html" className="float-right">
-                                                    Forgot Password?
-                                                </a>
-                                            </label>
+                                            <label>Password</label>
                                             <input id="password" type="password" className="form-control" minLength={8}
                                                 value={values.password} onChange={handleChange} name="password" required />
+                                            <a href="forgot.html" className="float-right">
+                                                Forgot Password?
+                                            </a>
                                             <div className="invalid-feedback">
                                                 Password is required
                                             </div>
                                         </div>
 
                                         <div className="form-group">
-                                            <div className="custom-control custom-checkbox">
+                                            <div className="custom-control">
                                                 <input type="checkbox" className="custom-control-input" id="customCheck1" />
                                                 <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
                                             </div>
@@ -119,7 +118,7 @@ const LoginPage = ({ loading, error, ...props }) => {
                                         </div>
                                     </form>
                                     {error &&
-                                        <Alert style={{ marginTop: '20px' }} variant="danger">
+                                        <Alert className='login-alert' variant="danger">
                                             {error}
                                         </Alert>
                                     }
