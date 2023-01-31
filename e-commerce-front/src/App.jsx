@@ -5,7 +5,7 @@ import NavbarInfo from './components/NavbarInfo';
 import NavbarMain from './components/NavbarMain';
 import Search from './components/Search';
 import Footer from './components/Footer';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from './pages/Homepage';
 import Aboutpage from './pages/Aboutpage';
 import Contactpage from './pages/Contactpage';
@@ -16,7 +16,7 @@ import { Dashboard } from './pages/dashboard/dashboard';
 function App() {
   return (
     <div className="app">
-      <Router>
+      <BrowserRouter>
         <NavbarInfo />
         <NavbarMain />
         <Search />
@@ -29,7 +29,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         <Footer />
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }

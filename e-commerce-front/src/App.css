@@ -239,7 +239,8 @@ div {
   box-sizing: inherit;
 }
 
-.about-container h2 {
+.about-container h2,
+.about-container .about-section {
   text-align: center;
 }
 
@@ -257,13 +258,8 @@ div {
 
 .about-container .about-section {
   padding: 50px;
-  text-align: center;
   background-color: #474e5d;
   color: white;
-}
-
-.about-container img {
-  width: 100%;
 }
 
 .about-container .container {
@@ -281,7 +277,9 @@ div {
   color: grey;
 }
 
-.about-container .btn-success {
+.about-container .btn-success,
+.about-container div,
+.about-container img {
   width: 100%;
 }
 
