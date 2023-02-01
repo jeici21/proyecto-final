@@ -4,10 +4,9 @@ import { useEffect, useState } from 'react';
 const Shop = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        axios.get('https://api.escuelajs.co/api/v1/products')
-            .then(res => {
-                setProducts(res.data);
-            });
+        axios.get('https://api.escuelajs.co/api/v1/products').then(res => {
+            setProducts(res.data);
+        });
     }, []);
 
     return (
@@ -19,7 +18,6 @@ const Shop = () => {
                         <h2>KMarket Products</h2>
                         <p>Esperamos que los productos que ofrecemos sean de su gusto.</p>
                     </div>
-
                     <div class="row">
                         {products.map((result) => {
                             return (
@@ -52,7 +50,6 @@ const Shop = () => {
                                         </div>
                                     </div>
                                 </div>
-
                             );
                         })}
                     </div>
