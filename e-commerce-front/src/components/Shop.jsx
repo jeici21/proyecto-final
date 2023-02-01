@@ -11,7 +11,7 @@ const Shop = () => {
 
     return (
         <div className="main_container">
-            <section class="our-publication pt-100 pb-70">
+            <section class="our-publication pt-50 pb-50">
                 <div class="container">
                     <div class="section-header">
                         <i class="fa fa-cart-arrow-down"></i>

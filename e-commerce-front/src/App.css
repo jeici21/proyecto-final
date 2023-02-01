@@ -234,12 +234,12 @@ div {
 }
 
 /*Products*/
-.pt-100 {
-  padding-top: 100px;
+.pt-50 {
+  padding-top: 50px;
 }
 
-.pb-70 {
-  padding-bottom: 70px;
+.pb-50 {
+  padding-bottom: 50px;
 }
 
 .section-header {
