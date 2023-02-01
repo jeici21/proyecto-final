@@ -248,7 +248,7 @@ div {
 }
 
 .section-header i {
-  color: #ff007d;
+  color: #ff7700;
   font-size: 50px;
   display: inline-block;
   margin-bottom: 10px;
@@ -304,7 +304,7 @@ div {
   height: 35px;
   text-align: center;
   font-size: 15px;
-  background: #ff007d;
+  background: #ff7700;
   margin-bottom: 7px;
   border-radius: 50%;
   line-height: 35px;
@@ -313,7 +313,7 @@ div {
 
 .single-publication figure ul li a:hover {
   color: #fff;
-  background: #e50663;
+  background: #e57d06;
 }
 
 .single-publication .publication-content {
@@ -323,9 +323,8 @@ div {
 
 .single-publication .publication-content .category {
   display: inline-block;
-  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
-  color: #ff007d;
+  color: #ff7300;
   font-weight: 600;
 }
 
@@ -341,7 +340,7 @@ div {
 }
 
 .single-publication .publication-content h3 a:hover {
-  color: #ff007d;
+  color: #ff7b00;
 }
 
 .single-publication .publication-content ul {
@@ -359,7 +358,7 @@ div {
 
 .single-publication .publication-content .price {
   font-size: 18px;
-  color: #ff007d;
+  color: #ff7700;
 }
 
 .single-publication .publication-content .price span {
@@ -410,15 +409,14 @@ div {
 }
 
 .default-btn {
-  background-color: #ff007d;
+  background-color: #ff7700;
   color: #fff;
-  border: 1px solid #ff007d;
+  border: 1px solid #ff9500;
   display: inline-block;
   padding: 10px 30px;
   border-radius: 30px;
   text-transform: uppercase;
   font-weight: 600;
-  font-family: 'Open Sans', sans-serif;
 }
 
 a:hover {

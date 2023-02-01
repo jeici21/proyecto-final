@@ -15,7 +15,7 @@ const Shop = () => {
             <section class="our-publication pt-100 pb-70">
                 <div class="container">
                     <div class="section-header">
-                        <i class="fa fa-book"></i>
+                        <i class="fa fa-cart-arrow-down"></i>
                         <h2>KMarket Products</h2>
                         <p>Esperamos que los productos que ofrecemos sean de su gusto.</p>
                     </div>
