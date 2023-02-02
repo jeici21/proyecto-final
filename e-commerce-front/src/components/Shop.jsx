@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
+import Collapsible from "react-collapsible";
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
@@ -89,10 +90,12 @@ const Shop = () => {
                                     );
                                 })}
                             </div>
-                            <h4>Product Description</h4>
-                            <p>{selectedProduct.description}</p>
-                            <h4>Product Price</h4>
-                            <p>{selectedProduct.price}</p>
+                            <Collapsible trigger="> Product Description">
+                                <p>{selectedProduct.description}</p>
+                            </Collapsible>
+                            <Collapsible trigger="> Product Price">
+                                <p>{selectedProduct.price}</p>
+                            </Collapsible>
                         </div>
                         <div className='modal-column'><img src={selectedProduct.images} alt="" className='modal-image' /></div>
                     </div>
