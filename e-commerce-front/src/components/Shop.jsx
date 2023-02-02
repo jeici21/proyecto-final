@@ -33,17 +33,17 @@ const Shop = () => {
                                     <div class="single-publication">
                                         <figure>
                                             <a href="#">
-                                                <img src={result.images} alt="Publication" />
+                                                <img src={result.images} alt="Publication" onClick={() => handleShow(result)} />
                                             </a>
                                             <ul>
                                                 <li><a href="#" title="Add to Favorite"><i class="fa fa-heart"></i></a></li>
                                                 <li><a href="#" title="Add to Compare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a onClick={() => handleShow(result)} title="Quick View"><i class="fa fa-search"></i></a></li>
+                                                <li><a href='#' title="Quick View"><i class="fa fa-search"></i></a></li>
                                             </ul>
                                         </figure>
                                         <div class="publication-content">
                                             <span class="category">Products</span>
-                                            <h3><a href="#">{result.name}</a></h3>
+                                            <h3><a href="#">{result.title}</a></h3>
                                             <ul>
                                                 <li><i class="icofont-star"></i></li>
                                                 <li><i class="icofont-star"></i></li>
@@ -65,9 +65,10 @@ const Shop = () => {
             </section>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{selectedProduct.name}</Modal.Title>
+                    <Modal.Title>{selectedProduct.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    <img src={selectedProduct.images} alt="" className='modal-image' />
                     <p>Price: {selectedProduct.price}</p>
                     <p>Description: {selectedProduct.description}</p>
                 </Modal.Body>
