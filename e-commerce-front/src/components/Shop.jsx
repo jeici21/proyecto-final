@@ -65,15 +65,31 @@ const Shop = () => {
             </section>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{selectedProduct.title}</Modal.Title>
+                    <Modal.Title>Detalles del Producto</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <img src={selectedProduct.images} alt="" className='modal-image' />
-                    <p>Price: {selectedProduct.price}</p>
-                    <p>Description: {selectedProduct.description}</p>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Product Title</th>
+                                <th>Product price</th>
+                                <th>Product Image</th>
+                                <th>Product Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{selectedProduct.title}</td>
+                                <td>{selectedProduct.price}</td>
+                                <td><img src={selectedProduct.images} alt="" className='modal-image' /></td>
+                                <td>{selectedProduct.description}</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button variant="secondary" onClick={handleClose}>
+                    <button className='default-btn' variant="secondary" onClick={handleClose}>
                         Close
                     </button>
                 </Modal.Footer>

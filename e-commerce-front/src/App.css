@@ -375,7 +375,20 @@ figure img {
   width: 200px;
 }
 
-.modal-image{
+.modal-content {
+  width: 600px !important;
+}
+
+.modal-title {
+  font-weight: bold !important;
+  font-size: larger !important;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.modal-image {
   width: 100%;
 }
 
