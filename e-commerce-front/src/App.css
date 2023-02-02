@@ -376,7 +376,8 @@ figure img {
 }
 
 .modal-content {
-  width: 600px !important;
+  width: auto;
+  height: auto;
 }
 
 .modal-title {

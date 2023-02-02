@@ -6,6 +6,8 @@ const Shop = () => {
     const [products, setProducts] = useState([]);
     const [show, setShow] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState({});
+    const [rating, setRating] = useState(0);
+    const [hover, setHover] = useState(0);
     useEffect(() => {
         axios.get('https://api.escuelajs.co/api/v1/products').then(res => {
             setProducts(res.data);
@@ -70,8 +72,23 @@ const Shop = () => {
                 <Modal.Body>
                     <div className='modal-row'>
                         <div className='modal-column'>
-                            <h4>Product Title</h4>
-                            <p>{selectedProduct.title}</p>
+                            <h4>{selectedProduct.title}</h4>
+                            <div>
+                                {[...Array(5)].map((star, i) => {
+                                    const ratingValue = i + 1;
+
+                                    return (
+                                        <label>
+                                            {/* <input type="radio" name="rating" value={ratingValue}
+                                                onClick={() => setRating(ratingValue)} /> */}
+                                            <i className="fa fa-star"
+                                                style={{ color: ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9" }}
+                                                onMouseEnter={() => setHover(ratingValue)} onMouseLeave={() => setHover(0)}
+                                                value={ratingValue} onClick={() => setRating(ratingValue)} />
+                                        </label>
+                                    );
+                                })}
+                            </div>
                             <h4>Product Description</h4>
                             <p>{selectedProduct.description}</p>
                             <h4>Product Price</h4>
