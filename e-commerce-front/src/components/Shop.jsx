@@ -1,13 +1,21 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Modal } from 'react-bootstrap';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
+    const [show, setShow] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState({});
     useEffect(() => {
         axios.get('https://api.escuelajs.co/api/v1/products').then(res => {
             setProducts(res.data);
         });
     }, []);
+    const handleClose = () => setShow(false);
+    const handleShow = (product) => {
+        setSelectedProduct(product);
+        setShow(true);
+    };
 
     return (
         <div className="main_container">
@@ -30,7 +38,7 @@ const Shop = () => {
                                             <ul>
                                                 <li><a href="#" title="Add to Favorite"><i class="fa fa-heart"></i></a></li>
                                                 <li><a href="#" title="Add to Compare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" title="Quick View"><i class="fa fa-search"></i></a></li>
+                                                <li><a onClick={() => handleShow(result)} title="Quick View"><i class="fa fa-search"></i></a></li>
                                             </ul>
                                         </figure>
                                         <div class="publication-content">
@@ -55,6 +63,20 @@ const Shop = () => {
                     </div>
                 </div>
             </section>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{selectedProduct.name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Price: {selectedProduct.price}</p>
+                    <p>Description: {selectedProduct.description}</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <button variant="secondary" onClick={handleClose}>
+                        Close
+                    </button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
