@@ -93,9 +93,8 @@ const Shop = () => {
                             <Collapsible trigger="> Product Description">
                                 <p>{selectedProduct.description}</p>
                             </Collapsible>
-                            <Collapsible trigger="> Product Price">
-                                <p>{selectedProduct.price}</p>
-                            </Collapsible>
+                            <h4>Product Price</h4>
+                            <p>{selectedProduct.price}</p>
                         </div>
                         <div className='modal-column'><img src={selectedProduct.images} alt="" className='modal-image' /></div>
                     </div>

@@ -399,8 +399,7 @@ figure img {
 }
 
 .Collapsible {
-  font-size: large !important;
-  font-weight: bold !important;
+  font-size: larger !important;
 }
 
 .modal-image {
