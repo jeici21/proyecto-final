@@ -68,25 +68,17 @@ const Shop = () => {
                     <Modal.Title>Detalles del Producto</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Product Title</th>
-                                <th>Product price</th>
-                                <th>Product Image</th>
-                                <th>Product Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{selectedProduct.title}</td>
-                                <td>{selectedProduct.price}</td>
-                                <td><img src={selectedProduct.images} alt="" className='modal-image' /></td>
-                                <td>{selectedProduct.description}</td>
-
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div className='modal-row'>
+                        <div className='modal-column'>
+                            <h4>Product Title</h4>
+                            <p>{selectedProduct.title}</p>
+                            <h4>Product Description</h4>
+                            <p>{selectedProduct.description}</p>
+                            <h4>Product Price</h4>
+                            <p>{selectedProduct.price}</p>
+                        </div>
+                        <div className='modal-column'><img src={selectedProduct.images} alt="" className='modal-image' /></div>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className='default-btn' variant="secondary" onClick={handleClose}>

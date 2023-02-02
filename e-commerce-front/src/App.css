@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
 
 body,
@@ -10,27 +10,27 @@ a,
 label,
 input,
 div {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 18px !important;
   font-weight: 300 !important;
 }
 
 .h1 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 48px !important;
   font-weight: 200 !important;
   color: orange;
 }
 
 .h2 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 30px !important;
   font-weight: 300;
   color: orange;
 }
 
 .h3 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 22px !important;
 }
 
@@ -386,6 +386,15 @@ figure img {
 
 .modal-body {
   text-align: center;
+}
+
+.modal-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.modal-column {
+  width: 50%;
 }
 
 .modal-image {
