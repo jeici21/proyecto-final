@@ -90,7 +90,7 @@ const Shop = () => {
                                     );
                                 })}
                             </div>
-                            <Collapsible trigger="> Product Description">
+                            <Collapsible trigger="Product Description">
                                 <p>{selectedProduct.description}</p>
                             </Collapsible>
                             <h4>Product Price</h4>
