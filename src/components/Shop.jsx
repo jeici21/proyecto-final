@@ -39,7 +39,7 @@ const Shop = () => {
                                             <a href="#">
                                                 <img src={result.img} alt="Publication" />
                                             </a>
-                                            <ul>
+                                            <ul> 
                                                 <li><a href="#" title="Add to Favorite"><i class="fa fa-heart"></i></a></li>
                                                 <li><a href="#" title="Add to Compare"><i class="fa fa-refresh"></i></a></li>
                                                 <li><a href="#" title="Quick View"><i class="fa fa-search"></i></a></li>

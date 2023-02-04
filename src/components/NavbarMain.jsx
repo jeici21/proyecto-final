@@ -29,6 +29,9 @@ const NavbarMain = () => {
                             <li className="nav-item">
                                 <NavLink to="/contact" activeClassName="active" exact className="nav-link">Contact</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink to="/crud" activeClassName="active" exact className="nav-link">Gestion de productos</NavLink>
+                            </li>
                         </ul>
                     </div>
                     <div className="navbar align-self-center d-flex">

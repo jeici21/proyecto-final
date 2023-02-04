@@ -12,7 +12,7 @@ import Contactpage from './pages/Contactpage';
 import Shoppage from './pages/Shoppage';
 import LoginPage from './pages/LoginPage';
 import { Dashboard } from './pages/dashboard/dashboard';
-
+import Crud from './components/Crud';
 function App() {
   return (
     <div className="app">
@@ -27,6 +27,7 @@ function App() {
           <Route path='/contact' element={<Contactpage />}></Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/crud" element={<Crud />} />
         </Routes>
         <Footer />
       </BrowserRouter>
