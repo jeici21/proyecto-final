@@ -22,7 +22,7 @@ const Login = ({ loading, error, ...props }) => {
             console.log("response", response);
             if (response.status === 200) {
                 props.setUser(response.data);
-                navigate('/dashboard');
+                navigate('/shop');
             }
             else {
                 props.loginFailure('Something Wrong! Please Try Again');

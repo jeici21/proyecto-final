@@ -10,28 +10,44 @@ a,
 label,
 input,
 div {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 18px !important;
   font-weight: 300 !important;
 }
 
 .h1 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 48px !important;
   font-weight: 200 !important;
   color: orange;
 }
 
 .h2 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 30px !important;
   font-weight: 300;
   color: orange;
 }
 
 .h3 {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 22px !important;
+}
+/*Logout*/
+.form-control-dark {
+  border-color: var(--bs-gray);
+}
+.form-control-dark:focus {
+  border-color: #fff;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
+
+.text-small {
+  font-size: 85%;
+}
+
+.dropdown-toggle {
+  outline: 0;
 }
 
 /* General */
@@ -138,7 +154,7 @@ div {
 .brand-img {
   filter: grayscale(100%);
   opacity: 0.5;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .brand-img:hover {
@@ -160,13 +176,13 @@ div {
 
 /* Carousel Brand */
 .tempaltemo-carousel .h1 {
-  font-size: .5em !important;
+  font-size: 0.5em !important;
   color: #000 !important;
 }
 
 /* Services */
 .services-icon-wap {
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .services-icon-wap:hover,
@@ -223,7 +239,7 @@ div {
   text-align: center;
 }
 
-.single-publication figure>a {
+.single-publication figure > a {
   background-color: #fafafa;
   display: block;
 }
@@ -235,8 +251,8 @@ div {
   position: absolute;
   right: -50px;
   top: 20px;
-  transition: .6s;
-  -webkit-transition: .6s;
+  transition: 0.6s;
+  -webkit-transition: 0.6s;
 }
 
 .single-publication:hover figure ul {
@@ -322,12 +338,12 @@ div {
   opacity: 0;
   visibility: hidden;
   text-align: center;
-  -webkit-transform: scale(.7);
-  transform: scale(.7);
+  -webkit-transform: scale(0.7);
+  transform: scale(0.7);
   height: 105px;
-  -moz-transition: .4s;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -moz-transition: 0.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .single-publication:hover .add-to-cart {
@@ -491,8 +507,8 @@ figure img {
   font-weight: bold;
 }
 
-.contact-container input[type=text],
-.contact-container input[type=email],
+.contact-container input[type="text"],
+.contact-container input[type="email"],
 .contact-container textarea {
   width: 100%;
   padding: 12px;
@@ -527,7 +543,6 @@ figure img {
 }
 
 @media screen and (max-width: 600px) {
-
   .contact-container,
   button {
     width: 100%;
@@ -558,7 +573,7 @@ figure img {
   overflow: hidden;
   border-radius: 50%;
   margin: 40px auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   position: relative;
 }
 
@@ -572,7 +587,7 @@ figure img {
 
 .login-page .card {
   border-color: transparent;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .login-page .card.fat {
@@ -647,12 +662,12 @@ figure img {
 
 #tempaltemo_footer ul.footer-icons li:hover {
   background-color: #cfd6e1;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 #tempaltemo_footer ul.footer-icons li:hover i {
   color: #212934;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 #tempaltemo_footer .border-light {
@@ -713,4 +728,5 @@ figure img {
 }
 
 /* Extra large devices (large desktops, 1200px and up)*/
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+}
