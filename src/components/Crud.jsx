@@ -2,27 +2,44 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import axios from 'axios';
+//import { clippingParents } from '@popperjs/core';
 
 const Crud = () => {
 
-    const baseUrl = "http://localhost:8080/product";
+    const ProductUrl = "http://localhost:8080/product";
+    const CategoryUrl = "http://localhost:8080/category";
+    const InventoryUrl = "http://localhost:8080/inventory";
+    const DiscountUrl = "http://localhost:8080/discount";
+    //data de los model para las solicitudes GET 
     const [data, setData] = useState([]);
+    const [dataCategory, setDataCategory] = useState([]);
+    const [dataInventory, setDataInventory] = useState([]);
+    const [dataDiscount, setDataDiscount] = useState([]);
+
     const [modalInsertar, setModalInsertar] = useState(false);
     const [modalEditar, setModalEditar] = useState(false);
     const [modalEliminar, setModalEliminar] = useState(false);
-    const [SelectedProduct, setSelectedProduct] = useState({});
-    
-    
-    function currencyFormatter( value) {
-        const formatter = new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          minimumFractionDigits: 2,
-          currency: "USD"
-        }) 
-        return formatter.format(value)
-      }
-      
 
+    const [SelectedProduct, setSelectedProduct] = useState({});
+    const [SelectedProductAdd, setSelectedProductAdd] = useState({});
+    //  const [SelectedCategory, setSelectedCategory] = useState({});
+    // const [SelectedInventory, setSelectedInventory] = useState({});
+
+    // crea un nuevo objeto `Date`
+    var today = new Date();
+    // obtener la fecha y la hora
+    var now = today.toISOString();
+    //FUNCION PARA DAR FORMATO DE DOLAR 
+    function currencyFormatter(value) {
+        const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            minimumFractionDigits: 2,
+            currency: "USD"
+        })
+        return formatter.format(value)
+    }
+
+    //AQUÍ SE GUARDA EL OBJETO QUE CONTIENE LAS VARIABLES DE PRODUCTOS PARA SU POSTERIOR ACTUALIZACION
     const handleChange = e => {
         const { name, value } = e.target;
         setSelectedProduct((prevState) => ({
@@ -31,9 +48,19 @@ const Crud = () => {
         }))
         console.log(SelectedProduct);
     }
+    //AQUÍ SE GUARDA EL OBJETO QUE CONTIENE LAS VARIABLES PARA GUARDAR UN PRODUCTO NUEVO
+    const handleChangeProduct = e => {
+        const { name, value } = e.target;
+        setSelectedProductAdd((prevState) => ({
+            ...prevState,
+            [name]: value
+        }))
+        console.log(SelectedProductAdd);
+    }
 
     // FUNCIONES DE LOS MODALES 
     const abrirCerrarModalInsertar = () => {
+        setSelectedProductAdd({});
         setModalInsertar(!modalInsertar);
     }
 
@@ -45,47 +72,109 @@ const Crud = () => {
         setModalEliminar(!modalEliminar);
     }
     // CObtener todos los prodcutos
-    const peticionGet = async () => {
-        await axios.get(baseUrl)
+    const peticionGetProduct = async () => {
+        await axios.get(ProductUrl)
             .then(response => {
                 setData(response.data);
+                console.log(response.data)
             }).catch(error => {
                 console.log(error);
             })
     }
-
-    const peticionPost = async () => {
-       
-        await axios.post(baseUrl+"/save", {
-            name: SelectedProduct.name,
-            description: SelectedProduct.description,
-            dimensions: SelectedProduct.dimensions,
-            img: SelectedProduct.img,
-            weight: SelectedProduct.weight,
-            price: SelectedProduct.price,
-            longdesc: SelectedProduct.longdesc,
-            sku:    1245687451,
-            // inventory_id: 2,
-            // discount_id: 2,
-            // category_id: 2
-            productCategory: {
-                id:2},
-            discount: {
-                id:2},
-            productInventory: {
-               id:2}
-        })
+    // CObtener todos los Inventory
+    const peticionGetInventory = async () => {
+        await axios.get(InventoryUrl)
             .then(response => {
-                //setData(data.concat(response.data));
-                peticionGet();
-                abrirCerrarModalInsertar();
+                setDataInventory(response.data);
+                console.log(response.data)
             }).catch(error => {
                 console.log(error);
             })
     }
 
+    // CObtener todos los Discount
+    const peticionGetDiscount = async () => {
+        await axios.get(DiscountUrl)
+            .then(response => {
+                setDataDiscount(response.data);
+                console.log(response.data)
+            }).catch(error => {
+                console.log(error);
+            })
+    }
+
+    // CObtener todos los Category
+    const peticionGetCategory = async () => {
+        await axios.get(CategoryUrl)
+            .then(response => {
+                setDataCategory(response.data);
+                console.log(response.data)
+            }).catch(error => {
+                console.log(error);
+            })
+    }
+
+    // ENVIO Y REGISTRO DE UN NUEVO inventario 
+    const saveInventory = async () => {
+        try {
+            const response = await axios.post(InventoryUrl + "/save", {
+                quantity: SelectedProductAdd.Inventory,
+                createAt: now
+            })
+
+            const inventoryId = response.data.id;
+            console.log("registrado conrrectamente con id " + inventoryId);
+            return inventoryId;
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    // ENVIO Y REGISTRO DE UN NUEVO PRODUCTO 
+    const peticionPost = async () => {
+        try {
+            const inventoryId = await saveInventory();
+            if (!inventoryId) {
+                throw new Error("No se pudo obtener el ID del registro de inventario");
+            }
+            await axios.post(ProductUrl + "/save", {
+                name: SelectedProductAdd.name,
+                description: SelectedProductAdd.description,
+                img: SelectedProductAdd.img,
+                dimensions: SelectedProductAdd.dimensions,
+                weight: SelectedProductAdd.weight,
+                price: SelectedProductAdd.price,
+                createAt: now,
+                longdesc: SelectedProductAdd.longdesc,
+                sku: "1245687451",
+                productCategory: {
+                    id: SelectedProductAdd.category
+                },
+                discount: {
+                    id: SelectedProductAdd.discount
+                },
+                productInventory: {
+                    id: inventoryId
+                }
+            })
+                .then(response => {
+                    //setData(data.concat(response.data));
+                    peticionGetProduct();
+                    abrirCerrarModalInsertar();
+                    peticionGetCategory();
+                    peticionGetDiscount();
+                }).catch(error => {
+                    console.log(error);
+                })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    //ACTUALIZAR PRODUCTOS 
     const peticionPut = async () => {
-        await axios.put(baseUrl + "/update/"+SelectedProduct.id,{
+        await axios.put(ProductUrl + "/update/" + SelectedProduct.id, {
             name: SelectedProduct.name,
             description: SelectedProduct.description,
             dimensions: SelectedProduct.dimensions,
@@ -93,29 +182,29 @@ const Crud = () => {
             weight: SelectedProduct.weight,
             price: SelectedProduct.price,
             longdesc: SelectedProduct.longdesc,
-            sku:    SelectedProduct.sku,
-            // inventory_id: 2,
-            // discount_id: 2,
-            // category_id: 2
+            sku: SelectedProduct.sku,
             productCategory: {
-                id:2},
+                id: SelectedProduct.category
+            },
             discount: {
-                id:2},
+                id: SelectedProduct.discount
+            },
             productInventory: {
-               id:2}
+                id: 1
+            }
         })
             .then(response => {
                 var newdata = data;
-                peticionGet();
+                peticionGetProduct();
                 abrirCerrarModalEditar();
             }).catch(error => {
                 console.log(error);
             })
     }
 
+    //ELIMINAR PRODUCTOS 
     const peticionDelete = async () => {
-        var f = new FormData();
-        await axios.delete(baseUrl + "/delete/" + SelectedProduct.id)
+        await axios.delete(ProductUrl + "/delete/" + SelectedProduct.id)
             .then(response => {
                 setData(data.filter(Product => Product.id !== SelectedProduct.id));
                 abrirCerrarModalEliminar();
@@ -132,7 +221,10 @@ const Crud = () => {
     }
 
     useEffect(() => {
-        peticionGet();
+        peticionGetProduct();
+        peticionGetInventory();
+        peticionGetCategory();
+        peticionGetDiscount();
     }, [])
 
 
@@ -147,6 +239,7 @@ const Crud = () => {
                         <th>ID</th>
                         <th>name</th>
                         <th>description</th>
+                        <th>Category</th>
                         <th>Inventory</th>
                         <th>Price</th>
                         <th>Acciones</th>
@@ -158,6 +251,7 @@ const Crud = () => {
                             <td> <img src={product.img} alt="Publication" width="50" height="50" /></td>
                             <td>{product.name}</td>
                             <td>{product.description}</td>
+                            <td>{product.productCategory.name}</td>
                             <td>{product.productInventory.quantity}</td>
                             <td>{currencyFormatter(product.price)}</td>
                             <td>
@@ -179,37 +273,62 @@ const Crud = () => {
             <Modal isOpen={modalInsertar}>
                 <ModalHeader>Insertar Producto</ModalHeader>
                 <ModalBody>
-                <div className="form-group">
+                    <div className="form-group">
                         <label>Nombre: </label>
                         <br />
-                        <input type="text" className="form-control" name="name" onChange={handleChange}  />
+                        <input type="text" className="form-control" name="name" onChange={handleChangeProduct} />
                         <br />
                         <label>description: </label>
                         <br />
-                        <textarea type="text" className="form-control" name="description" onChange={handleChange}  />
+                        <textarea type="text" className="form-control" name="description" onChange={handleChangeProduct} />
                         <br />
                         <label>Loong description: </label>
                         <br />
-                        <textarea type="text" className="form-control" name="longdesc" onChange={handleChange}  />
+                        <textarea type="text" className="form-control" name="longdesc" onChange={handleChangeProduct} />
                         <br />
                         <label>price: </label>
                         <br />
-                        <input type="text" className="form-control" name="price" onChange={handleChange} />
+                        <input type="text" className="form-control" name="price" onChange={handleChangeProduct} />
                         <br />
+                        <label>Category: </label>
+                        <br />
+                        <select name="category" id="selCategory" onClick={handleChangeProduct} >
+                            <option>Seleccione una categoria: </option>
+                            {
+                                dataCategory.map((category) => (
+                                    <option key={category.id} value={category.id}> {category.name}</option>
+                                ))
+                            }
+                        </select>
+                        <br /><br />
+                        <label>Ofertas y descuentos: </label>
+                        <br />
+                        <select name="discount" id="selDiscount" onClick={handleChangeProduct} >
+                            <option>Seleccione un  descuento: </option>
+                            {
+                                dataDiscount.map((discount) => (
+                                    <option key={discount.id} value={discount.id}> {discount.name}</option>
+                                ))
+                            }
+                        </select>
+                        <br /><br />
+                        <label>Stock: </label>
+                        <br />
+                        <input type="text" className="form-control" name="Inventory" onChange={handleChangeProduct} />
                         <label>dimensions: </label>
                         <br />
-                        <input type="text" className="form-control" name="dimensions" onChange={handleChange} />
+                        <input type="text" className="form-control" name="dimensions" onChange={handleChangeProduct} />
                         <label>weight: </label>
                         <br />
-                        <input type="text" className="form-control" name="weight" onChange={handleChange}  />
+                        <input type="text" className="form-control" name="weight" onChange={handleChangeProduct} />
                         <label>Ruta de Imagen: </label>
                         <br />
-                        <input type="text" className="form-control" name="img" onChange={handleChange}  />
-                        
+                        <input type="text" className="form-control" name="img" onChange={handleChangeProduct} />
+
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className="btn btn-primary m-1" onClick={() => peticionPost()}>Registrar</button>
+                    <button className="btn btn-primary m-1" onClick={() => peticionPost()}>Registrar    </button>
                     <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertar()}>Cancelar</button>
                 </ModalFooter>
             </Modal>
@@ -236,6 +355,28 @@ const Crud = () => {
                         <br />
                         <input type="text" className="form-control" name="price" onChange={handleChange} value={SelectedProduct && SelectedProduct.price} />
                         <br />
+                        <label>Category: </label>
+                        <br />
+                        <select name="categorias" id="selCategory" value={SelectedProduct && SelectedProduct.category}>
+                            <option value={-1}>Seleccione una opción: </option>
+                            {
+                                dataCategory.map((category) => (
+                                    <option key={category.id} value={category.id}> {category.name} </option>
+                                ))
+                            }
+                        </select>
+                        <br /><br />
+                        <label>Ofertas y descuentos: </label>
+                        <br />
+                        <select name="discount" id="selDiscount" onClick={handleChange}  >
+                            <option>Seleccione un descuento: </option>
+                            {
+                                dataDiscount.map((discount) => (
+                                    <option key={discount.id} value={discount.id}> {discount.name}</option>
+                                ))
+                            }
+                        </select>
+                        <br /><br />
                         <label>dimensions: </label>
                         <br />
                         <input type="text" className="form-control" name="dimensions" onChange={handleChange} value={SelectedProduct && SelectedProduct.dimensions} />
@@ -245,7 +386,7 @@ const Crud = () => {
                         <label>Ruta de Imagen: </label>
                         <br />
                         <input type="text" className="form-control" name="img" onChange={handleChange} value={SelectedProduct && SelectedProduct.img} />
-                        
+
                     </div>
                 </ModalBody>
                 <ModalFooter>
