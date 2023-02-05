@@ -46,7 +46,7 @@ const Crud = () => {
             ...prevState,
             [name]: value
         }))
-        console.log(SelectedProduct);
+  
     }
     //AQUÍ SE GUARDA EL OBJETO QUE CONTIENE LAS VARIABLES PARA GUARDAR UN PRODUCTO NUEVO
     const handleChangeProduct = e => {
@@ -55,7 +55,6 @@ const Crud = () => {
             ...prevState,
             [name]: value
         }))
-        console.log(SelectedProductAdd);
     }
 
     // FUNCIONES DE LOS MODALES 
@@ -76,7 +75,6 @@ const Crud = () => {
         await axios.get(ProductUrl)
             .then(response => {
                 setData(response.data);
-                console.log(response.data)
             }).catch(error => {
                 console.log(error);
             })
@@ -86,7 +84,6 @@ const Crud = () => {
         await axios.get(InventoryUrl)
             .then(response => {
                 setDataInventory(response.data);
-                console.log(response.data)
             }).catch(error => {
                 console.log(error);
             })
@@ -97,7 +94,6 @@ const Crud = () => {
         await axios.get(DiscountUrl)
             .then(response => {
                 setDataDiscount(response.data);
-                console.log(response.data)
             }).catch(error => {
                 console.log(error);
             })
@@ -108,7 +104,6 @@ const Crud = () => {
         await axios.get(CategoryUrl)
             .then(response => {
                 setDataCategory(response.data);
-                console.log(response.data)
             }).catch(error => {
                 console.log(error);
             })
@@ -123,7 +118,6 @@ const Crud = () => {
             })
 
             const inventoryId = response.data.id;
-            console.log("registrado conrrectamente con id " + inventoryId);
             return inventoryId;
 
         } catch (error) {

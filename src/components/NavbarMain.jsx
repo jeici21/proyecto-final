@@ -5,7 +5,7 @@ const NavbarMain = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light shadow">
             <div className="container d-flex justify-content-between align-items-center">
-                <NavLink to="/"  exact className="navbar-brand text-success h1 align-self-center" href="/">
+                <NavLink to="/"  exact="true" className="navbar-brand text-success h1 align-self-center" href="/">
                     <img src={logo} alt="KMarket" className="logo" />
                 </NavLink>
                 <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -18,19 +18,19 @@ const NavbarMain = () => {
                     <div className="flex-fill">
                         <ul className="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                             <li className="nav-item">
-                                <NavLink to="/"  exact className="nav-link">Home</NavLink>
+                                <NavLink to="/" activeclassname="active" exact="true" className="nav-link">Home</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/shop"  exact className="nav-link">Shop</NavLink>
+                                <NavLink to="/shop" activeclassname="active" exact="true" className="nav-link">Shop</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/about"  exact className="nav-link">About</NavLink>
+                                <NavLink to="/about" activeclassname="active" exact="true" className="nav-link">About</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/contact"  exact className="nav-link">Contact</NavLink>
+                                <NavLink to="/contact" activeclassname="active" exact="true" className="nav-link">Contact</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/crud"  exact className="nav-link">Gestion de productos</NavLink>
+                                <NavLink to="/crud" activeclassname="active" exact="true" className="nav-link">Gestion de productos</NavLink>
                             </li>
                         </ul>
                     </div>
@@ -52,7 +52,7 @@ const NavbarMain = () => {
                                 7
                             </span>
                         </a>
-                        <NavLink to="/login" className="nav-icon position-relative text-decoration-none">
+                        <NavLink to="/login" activeclassname="active" className="nav-icon position-relative text-decoration-none">
                             <i className="fa fa-fw fa-user text-dark mr-3"></i>
                             <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
                                 +99

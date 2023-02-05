@@ -23,42 +23,42 @@ const Shop = () => {
       }
     return (
         <div className="main_container">
-            <section class="our-publication pt-50 pb-50">
-                <div class="container">
-                    <div class="section-header">
-                        <i class="fa fa-cart-arrow-down"></i>
+            <section className="our-publication pt-50 pb-50">
+                <div className="container">
+                    <div className="section-header">
+                        <i className="fa fa-cart-arrow-down"></i>
                         <h2>KMarket Products</h2>
                         <p>Esperamos que los productos que ofrecemos sean de su gusto.</p>
                     </div>
-                    <div class="row">
+                    <div className="row">
                         {products.map((result) => {
                             return (
-                                <div class="col-sm-6 col-lg-3" key={result.id}>
-                                    <div class="single-publication">
+                                <div className="col-sm-6 col-lg-3" key={result.id}>
+                                    <div className="single-publication">
                                         <figure>
                                             <a href="#">
                                                 <img src={result.img} alt="Publication" />
                                             </a>
                                             <ul> 
-                                                <li><a href="#" title="Add to Favorite"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#" title="Add to Compare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" title="Quick View"><i class="fa fa-search"></i></a></li>
+                                                <li><a href="#" title="Add to Favorite"><i className="fa fa-heart"></i></a></li>
+                                                <li><a href="#" title="Add to Compare"><i className="fa fa-refresh"></i></a></li>
+                                                <li><a href="#" title="Quick View"><i className="fa fa-search"></i></a></li>
                                             </ul>
                                         </figure>
-                                        <div class="publication-content">
-                                            <span class="category">Products</span>
+                                        <div className="publication-content">
+                                            <span className="category">Products</span>
                                             <h3><a href="#">{result.name}</a></h3>
                                             <ul>
-                                                <li><i class="icofont-star"></i></li>
-                                                <li><i class="icofont-star"></i></li>
-                                                <li><i class="icofont-star"></i></li>
-                                                <li><i class="icofont-star"></i></li>
-                                                <li><i class="icofont-star"></i></li>
+                                                <li><i className="icofont-star"></i></li>
+                                                <li><i className="icofont-star"></i></li>
+                                                <li><i className="icofont-star"></i></li>
+                                                <li><i className="icofont-star"></i></li>
+                                                <li><i className="icofont-star"></i></li>
                                             </ul>
-                                            <h4 class="price">${result.price}</h4>
+                                            <h4 className="price">${result.price}</h4>
                                         </div>
-                                        <div class="add-to-cart">
-                                            <a href="#" class="default-btn">Add to Cart</a>
+                                        <div className="add-to-cart">
+                                            <a href="#" className="default-btn">Add to Cart</a>
                                         </div>
                                     </div>
                                 </div>

@@ -38,19 +38,19 @@ const Footer = () => {
                         <h2 className="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
                         <ul className="list-unstyled text-light footer-link-list">
                             <li>
-                                <NavLink to="/" activeClassName="active" exact className="text-decoration-none">
+                                <NavLink to="/" activeclassname="active" exact="true" className="text-decoration-none">
                                     Home
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/about" activeClassName="active" exact className="text-decoration-none">
+                                <NavLink to="/about" activeclassname="active" exact="true" className="text-decoration-none">
                                     About Us
                                 </NavLink>
                             </li>
                             <li><a className="text-decoration-none" href="#">Shop Locations</a></li>
                             <li><a className="text-decoration-none" href="#">FAQs</a></li>
                             <li>
-                                <NavLink to="/contact" activeClassName="active" exact className="text-decoration-none">
+                                <NavLink to="/contact" activeclassname="active" exact="true" className="text-decoration-none">
                                     Contact
                                 </NavLink>
                             </li>
@@ -86,7 +86,7 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="col-auto">
-                        <label className="sr-only" for="subscribeEmail">Email address</label>
+                        <label className="sr-only" htmlFor="subscribeEmail">Email address</label>
                         <div className="input-group mb-2">
                             <input type="text" className="form-control bg-dark border-light" id="subscribeEmail"
                                 placeholder="Email address" />
