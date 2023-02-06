@@ -27,7 +27,7 @@ const Shop = () => {
                 <div className="container">
                     <div className="section-header">
                         <i className="fa fa-cart-arrow-down"></i>
-                        <h2>KMarket Products</h2>
+                        <h2>Productos KMarket</h2>
                         <p>Esperamos que los productos que ofrecemos sean de su gusto.</p>
                     </div>
                     <div className="row">
@@ -40,13 +40,13 @@ const Shop = () => {
                                                 <img src={result.img} alt="Publication" />
                                             </a>
                                             <ul> 
-                                                <li><a href="#" title="Add to Favorite"><i className="fa fa-heart"></i></a></li>
-                                                <li><a href="#" title="Add to Compare"><i className="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" title="Quick View"><i className="fa fa-search"></i></a></li>
+                                                <li><a href="#" title="Añadir a Favoritos"><i className="fa fa-heart"></i></a></li>
+                                                <li><a href="#" title="Añadir a comparación"><i className="fa fa-refresh"></i></a></li>
+                                                <li><a href="#" title="Vistazo Rápido"><i className="fa fa-search"></i></a></li>
                                             </ul>
                                         </figure>
                                         <div className="publication-content">
-                                            <span className="category">Products</span>
+                                            <span className="category">Productos</span>
                                             <h3><a href="#">{result.name}</a></h3>
                                             <ul>
                                                 <li><i className="icofont-star"></i></li>
@@ -58,7 +58,7 @@ const Shop = () => {
                                             <h4 className="price">${result.price}</h4>
                                         </div>
                                         <div className="add-to-cart">
-                                            <a href="#" className="default-btn">Add to Cart</a>
+                                            <a href="#" className="default-btn">Añadir al Carro</a>
                                         </div>
                                     </div>
                                 </div>

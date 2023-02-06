@@ -25,7 +25,7 @@ const Login = ({ loading, error, ...props }) => {
                 navigate('/dashboard');
             }
             else {
-                props.loginFailure('Something Wrong! Please Try Again');
+                props.loginFailure('Autenticación fallida. Por favor, intenta de nuevo.');
             }
 
         }).catch((err) => {
@@ -35,14 +35,14 @@ const Login = ({ loading, error, ...props }) => {
                 switch (err.response.status) {
                     case 401:
                         console.log("401 status");
-                        props.loginFailure("Authentication Failed. Bad Credentials");
+                        props.loginFailure("Usuario o contraseña incorrectos.");
                         break;
                     default:
-                        props.loginFailure('Something Wrong! Please Try Again');
+                        props.loginFailure('Autenticación fallida. Por favor, intenta de nuevo.');
                 }
             }
             else {
-                props.loginFailure('Something Wrong! Please Try Again');
+                props.loginFailure('Autenticación fallida. Por favor, intenta de nuevo.');
                 console.log(err);
             }
         });
@@ -66,25 +66,25 @@ const Login = ({ loading, error, ...props }) => {
                         <div className="card-wrapper">
                             <div className="card fat">
                                 <div className="card-body">
-                                    <h4 className="card-title">Login</h4>
+                                    <h4 className="card-title">Inicio de sesión</h4>
                                     <form className="my-login-validation" onSubmit={handleSubmit} noValidate={false}>
                                         <div className="form-group">
-                                            <label htmlFor="email">User Name</label>
+                                            <label htmlFor="email">Nombre de Usuario</label>
                                             <input id="username" type="text" className="form-control" minLength={5}
                                                 value={values.userName} onChange={handleChange} name="userName" required />
                                             <div className="invalid-feedback">
-                                                UserId is invalid
+                                                UserId es inválido
                                             </div>
                                         </div>
                                         <div className="form-group">
-                                            <label>Password</label>
+                                            <label>Contraseña</label>
                                             <input id="password" type="password" className="form-control" minLength={8}
                                                 value={values.password} onChange={handleChange} name="password" required />
                                             <a href="forgot.html" className="float-right">
-                                                Forgot Password?
+                                                ¿Olvidó la contraseña?
                                             </a>
                                             <div className="invalid-feedback">
-                                                Password is required
+                                                Contraseña requerida
                                             </div>
                                         </div>
 
@@ -98,7 +98,7 @@ const Login = ({ loading, error, ...props }) => {
 
                                         <div className="form-group m-0">
                                             <button type="submit" className="btn btn-primary">
-                                                Login
+                                                Iniciar sesión
                                                 {loading && (
                                                     <Spinner
                                                         as="span"

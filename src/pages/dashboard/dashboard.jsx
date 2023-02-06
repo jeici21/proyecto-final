@@ -29,12 +29,12 @@ export const Dashboard = (props) => {
     return (
         <Container>
             <div className='dashboard-container'>
-                <h4>Hello {data && `${data.firstName} ${data.lastName}`}</h4>
+                <h4>Hola {data && `${data.firstName} ${data.lastName}`}</h4>
                 <br></br>
                 {data && data.roles && data.roles.filter(value => value.roleCode === 'ADMIN').length > 0
-                    && <Button type="variant">Add User</Button>}
+                    && <Button type="variant">Añadir Usuario</Button>}
                 <br></br>
-                <Button className='dashboard-button' onClick={() => logOut()}>Logout</Button>
+                <Button className='dashboard-button' onClick={() => logOut()}>Cerrar sesión</Button>
             </div>
         </Container>
     )

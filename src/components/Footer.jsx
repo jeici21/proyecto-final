@@ -1,16 +1,18 @@
 import { NavLink } from "react-router-dom";
 
 const Footer = () => {
+    const year = new Date().getFullYear();
+
     return (
         <footer className="bg-dark" id="tempaltemo_footer">
             <div className="container">
                 <div className="row">
                     <div className="col-md-4 pt-5">
-                        <h2 className="h2 border-bottom pb-3 border-light logo">KMarket Shop</h2>
+                        <h2 className="h2 border-bottom pb-3 border-light logo">Supermercados KMarket</h2>
                         <ul className="list-unstyled text-light footer-link-list">
                             <li>
                                 <i className="fas fa-map-marker-alt fa-fw"></i>
-                                India
+                                Ecuador
                             </li>
                             <li>
                                 <i className="fa fa-phone fa-fw"></i>
@@ -23,35 +25,40 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="col-md-4 pt-5">
-                        <h2 className="h2 text-light border-bottom pb-3 border-light">Products</h2>
+                        <h2 className="h2 text-light border-bottom pb-3 border-light">Productos</h2>
                         <ul className="list-unstyled text-light footer-link-list">
-                            <li><a className="text-decoration-none" href="#">Luxury</a></li>
-                            <li><a className="text-decoration-none" href="#">Sport Wear</a></li>
-                            <li><a className="text-decoration-none" href="#">Men's Shoes</a></li>
-                            <li><a className="text-decoration-none" href="#">Women's Shoes</a></li>
-                            <li><a className="text-decoration-none" href="#">Popular Dress</a></li>
-                            <li><a className="text-decoration-none" href="#">Gym Accessories</a></li>
-                            <li><a className="text-decoration-none" href="#">Sport Shoes</a></li>
+                            <li><a className="text-decoration-none" href="#">Embutidos</a></li>
+                            <li><a className="text-decoration-none" href="#">Ropa</a></li>
+                            <li><a className="text-decoration-none" href="#">Zapatos</a></li>
+                            <li><a className="text-decoration-none" href="#">Golosinas</a></li>
+                            <li><a className="text-decoration-none" href="#">Electrodomésticos</a></li>
+                            <li><a className="text-decoration-none" href="#">Limpieza</a></li>
+                            <li><a className="text-decoration-none" href="#">Lácteos</a></li>
                         </ul>
                     </div>
                     <div className="col-md-4 pt-5">
-                        <h2 className="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                        <h2 className="h2 text-light border-bottom pb-3 border-light">Más Información</h2>
                         <ul className="list-unstyled text-light footer-link-list">
                             <li>
                                 <NavLink to="/" activeclassname="active" exact="true" className="text-decoration-none">
-                                    Home
+                                    Inicio
                                 </NavLink>
                             </li>
                             <li>
                                 <NavLink to="/about" activeclassname="active" exact="true" className="text-decoration-none">
-                                    About Us
+                                    Acerca de
                                 </NavLink>
                             </li>
-                            <li><a className="text-decoration-none" href="#">Shop Locations</a></li>
+                            <li>
+                                <NavLink activeclassname="active" className="text-decoration-none"
+                                    to="https://goo.gl/maps/DzG5vJjFAcaZSGRD8">
+                                    Ubicaciones
+                                </NavLink>
+                            </li>
                             <li><a className="text-decoration-none" href="#">FAQs</a></li>
                             <li>
                                 <NavLink to="/contact" activeclassname="active" exact="true" className="text-decoration-none">
-                                    Contact
+                                    Contacto
                                 </NavLink>
                             </li>
                         </ul>
@@ -86,11 +93,11 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="col-auto">
-                        <label className="sr-only" htmlFor="subscribeEmail">Email address</label>
+                        <label className="sr-only" htmlFor="subscribeEmail">Correo electrónico</label>
                         <div className="input-group mb-2">
                             <input type="text" className="form-control bg-dark border-light" id="subscribeEmail"
-                                placeholder="Email address" />
-                            <div className="input-group-text btn-success text-light">Subscribe</div>
+                                placeholder="Correo electrónico" />
+                            <div className="input-group-text btn-success text-light">Suscripción</div>
                         </div>
                     </div>
                 </div>
@@ -100,7 +107,7 @@ const Footer = () => {
                     <div className="row pt-2">
                         <div className="col-12">
                             <p className="text-left text-light">
-                                Copyright &copy; 2023 Company Name
+                                Copyright &copy; {year} KMarket Corporation
                                 | Designed by <a rel="sponsored" href="#" target="_blank">KMarket</a>
                             </p>
                         </div>
