@@ -18,26 +18,26 @@ const NavbarMain = () => {
                     <div className="flex-fill">
                         <ul className="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                             <li className="nav-item">
-                                <NavLink to="/" activeclassname="active" exact="true" className="nav-link">Home</NavLink>
+                                <NavLink to="/" activeclassname="active" exact="true" className="nav-link">Inicio</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/shop" activeclassname="active" exact="true" className="nav-link">Shop</NavLink>
+                                <NavLink to="/shop" activeclassname="active" exact="true" className="nav-link">Tienda</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/about" activeclassname="active" exact="true" className="nav-link">About</NavLink>
+                                <NavLink to="/about" activeclassname="active" exact="true" className="nav-link">Acerca de</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/contact" activeclassname="active" exact="true" className="nav-link">Contact</NavLink>
+                                <NavLink to="/contact" activeclassname="active" exact="true" className="nav-link">Contacto</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink to="/crud" activeclassname="active" exact="true" className="nav-link">Gestion de productos</NavLink>
+                                <NavLink to="/crud" activeclassname="active" exact="true" className="nav-link">Gestión de productos</NavLink>
                             </li>
                         </ul>
                     </div>
                     <div className="navbar align-self-center d-flex">
                         <div className="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
                             <div className="input-group">
-                                <input type="text" className="form-control" id="inputMobileSearch" placeholder="Search ..." />
+                                <input type="text" className="form-control" id="inputMobileSearch" placeholder="Buscar..." />
                                 <div className="input-group-text">
                                     <i className="fa fa-fw fa-search"></i>
                                 </div>
