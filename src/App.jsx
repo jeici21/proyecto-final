@@ -13,6 +13,7 @@ import Shoppage from './pages/Shoppage';
 import LoginPage from './pages/LoginPage';
 import { Dashboard } from './pages/dashboard/dashboard';
 import Crud from './components/Crud';
+// import TableWithPaginationAndSearch from './components/TableWithPaginationAndSearch';
 function App() {
   return (
     <div className="app">
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/crud" element={<Crud />} />
+          {/* <Route path="/table" element={<TableWithPaginationAndSearch />} /> */}
         </Routes>
         <Footer />
       </BrowserRouter>

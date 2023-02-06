@@ -20,7 +20,17 @@ const Crud = () => {
     const [modalEditar, setModalEditar] = useState(false);
     const [modalEliminar, setModalEliminar] = useState(false);
 
-    const [SelectedProduct, setSelectedProduct] = useState({});
+    const [SelectedProduct, setSelectedProduct] = useState({
+        "productInventory": {
+            "quantity": 0,
+        },
+        "productCategory": {
+            "id": 0,
+        },
+        "discount":{
+            "id": 0,
+        }
+    });
     const [SelectedProductAdd, setSelectedProductAdd] = useState({});
     //  const [SelectedCategory, setSelectedCategory] = useState({});
     // const [SelectedInventory, setSelectedInventory] = useState({});
@@ -40,14 +50,48 @@ const Crud = () => {
     }
 
     //AQUÍ SE GUARDA EL OBJETO QUE CONTIENE LAS VARIABLES DE PRODUCTOS PARA SU POSTERIOR ACTUALIZACION
-    const handleChange = e => {
-        const { name, value } = e.target;
-        setSelectedProduct((prevState) => ({
-            ...prevState,
-            [name]: value
-        }))
-  
-    }
+    const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+
+        if (name === "quantity") {
+            setSelectedProduct({
+                ...SelectedProduct,
+                productInventory: {
+                    ...SelectedProduct.productInventory,
+                    [name]: value
+                }
+            });
+        } else if (name === "Category") {
+            const nameid= "id";
+            console.log("entro a categoria");
+            setSelectedProduct({
+                ...SelectedProduct,
+                productCategory: {
+                    ...SelectedProduct.productCategory,
+                    [nameid]: value,
+                },
+            });
+        }  else if (name === "discount") {
+            const nameid= "id";
+            console.log("entro a descuento");
+            setSelectedProduct({
+                ...SelectedProduct,
+                discount: {
+                    ...SelectedProduct.productCategory,
+                    [nameid]: value,
+                },
+            });
+        } else {
+            setSelectedProduct({
+                ...SelectedProduct,
+                [name]: value
+            });
+        }
+        console.log(SelectedProduct);
+    };
+
+
     //AQUÍ SE GUARDA EL OBJETO QUE CONTIENE LAS VARIABLES PARA GUARDAR UN PRODUCTO NUEVO
     const handleChangeProduct = e => {
         const { name, value } = e.target;
@@ -65,6 +109,7 @@ const Crud = () => {
 
     const abrirCerrarModalEditar = () => {
         setModalEditar(!modalEditar);
+        if (modalEditar === "false") { setSelectedProduct({}); }
     }
 
     const abrirCerrarModalEliminar = () => {
@@ -166,34 +211,59 @@ const Crud = () => {
         }
     }
 
+
+    // ACTUALIZACION DEL inventario DE UN PRODUCTO
+    const EditInventory = async () => {
+        try {
+            const response = await axios.put(InventoryUrl + "/update/" + SelectedProduct.productInventory.id, {
+                quantity: SelectedProduct.productInventory.quantity,
+            })
+
+            const inventoryId = response.data.id;
+            console.log("inventario actualizado correctamente con id: " + SelectedProduct.productInventory.id);
+            console.log(inventoryId);
+            return inventoryId;
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
     //ACTUALIZAR PRODUCTOS 
     const peticionPut = async () => {
-        await axios.put(ProductUrl + "/update/" + SelectedProduct.id, {
-            name: SelectedProduct.name,
-            description: SelectedProduct.description,
-            dimensions: SelectedProduct.dimensions,
-            img: SelectedProduct.img,
-            weight: SelectedProduct.weight,
-            price: SelectedProduct.price,
-            longdesc: SelectedProduct.longdesc,
-            sku: SelectedProduct.sku,
-            productCategory: {
-                id: SelectedProduct.category
-            },
-            discount: {
-                id: SelectedProduct.discount
-            },
-            productInventory: {
-                id: 1
+        try {
+            const inventoryId = await EditInventory();
+            if (!inventoryId) {
+                throw new Error("No se pudo obtener el ID del registro de inventario");
             }
-        })
-            .then(response => {
-                var newdata = data;
-                peticionGetProduct();
-                abrirCerrarModalEditar();
-            }).catch(error => {
-                console.log(error);
+            await axios.put(ProductUrl + "/update/" + SelectedProduct.id, {
+                name: SelectedProduct.name,
+                description: SelectedProduct.description,
+                dimensions: SelectedProduct.dimensions,
+                img: SelectedProduct.img,
+                weight: SelectedProduct.weight,
+                price: SelectedProduct.price,
+                longdesc: SelectedProduct.longdesc,
+                sku: SelectedProduct.sku,
+                productCategory: {
+                    id: SelectedProduct.productCategory.id
+                },
+                discount: {
+                    id: SelectedProduct.discount.id
+                },
+                productInventory: {
+                    id: inventoryId
+                }
             })
+                .then(response => {
+                    var newdata = data;
+                    peticionGetProduct();
+                    abrirCerrarModalEditar();
+                }).catch(error => {
+                    console.log(error);
+                })
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     //ELIMINAR PRODUCTOS 
@@ -207,11 +277,10 @@ const Crud = () => {
             })
     }
 
-    const seleccionarFramework = (Product, caso) => {
+    const seleccionarModal = (Product, caso) => {
         setSelectedProduct(Product);
-        (caso === "Editar") ?
-            abrirCerrarModalEditar() :
-            abrirCerrarModalEliminar()
+        (caso === "Editar") ? abrirCerrarModalEditar() : abrirCerrarModalEliminar();
+
     }
 
     useEffect(() => {
@@ -225,7 +294,9 @@ const Crud = () => {
     return (
         <Container className='text-center'>
             <br />
-            <button className="btn btn-success" onClick={() => abrirCerrarModalInsertar()}>Add product</button>
+            <button className="btn btn-success m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
+            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar category</button>
+            <button className="btn btn-danger m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar descuento</button>
             <br /><br />
             <table className="table table-striped">
                 <thead>
@@ -250,8 +321,8 @@ const Crud = () => {
                             <td>{currencyFormatter(product.price)}</td>
                             <td>
                                 <div className='d-flex text-center'>
-                                    <button className="btn btn-primary m-1 " onClick={() => seleccionarFramework(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                    <button className="btn btn-danger m-1" onClick={() => seleccionarFramework(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                    <button className="btn btn-primary m-1 " onClick={() => seleccionarModal(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
+                                    <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
                                 </div>
 
                             </td>
@@ -335,23 +406,27 @@ const Crud = () => {
                     <div className="form-group">
                         <label>Nombre: </label>
                         <br />
-                        <input type="text" className="form-control" name="name" onChange={handleChange} value={SelectedProduct && SelectedProduct.name} />
+                        <input type="text" className="form-control" name="name" onChange={handleChange} value={SelectedProduct.name} />
                         <br />
                         <label>description: </label>
                         <br />
-                        <textarea type="text" className="form-control" name="description" onChange={handleChange} value={SelectedProduct && SelectedProduct.description} />
+                        <textarea type="text" className="form-control" name="description" onChange={handleChange} value={SelectedProduct.description} />
                         <br />
                         <label>Loong description: </label>
                         <br />
-                        <textarea type="text" className="form-control" name="longdesc" onChange={handleChange} value={SelectedProduct && SelectedProduct.longdesc} />
+                        <textarea type="text" className="form-control" name="longdesc" onChange={handleChange} value={SelectedProduct.longdesc} />
                         <br />
                         <label>price: </label>
                         <br />
-                        <input type="text" className="form-control" name="price" onChange={handleChange} value={SelectedProduct && SelectedProduct.price} />
+                        <input type="text" className="form-control" name="price" onChange={handleChange} value={SelectedProduct.price} />
+                        <br />
+                        <label>Stock: </label>
+                        <br />
+                        <input type="text" className="form-control" name="quantity" onChange={handleChange} value={SelectedProduct.productInventory.quantity} />
                         <br />
                         <label>Category: </label>
                         <br />
-                        <select name="categorias" id="selCategory" value={SelectedProduct && SelectedProduct.category}>
+                        <select name="Category" id="selCategory" onChange={handleChange} value={SelectedProduct.productCategory.id}>
                             <option value={-1}>Seleccione una opción: </option>
                             {
                                 dataCategory.map((category) => (
@@ -362,7 +437,8 @@ const Crud = () => {
                         <br /><br />
                         <label>Ofertas y descuentos: </label>
                         <br />
-                        <select name="discount" id="selDiscount" onClick={handleChange}  >
+                        <select name="discount" id="selDiscount" onChange={handleChange} value={SelectedProduct.discount.id} >
+                            {/*  */}
                             <option>Seleccione un descuento: </option>
                             {
                                 dataDiscount.map((discount) => (
