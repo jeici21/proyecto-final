@@ -1,7 +1,37 @@
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../images/K-Market-2.png";
+import { fetchUserData } from "../../src/api/authenticationService";
+import { useNavigate } from "react-router-dom";
 
 const NavbarMain = () => {
+  const [data, setData] = useState({});
+  const navigate = useNavigate();
+  const [linkImage, setlinkImage] = useState("");
+
+  React.useEffect(() => {
+    fetchUserData()
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((e) => {
+        localStorage.clear();
+        navigate("/");
+      });
+  }, []);
+
+  const logOut = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+ /* pROBANDO CONTROL Image
+
+  if (data.firstName) {
+    setlinkImage("https://avatars.githubusercontent.com/u/35409654?s=40&v=4");
+  } else {
+    setlinkImage("https://i.stack.imgur.com/l60Hf.png");
+  }
+*/
   return (
     <nav className="navbar navbar-expand-lg navbar-light shadow">
       <div className="container d-flex justify-content-between align-items-center">
@@ -133,7 +163,7 @@ const NavbarMain = () => {
               <ul class="dropdown-menu text-small shadow">
                 <li>
                   <a class="dropdown-item" href="#">
-                    Luis Anrrango
+                  {data && `${data.firstName} ${data.lastName}`}
                   </a>
                 </li>
                 <li>
@@ -150,7 +180,7 @@ const NavbarMain = () => {
                   <hr class="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item" href="#" onClick={() => logOut()}>
                     Sign out
                   </a>
                 </li>

@@ -49,7 +49,10 @@ div {
 .dropdown-toggle {
   outline: 0;
 }
-
+/*Register*/
+.register{
+  
+}
 /* General */
 .logo {
   width: 250px auto !important;

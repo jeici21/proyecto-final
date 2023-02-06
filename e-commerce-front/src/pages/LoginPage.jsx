@@ -1,9 +1,14 @@
-import Login from "../components/Login";
+import Login from "../components/login/Login";
+import WhatsAppForm from "../components/login/WhatsAppForm";
+
 
 const LoginPage = () => {
-    return (
-        <Login />
-    );
-}
+  return (
+    <div>
+      <Login />
+      <WhatsAppForm></WhatsAppForm>
+    </div>
+  );
+};
 
 export default LoginPage;
