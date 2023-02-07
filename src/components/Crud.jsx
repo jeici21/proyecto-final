@@ -19,6 +19,8 @@ const Crud = () => {
     const [modalInsertar, setModalInsertar] = useState(false);
     const [modalEditar, setModalEditar] = useState(false);
     const [modalEliminar, setModalEliminar] = useState(false);
+    const [modalInsertarDescuento, setModalInsertarDescuento] = useState(false);
+    const [modalInsertarCategoria, setModalInsertarCategoria] = useState(false);
 
     const [SelectedProduct, setSelectedProduct] = useState({
         "productInventory": {
@@ -27,7 +29,7 @@ const Crud = () => {
         "productCategory": {
             "id": 0,
         },
-        "discount":{
+        "discount": {
             "id": 0,
         }
     });
@@ -63,7 +65,7 @@ const Crud = () => {
                 }
             });
         } else if (name === "Category") {
-            const nameid= "id";
+            const nameid = "id";
             console.log("entro a categoria");
             setSelectedProduct({
                 ...SelectedProduct,
@@ -72,8 +74,8 @@ const Crud = () => {
                     [nameid]: value,
                 },
             });
-        }  else if (name === "discount") {
-            const nameid= "id";
+        } else if (name === "discount") {
+            const nameid = "id";
             console.log("entro a descuento");
             setSelectedProduct({
                 ...SelectedProduct,
@@ -99,9 +101,20 @@ const Crud = () => {
             ...prevState,
             [name]: value
         }))
+        console.log(SelectedProductAdd);
     }
 
-    // FUNCIONES DE LOS MODALES 
+    // FUNCIONES DE LOS MODALES CATEGRIA 
+    const abrirCerrarModalInsertarCategoria = () => {
+        setSelectedProductAdd({});
+        setModalInsertarCategoria(!modalInsertarCategoria);
+    }
+    // FUNCIONES DE LOS MODALES DESCUENTO 
+    const abrirCerrarModalInsertarDescuento = () => {
+        setSelectedProductAdd({});
+        setModalInsertarDescuento(!modalInsertarDescuento);
+    }
+    // FUNCIONES DE LOS MODALES PRODUCTOS
     const abrirCerrarModalInsertar = () => {
         setSelectedProductAdd({});
         setModalInsertar(!modalInsertar);
@@ -152,6 +165,50 @@ const Crud = () => {
             }).catch(error => {
                 console.log(error);
             })
+    }
+
+    // ENVIO Y REGISTRO DE UN NUEVO PRODUCTO 
+    const peticionPostCategoria = async () => {
+        try {
+
+            await axios.post(CategoryUrl + "/save", {
+                name: SelectedProductAdd.name,
+                longDesc: SelectedProductAdd.description,
+                createAt: now
+            })
+                .then(response => {
+                    abrirCerrarModalInsertarCategoria();
+                    peticionGetCategory();
+                    console.log("categoria registrada correctamente.");
+                    console.log(response);
+                }).catch(error => {
+                    console.log(error);
+                })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    const peticionPostDescuento = async () => {
+        try {
+
+            await axios.post(DiscountUrl + "/save", {
+                name: SelectedProductAdd.name,
+                longDesc: SelectedProductAdd.description,
+                discount_percent:SelectedProductAdd.discount,
+                active: true,
+                createAt: now
+            })
+                .then(response => {
+                    abrirCerrarModalInsertarDescuento();
+                    peticionGetCategory();
+                    console.log("Descuento registrado correctamente.");
+                    console.log(response);
+                }).catch(error => {
+                    console.log(error);
+                })
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     // ENVIO Y REGISTRO DE UN NUEVO inventario 
@@ -295,8 +352,8 @@ const Crud = () => {
         <Container className='text-center'>
             <br />
             <button className="btn btn-success m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
-            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar category</button>
-            <button className="btn btn-danger m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar descuento</button>
+            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>Agregar category</button>
+            <button className="btn btn-danger m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>Agregar descuento</button>
             <br /><br />
             <table className="table table-striped">
                 <thead>
@@ -333,8 +390,7 @@ const Crud = () => {
                 </tbody>
 
             </table>
-
-
+            {/*  MODALES REFERENTES A PRODUCTOS ========================================================================== */}
             <Modal isOpen={modalInsertar}>
                 <ModalHeader>Insertar Producto</ModalHeader>
                 <ModalBody>
@@ -488,7 +544,51 @@ const Crud = () => {
                     </button>
                 </ModalFooter>
             </Modal>
+
+            {/*  MODALES REFERENTES A CATEGORIA ========================================================================== */}
+            <Modal isOpen={modalInsertarCategoria}>
+                <ModalHeader>Insertar Categoria</ModalHeader>
+                <ModalBody>
+                    <div className="form-group">
+                        <label>Nombre: </label>
+                        <br />
+                        <input type="text" className="form-control" name="name" onChange={handleChangeProduct} />
+                        <br />
+                        <label>description: </label>
+                        <br />
+                        <textarea type="text" className="form-control" name="description" onChange={handleChangeProduct} />
+
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <button className="btn btn-primary m-1" onClick={() => peticionPostCategoria()}>Registrar    </button>
+                    <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertarCategoria()}>Cancelar</button>
+                </ModalFooter>
+            </Modal>
+            {/*  MODALES REFERENTES A DESCUENTO ========================================================================== */}
+            <Modal isOpen={modalInsertarDescuento}>
+                <ModalHeader>Insertar Descuento</ModalHeader>
+                <ModalBody>
+                    <div className="form-group">
+                        <label>Nombre: </label>
+                        <br />
+                        <input type="text" className="form-control" name="name" onChange={handleChangeProduct} />
+                        <br />
+                        <label>description: </label>
+                        <br />
+                        <textarea type="text" className="form-control" name="description" onChange={handleChangeProduct} />
+                        <label>Descuento: </label>
+                        <br />
+                        <input type="text" className="form-control" name="discount" onChange={handleChangeProduct} />
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <button className="btn btn-primary m-1" onClick={() => peticionPostDescuento()}>Registrar    </button>
+                    <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertarDescuento()}>Cancelar</button>
+                </ModalFooter>
+            </Modal>
         </Container>
+
     );
 }
 
