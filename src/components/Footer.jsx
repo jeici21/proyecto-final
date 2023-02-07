@@ -49,12 +49,12 @@ const Footer = () => {
                                     Acerca de
                                 </NavLink>
                             </li>
-                            <li>
+{/*                             <li>
                                 <NavLink activeclassname="active" className="text-decoration-none"
                                     to="https://goo.gl/maps/DzG5vJjFAcaZSGRD8">
                                     Ubicaciones
                                 </NavLink>
-                            </li>
+                            </li> */}
                             <li><a className="text-decoration-none" href="#">FAQs</a></li>
                             <li>
                                 <NavLink to="/contact" activeclassname="active" exact="true" className="text-decoration-none">
