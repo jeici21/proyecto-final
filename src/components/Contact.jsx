@@ -54,7 +54,7 @@ const Contact = () => {
                 <textarea id="textarea" required placeholder="Escriba su mensaje..." value={textarea}
                     onChange={(e) => { onChangeHandler("textarea", e.target.value); }}>
                 </textarea>
-                <button type="submit">Get in Touch!</button>
+                <button type="submit">Enviar mensaje</button>
             </form>
         </div>
     );

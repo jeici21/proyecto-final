@@ -359,11 +359,11 @@ const Crud = () => {
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>name</th>
-                        <th>description</th>
-                        <th>Category</th>
-                        <th>Inventory</th>
-                        <th>Price</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Categoría</th>
+                        <th>Inventario</th>
+                        <th>Precio</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -378,7 +378,7 @@ const Crud = () => {
                             <td>{currencyFormatter(product.price)}</td>
                             <td>
                                 <div className='d-flex text-center'>
-                                    <button className="btn btn-primary m-1 " onClick={() => seleccionarModal(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
+                                    <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
                                     <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
                                 </div>
 
@@ -399,22 +399,22 @@ const Crud = () => {
                         <br />
                         <input type="text" className="form-control" name="name" onChange={handleChangeProduct} />
                         <br />
-                        <label>description: </label>
+                        <label>Descripción: </label>
                         <br />
                         <textarea type="text" className="form-control" name="description" onChange={handleChangeProduct} />
                         <br />
-                        <label>Loong description: </label>
+                        <label>Descripción larga: </label>
                         <br />
                         <textarea type="text" className="form-control" name="longdesc" onChange={handleChangeProduct} />
                         <br />
-                        <label>price: </label>
+                        <label>Precio: </label>
                         <br />
                         <input type="text" className="form-control" name="price" onChange={handleChangeProduct} />
                         <br />
-                        <label>Category: </label>
+                        <label>Categoría: </label>
                         <br />
                         <select name="category" id="selCategory" onClick={handleChangeProduct} >
-                            <option>Seleccione una categoria: </option>
+                            <option>Seleccione una categoría: </option>
                             {
                                 dataCategory.map((category) => (
                                     <option key={category.id} value={category.id}> {category.name}</option>
@@ -425,7 +425,7 @@ const Crud = () => {
                         <label>Ofertas y descuentos: </label>
                         <br />
                         <select name="discount" id="selDiscount" onClick={handleChangeProduct} >
-                            <option>Seleccione un  descuento: </option>
+                            <option>Seleccione un descuento: </option>
                             {
                                 dataDiscount.map((discount) => (
                                     <option key={discount.id} value={discount.id}> {discount.name}</option>
@@ -436,10 +436,10 @@ const Crud = () => {
                         <label>Stock: </label>
                         <br />
                         <input type="text" className="form-control" name="Inventory" onChange={handleChangeProduct} />
-                        <label>dimensions: </label>
+                        <label>Dimensiones: </label>
                         <br />
                         <input type="text" className="form-control" name="dimensions" onChange={handleChangeProduct} />
-                        <label>weight: </label>
+                        <label>Peso: </label>
                         <br />
                         <input type="text" className="form-control" name="weight" onChange={handleChangeProduct} />
                         <label>Ruta de Imagen: </label>
@@ -449,7 +449,7 @@ const Crud = () => {
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className="btn btn-primary m-1" onClick={() => peticionPost()}>Registrar    </button>
+                    <button className="btn btn-primary m-1" onClick={() => peticionPost()}>Registrar</button>
                     <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertar()}>Cancelar</button>
                 </ModalFooter>
             </Modal>
@@ -464,15 +464,15 @@ const Crud = () => {
                         <br />
                         <input type="text" className="form-control" name="name" onChange={handleChange} value={SelectedProduct.name} />
                         <br />
-                        <label>description: </label>
+                        <label>Descripción: </label>
                         <br />
                         <textarea type="text" className="form-control" name="description" onChange={handleChange} value={SelectedProduct.description} />
                         <br />
-                        <label>Loong description: </label>
+                        <label>Descripción larga: </label>
                         <br />
                         <textarea type="text" className="form-control" name="longdesc" onChange={handleChange} value={SelectedProduct.longdesc} />
                         <br />
-                        <label>price: </label>
+                        <label>Precio: </label>
                         <br />
                         <input type="text" className="form-control" name="price" onChange={handleChange} value={SelectedProduct.price} />
                         <br />
@@ -480,7 +480,7 @@ const Crud = () => {
                         <br />
                         <input type="text" className="form-control" name="quantity" onChange={handleChange} value={SelectedProduct.productInventory.quantity} />
                         <br />
-                        <label>Category: </label>
+                        <label>Categoría: </label>
                         <br />
                         <select name="Category" id="selCategory" onChange={handleChange} value={SelectedProduct.productCategory.id}>
                             <option value={-1}>Seleccione una opción: </option>
@@ -503,10 +503,10 @@ const Crud = () => {
                             }
                         </select>
                         <br /><br />
-                        <label>dimensions: </label>
+                        <label>Dimensiones: </label>
                         <br />
                         <input type="text" className="form-control" name="dimensions" onChange={handleChange} value={SelectedProduct && SelectedProduct.dimensions} />
-                        <label>weight: </label>
+                        <label>Peso: </label>
                         <br />
                         <input type="text" className="form-control" name="weight" onChange={handleChange} value={SelectedProduct && SelectedProduct.weight} />
                         <label>Ruta de Imagen: </label>
@@ -524,7 +524,7 @@ const Crud = () => {
             <Modal isOpen={modalEliminar}>
                 <ModalBody>
                     <div>
-                        ¿Estás seguro que deseas eliminar el producto {SelectedProduct && SelectedProduct.name}?
+                        ¿Estás seguro de que deseas eliminar el producto {SelectedProduct && SelectedProduct.name}?
                     </div>
 
                     <div className='text-center'>
@@ -538,8 +538,7 @@ const Crud = () => {
                     </button>
                     <button
                         className="btn btn-secondary"
-                        onClick={() => abrirCerrarModalEliminar()}
-                    >
+                        onClick={() => abrirCerrarModalEliminar()}>
                         No
                     </button>
                 </ModalFooter>

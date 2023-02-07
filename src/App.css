@@ -9,7 +9,8 @@ a,
 .nav-link,
 label,
 input,
-div {
+div,
+textarea {
   font-family: 'Roboto', sans-serif;
   font-size: 18px !important;
   font-weight: 300 !important;
@@ -79,8 +80,8 @@ div {
 
 .btn-success:hover {
   cursor: pointer;
-  background-color: rgb(102, 255, 0) !important;
-  border-color: rgb(83, 207, 0) !important;
+  /* background-color: rgb(102, 255, 0) !important;
+  border-color: rgb(83, 207, 0) !important; */
 }
 
 .pagination .page-link:hover {
@@ -524,6 +525,7 @@ figure img {
   margin-top: 6px;
   margin-bottom: 16px;
   resize: vertical;
+  border-radius: 5px;
 }
 
 .contact-container textarea {

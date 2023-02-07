@@ -4,7 +4,7 @@ const FeaturedProducts = () => {
             <div className="container py-5">
                 <div className="row text-center py-3">
                     <div className="col-lg-6 m-auto">
-                        <h1 className="h1">Featured Product</h1>
+                        <h1 className="h1">Productos destacados</h1>
                         <p>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
