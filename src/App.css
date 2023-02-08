@@ -511,10 +511,27 @@ figure img {
 .contact-container {
   box-sizing: border-box;
   text-align: center;
-  width: 50%;
   margin: 10px auto;
-
+  height: 100%;
   /* background-color: aquamarine; */
+}
+
+.contact-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1%;
+}
+
+.contact-col1 {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-col2 {
+  width: 70%;
 }
 
 .form-container {
@@ -565,12 +582,17 @@ figure img {
   padding: 10px;
 }
 
+.contact-container iframe {
+  border-radius: 5px;
+}
+
 @media screen and (max-width: 600px) {
 
   .contact-container,
-  button {
+  button, .contact-col1, .contact-col2, .contact-row {
     width: 100%;
     margin-top: 0;
+    display: block;
   }
 }
 
