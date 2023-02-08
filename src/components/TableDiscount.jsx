@@ -4,14 +4,14 @@ import { Container, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstra
 import axios from 'axios';
 //import { clippingParents } from '@popperjs/core';
 
-const TableCateory = () => {
+const TableDiscount = () => {
 
-    const CategoryUrl = "http://localhost:8080/category";
+    const DiscountUrl = "http://localhost:8080/discount";
     //data de los model para las solicitudes GET 
     const [data, setData] = useState([]);
     const [modalEditar, setModalEditar] = useState(false);
-    const [modalEliminarcate, setModalEliminarcate] = useState(false);
-    const [modalInsertarCategoria, setModalInsertarCategoria] = useState(false);
+    const [modalEliminar, setModalEliminar] = useState(false);
+    const [modalInsertarDescuento, setModalInsertarDescuento] = useState(false);
 
 
     const [SelectedProductAdd, setSelectedProductAdd] = useState({});
@@ -36,66 +36,69 @@ const TableCateory = () => {
         console.log(SelectedProduct);
     }
 
-    // FUNCIONES DE LOS MODALES CATEGRIA 
-    const abrirCerrarModalInsertarCategoria = () => {
-        setSelectedProduct({});
-        setModalInsertarCategoria(!modalInsertarCategoria);
+    // FUNCIONES DE LOS MODALES DESCUENTO 
+    const abrirCerrarModalInsertarDescuento = () => {
+        setSelectedProductAdd({});
+        setModalInsertarDescuento(!modalInsertarDescuento);
     }
 
-    const abrirCerrarModalEditarcate = () => {
+    const abrirCerrarModalEditar = () => {
         setModalEditar(!modalEditar);
         if (modalEditar === "false") { setSelectedProduct({}); }
     }
 
-    const abrirCerrarModalEliminarcate= () => {
-        setModalEliminarcate(!modalEliminarcate);
+    const abrirCerrarModalEliminar = () => {
+        setModalEliminar(!modalEliminar);
     }
 
 
-    // CObtener todos los Category
-    const peticionGetCategory = async () => {
-        await axios.get(CategoryUrl)
+   // CObtener todos los Discount
+   const peticionGetDiscount = async () => {
+    await axios.get(DiscountUrl)
+        .then(response => {
+            setData(response.data);
+        }).catch(error => {
+            console.log(error);
+        })
+}
+
+
+const peticionPostDescuento = async () => {
+    try {
+
+        await axios.post(DiscountUrl + "/save", {
+            name: SelectedProduct.name,
+            longDesc: SelectedProduct.description,
+            discount_percent:SelectedProduct.discount,
+            active: true,
+            createAt: now
+        })
             .then(response => {
-                setData(response.data);
+                abrirCerrarModalInsertarDescuento();
+                peticionGetDiscount();
+                console.log("Descuento registrado correctamente.");
+                console.log(response);
             }).catch(error => {
                 console.log(error);
             })
+    } catch (error) {
+        console.error(error);
     }
+}
 
-    // ENVIO Y REGISTRO DE UNA CATEGORIA 
-    const peticionPostCategoria = async () => {
-        try {
-
-            await axios.post(CategoryUrl + "/save", {
-                name: SelectedProduct.name,
-                longDesc: SelectedProduct.description,
-                createAt: now
-            })
-                .then(response => {
-                    abrirCerrarModalInsertarCategoria();
-                    peticionGetCategory();
-                    console.log("categoria registrada correctamente.");
-                    console.log(response);
-                }).catch(error => {
-                    console.log(error);
-                })
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    //ACTUALIZAR CATEGORIA 
+    //ACTUALIZAR DESCUENTO 
     const peticionPut = async () => {
         try {
-            await axios.put(CategoryUrl + "/update/" + SelectedProduct.id, {
+            await axios.put(DiscountUrl + "/update/" + SelectedProduct.id, {
                 name: SelectedProduct.name,
                 longDesc: SelectedProduct.longDesc,
+                discount_percent: SelectedProduct.discount_percent,
 
             })
                 .then(response => {
                     var newdata = data;
-                    abrirCerrarModalEditarcate();
-                    peticionGetCategory();
+                    abrirCerrarModalEditar();
+                    peticionGetDiscount();
                 }).catch(error => {
                     console.log(error);
                 })
@@ -106,31 +109,31 @@ const TableCateory = () => {
 
     //ELIMINAR PRODUCTOS 
     const peticionDelete = async () => {
-        await axios.delete(CategoryUrl + "/delete/" + SelectedProduct.id)
+        await axios.delete(DiscountUrl + "/delete/" + SelectedProduct.id)
             .then(response => {
                 setData(data.filter(Product => Product.id !== SelectedProduct.id));
-                peticionGetCategory();
-                abrirCerrarModalEliminarcate();
+                peticionGetDiscount();
+                abrirCerrarModalEliminar();
             }).catch(error => {
                 console.log(error);
             })
     }
 
-    const seleccionarModalcate = (Product, caso) => {
+    const seleccionarModal = (Product, caso) => {
         setSelectedProduct(Product);
-        (caso === "Editar") ? abrirCerrarModalEditarcate() : abrirCerrarModalEliminarcate();
+        (caso === "Editar") ? abrirCerrarModalEditar() : abrirCerrarModalEliminar();
 
     }
 
     useEffect(() => {
-        peticionGetCategory();
+        peticionGetDiscount();
     }, [])
 
 
     return (
         <Container className='text-center'>
             <br />
-            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>Agregar category</button>
+            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>Agregar Descuento</button>
             <br /><br />
             <div className="table table-responsive table-striped">
 
@@ -141,6 +144,8 @@ const TableCateory = () => {
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
+                            <th>Porcentaje de descuento</th>
+                            <th>Activo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,10 +154,12 @@ const TableCateory = () => {
                                 <td>{product.id}</td>
                                 <td>{product.name}</td>
                                 <td>{product.longDesc}</td>
+                                <td>{product.discount_percent}</td>
+                                <td>{product.active}</td>
                                 <td>
                                     <div className='d-flex text-center'>
-                                        <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                        <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                        <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
+                                        <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
                                     </div>
 
                                 </td>
@@ -176,15 +183,18 @@ const TableCateory = () => {
                         <label>Descripción: </label>
                         <textarea type="text" className="form-control" name="longDesc" onChange={handleChangeProduct} value={SelectedProduct.longDesc} />
                         <br />
+                        <label>Descripción: </label>
+                        <input type="text"className="form-control" name="discount_percent" onChange={handleChangeProduct} value={SelectedProduct.discount_percent} />
+                        <br />
                     </div>
                 </ModalBody>
                 <ModalFooter>
                     <button className="btn btn-primary m-1" onClick={() => peticionPut()}>Editar</button>
-                    <button className="btn btn-danger" onClick={() => abrirCerrarModalEditarcate()}>Cancelar</button>
+                    <button className="btn btn-danger" onClick={() => abrirCerrarModalEditar()}>Cancelar</button>
                 </ModalFooter>
             </Modal>
 
-            <Modal isOpen={modalEliminarcate}>
+            <Modal isOpen={modalEliminar}>
                 <ModalBody>
                     <div>
                         ¿Estás seguro de que deseas eliminar la categoria {SelectedProduct && SelectedProduct.name}?
@@ -196,15 +206,15 @@ const TableCateory = () => {
                     </button>
                     <button
                         className="btn btn-secondary"
-                        onClick={() => abrirCerrarModalEliminarcate()}>
+                        onClick={() => abrirCerrarModalEliminar()}>
                         No
                     </button>
                 </ModalFooter>
             </Modal>
 
-            {/*  MODALES REFERENTES A CATEGORIA ========================================================================== */}
-            <Modal isOpen={modalInsertarCategoria}>
-                <ModalHeader>Insertar Categoria</ModalHeader>
+             {/*  MODALES REFERENTES A DESCUENTO ========================================================================== */}
+             <Modal isOpen={modalInsertarDescuento}>
+                <ModalHeader>Insertar Descuento</ModalHeader>
                 <ModalBody>
                     <div className="form-group">
                         <label>Nombre: </label>
@@ -214,12 +224,14 @@ const TableCateory = () => {
                         <label>description: </label>
                         <br />
                         <textarea type="text" className="form-control" name="description" onChange={handleChangeProduct} />
-
+                        <label>Descuento: </label>
+                        <br />
+                        <input type="text" className="form-control" name="discount" onChange={handleChangeProduct} />
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className="btn btn-primary m-1" onClick={() => peticionPostCategoria()}>Registrar    </button>
-                    <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertarCategoria()}>Cancelar</button>
+                    <button className="btn btn-primary m-1" onClick={() => peticionPostDescuento()}>Registrar    </button>
+                    <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertarDescuento()}>Cancelar</button>
                 </ModalFooter>
             </Modal>
 
@@ -230,4 +242,4 @@ const TableCateory = () => {
 }
 
 
-export default TableCateory;
+export default TableDiscount;

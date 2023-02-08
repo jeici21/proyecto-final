@@ -19,8 +19,44 @@ const Crud = () => {
     const [modalInsertar, setModalInsertar] = useState(false);
     const [modalEditar, setModalEditar] = useState(false);
     const [modalEliminar, setModalEliminar] = useState(false);
+
+
     const [modalInsertarDescuento, setModalInsertarDescuento] = useState(false);
+    const [modalEditardesc, setModalEditardesc] = useState(false);
+    const [modalEliminardesc, setModalEliminardesc] = useState(false);
+
+    const [SelectedCate, setSelectedCate] = useState({});
+    const [SelectedDesc, setSelectedDesc] = useState({});
     const [modalInsertarCategoria, setModalInsertarCategoria] = useState(false);
+    const [modalEditarcate, setModalEditarcate] = useState(false);
+    const [modalEliminarcate, setModalEliminarcate] = useState(false);
+    const abrirCerrarModalEditarcate = () => {
+        setModalEditarcate(!modalEditarcate);
+        if (modalEditarcate === "false") { setSelectedCate({}); }
+    }
+    const abrirCerrarModalEliminarcate = () => {
+        setModalEliminarcate(!modalEliminarcate);
+    }
+
+    const seleccionarModalcate = (Product, caso) => {
+        setSelectedCate(Product);
+        (caso === "Editar") ? abrirCerrarModalEditarcate() : abrirCerrarModalEliminarcate();
+
+    }
+
+    const abrirCerrarModalEditarDesc = () => {
+        setModalEditardesc(!modalEditardesc);
+        if (modalEditardesc === "false") { SelectedDesc({}); }
+    }
+    const abrirCerrarModalEliminarDesc = () => {
+        setModalEliminardesc(!modalEliminardesc);
+    }
+    const seleccionarModaldesc = (Product, caso) => {
+        setSelectedDesc(Product);
+        (caso === "Editar") ? abrirCerrarModalEditarDesc() : abrirCerrarModalEliminarDesc();
+
+    }
+
 
     const [SelectedProduct, setSelectedProduct] = useState({
         "productInventory": {
@@ -51,6 +87,12 @@ const Crud = () => {
         return formatter.format(value)
     }
 
+    //aquí se controla el manejo de cada tabla 
+    const [selectedTable, setSelectedTable] = useState(1);
+
+    const handleRadioChange = (e) => {
+        setSelectedTable(parseInt(e.target.value, 10));
+    };
     //AQUÍ SE GUARDA EL OBJETO QUE CONTIENE LAS VARIABLES DE PRODUCTOS PARA SU POSTERIOR ACTUALIZACION
     const handleChange = (e) => {
         const name = e.target.name;
@@ -103,6 +145,7 @@ const Crud = () => {
         }))
         console.log(SelectedProductAdd);
     }
+
 
     // FUNCIONES DE LOS MODALES CATEGRIA 
     const abrirCerrarModalInsertarCategoria = () => {
@@ -166,8 +209,47 @@ const Crud = () => {
                 console.log(error);
             })
     }
+    //AQUÍ SE GUARDA EL OBJETO QUE CONTIENE LAS VARIABLES PARA EDITAR UNA CATEGORIA
+    const handleChangecate = e => {
+        const { name, value } = e.target;
+        setSelectedCate((prevState) => ({
+            ...prevState,
+            [name]: value
+        }))
+        console.log(SelectedCate);
+    }
+    //ELIMINAR CATEGORIA 
+    const peticionDeletecate = async () => {
+        await axios.delete(CategoryUrl + "/delete/" + SelectedCate.id)
+            .then(response => {
+                setData(data.filter(Product => Product.id !== SelectedCate.id));
+                peticionGetCategory();
+                abrirCerrarModalEliminarcate();
+            }).catch(error => {
+                console.log(error);
+            })
+    }
+    //ACTUALIZAR CATEGORIA 
+    const peticionPutcate = async () => {
+        try {
+            await axios.put(CategoryUrl + "/update/" + SelectedCate.id, {
+                name: SelectedCate.name,
+                longDesc: SelectedCate.longDesc,
 
-    // ENVIO Y REGISTRO DE UN NUEVO PRODUCTO 
+            })
+                .then(response => {
+                    var newdata = data;
+                    abrirCerrarModalEditarcate();
+                    peticionGetCategory();
+                }).catch(error => {
+                    console.log(error);
+                })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    // ENVIO Y REGISTRO DE UNA CATEGORIA 
     const peticionPostCategoria = async () => {
         try {
 
@@ -188,13 +270,25 @@ const Crud = () => {
             console.error(error);
         }
     }
+
+      //AQUÍ SE GUARDA EL OBJETO QUE CONTIENE LAS VARIABLES PARA EDITAR UNA CATEGORIA
+      const handleChangeDesc = e => {
+        const { name, value } = e.target;
+        setSelectedDesc((prevState) => ({
+            ...prevState,
+            [name]: value
+        }))
+        console.log(SelectedDesc);
+    }
+
+    // ENVIO Y REGISTRO DE UN NUEVO DESCUENTO 
     const peticionPostDescuento = async () => {
         try {
 
             await axios.post(DiscountUrl + "/save", {
                 name: SelectedProductAdd.name,
                 longDesc: SelectedProductAdd.description,
-                discount_percent:SelectedProductAdd.discount,
+                discount_percent: SelectedProductAdd.discount,
                 active: true,
                 createAt: now
             })
@@ -209,6 +303,37 @@ const Crud = () => {
         } catch (error) {
             console.error(error);
         }
+    }
+    //ACTUALIZAR DESCUENTO 
+    const peticionPutdesc = async () => {
+        try {
+            await axios.put(DiscountUrl + "/update/" + SelectedDesc.id, {
+                name: SelectedDesc.name,
+                longDesc: SelectedDesc.longDesc,
+                discount_percent: SelectedDesc.discount_percent,
+
+            })
+                .then(response => {
+                    abrirCerrarModalEditarDesc();
+                    peticionGetDiscount();
+                }).catch(error => {
+                    console.log(error);
+                })
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    //ELIMINAR PRODUCTOS 
+    const peticionDeletedesc = async () => {
+        await axios.delete(DiscountUrl + "/delete/" + SelectedProduct.id)
+            .then(response => {
+                setData(data.filter(Product => Product.id !== SelectedProduct.id));
+                peticionGetDiscount();
+                abrirCerrarModalEliminar();
+            }).catch(error => {
+                console.log(error);
+            })
     }
 
     // ENVIO Y REGISTRO DE UN NUEVO inventario 
@@ -349,47 +474,139 @@ const Crud = () => {
 
 
     return (
-        <Container className='text-center'>
+        <Container className='text-center cont' >
+
+
             <br />
-            <button className="btn btn-success m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
+            <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
             <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>Agregar category</button>
-            <button className="btn btn-danger m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>Agregar descuento</button>
+            <button className="btn btn-warning  m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>Agregar descuento</button>
             <br /><br />
-            <table className="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Categoría</th>
-                        <th>Inventario</th>
-                        <th>Precio</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map(product => (
-                        <tr key={product.id}>
-                            <td> <img src={product.img} alt="Publication" width="50" height="50" /></td>
-                            <td>{product.name}</td>
-                            <td>{product.description}</td>
-                            <td>{product.productCategory.name}</td>
-                            <td>{product.productInventory.quantity}</td>
-                            <td>{currencyFormatter(product.price)}</td>
-                            <td>
-                                <div className='d-flex text-center'>
-                                    <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                    <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
-                                </div>
-
-                            </td>
-                        </tr>
-                    ))}
+            <div className='d-flex  justify-content-center'>
 
 
-                </tbody>
+                <div className='m-2 '>
+                    <input type="radio" name="table" value="1" onChange={handleRadioChange} checked={selectedTable === 1} />
+                    Productos
+                </div >
+                <div className='m-2'>
+                    <input type="radio" name="table" value="2" onChange={handleRadioChange} checked={selectedTable === 2} />
+                    Descuentos
+                </div >
+                <div className='m-2'>
+                    <input type="radio" name="table" value="3" onChange={handleRadioChange} checked={selectedTable === 3} />
+                    Categorias
+                </div>
+            </div>
+            {selectedTable === 1 && (
+                <div className=''>
+                    {/* <h2> Tabla de productos</h2> */}
+                    <table className="table table-responsive table-striped tablebg">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Categoría</th>
+                                <th>Inventario</th>
+                                <th>Precio</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map(product => (
+                                <tr key={product.id}>
+                                    <td> <img src={product.img} alt="Publication" width="50" height="50" /></td>
+                                    <td>{product.name}</td>
+                                    <td>{product.description}</td>
+                                    <td>{product.productCategory.name}</td>
+                                    <td>{product.productInventory.quantity}</td>
+                                    <td>{currencyFormatter(product.price)}</td>
+                                    <td>
+                                        <div className='d-flex text-center'>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                        </div>
 
-            </table>
+                                    </td>
+                                </tr>
+                            ))}
+
+
+                        </tbody>
+
+                    </table>
+                </div>
+            )}
+            {selectedTable === 3 && (
+                <div>
+                    {/* <h2> Tabla de categorias</h2> */}
+                    <table className="table table-striped tablebg">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dataCategory.map(product => (
+                                <tr key={product.id}>
+                                    <td>{product.id}</td>
+                                    <td>{product.name}</td>
+                                    <td>{product.longDesc}</td>
+                                    <td>
+                                        <div className='d-flex text-center'>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            ))}
+
+                        </tbody>
+
+                    </table>
+                </div>
+            )}
+            {selectedTable === 2 && (
+                <div>
+                    {/* <h2> Tabla de descuento</h2> */}
+                    <table className="table table-striped tablebg">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>% de descuento</th>
+                                {/* <th>Activo</th> */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dataDiscount.map(product => (
+                                <tr key={product.id}>
+                                    <td>{product.id}</td>
+                                    <td>{product.name}</td>
+                                    <td>{product.longDesc}</td>
+                                    <td>{product.discount_percent}</td>
+                                    {/* <td>{product.active}</td> */}
+                                    <td>
+                                        <div className='d-flex text-center'>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModaldesc(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModaldesc(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            ))}
+
+                        </tbody>
+
+                    </table>
+                </div>
+            )}
+
             {/*  MODALES REFERENTES A PRODUCTOS ========================================================================== */}
             <Modal isOpen={modalInsertar}>
                 <ModalHeader>Insertar Producto</ModalHeader>
@@ -564,6 +781,43 @@ const Crud = () => {
                     <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertarCategoria()}>Cancelar</button>
                 </ModalFooter>
             </Modal>
+
+            <Modal isOpen={modalEliminarcate}>
+                <ModalBody>
+                    <div>
+                        ¿Estás seguro de que deseas eliminar la categoria {SelectedProduct && SelectedProduct.name}?
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <button className="btn btn-danger" onClick={() => peticionDeletecate()}>
+                        Sí
+                    </button>
+                    <button
+                        className="btn btn-secondary"
+                        onClick={() => abrirCerrarModalEliminarcate()}>
+                        No
+                    </button>
+                </ModalFooter>
+            </Modal>
+
+            <Modal isOpen={modalEditarcate}>
+                <ModalHeader>Editar Categoria</ModalHeader>
+                <ModalBody>
+                    <div className="form-group">
+                        <label>Nombre: </label>
+                        <br />
+                        <input type="text" className="form-control" name="name" onChange={handleChangecate} value={SelectedCate.name} />
+                        <br />
+                        <label>Descripción: </label>
+                        <textarea type="text" className="form-control" name="longDesc" onChange={handleChangecate} value={SelectedCate.longDesc} />
+                        <br />
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <button className="btn btn-primary m-1" onClick={() => peticionPutcate()}>Editar</button>
+                    <button className="btn btn-danger" onClick={() => abrirCerrarModalEditarcate()}>Cancelar</button>
+                </ModalFooter>
+            </Modal>
             {/*  MODALES REFERENTES A DESCUENTO ========================================================================== */}
             <Modal isOpen={modalInsertarDescuento}>
                 <ModalHeader>Insertar Descuento</ModalHeader>
@@ -584,6 +838,46 @@ const Crud = () => {
                 <ModalFooter>
                     <button className="btn btn-primary m-1" onClick={() => peticionPostDescuento()}>Registrar    </button>
                     <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertarDescuento()}>Cancelar</button>
+                </ModalFooter>
+            </Modal>
+
+            <Modal isOpen={modalEditardesc}>
+                <ModalHeader>Editar Producto</ModalHeader>
+                <ModalBody>
+                    <div className="form-group">
+                        <label>Nombre: </label>
+                        <br />
+                        <input type="text" className="form-control" name="name" onChange={handleChangeDesc} value={SelectedDesc.name} />
+                        <br />
+                        <label>Descripción: </label>
+                        <textarea type="text" className="form-control" name="longDesc" onChange={handleChangeDesc} value={SelectedDesc.longDesc} />
+                        <br />
+                        <label>Descripción: </label>
+                        <input type="text" className="form-control" name="discount_percent" onChange={handleChangeDesc} value={SelectedDesc.discount_percent} />
+                        <br />
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <button className="btn btn-primary m-1" onClick={() => peticionPutdesc()}>Editar</button>
+                    <button className="btn btn-danger" onClick={() => abrirCerrarModalEditarDesc()}>Cancelar</button>
+                </ModalFooter>
+            </Modal>
+
+            <Modal isOpen={modalEliminardesc}>
+                <ModalBody>
+                    <div>
+                        ¿Estás seguro de que deseas eliminar la categoria {SelectedProduct && SelectedProduct.name}?
+                    </div>
+                </ModalBody>
+                <ModalFooter>
+                    <button className="btn btn-danger" onClick={() => peticionDeletedesc()}>
+                        Sí
+                    </button>
+                    <button
+                        className="btn btn-secondary"
+                        onClick={() => abrirCerrarModalEliminarDesc()}>
+                        No
+                    </button>
                 </ModalFooter>
             </Modal>
         </Container>

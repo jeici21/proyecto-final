@@ -13,7 +13,8 @@ import Shoppage from './pages/Shoppage';
 import LoginPage from './pages/LoginPage';
 import { Dashboard } from './pages/dashboard/dashboard';
 import Crud from './components/Crud';
-import TableWithPaginationAndSearch from './components/TableWithPaginationAndSearch';
+import TableCateory from './components/TableCategory';
+import TableDiscount from './components/TableDiscount';
 function App() {
   return (
     <div className="app">
@@ -29,7 +30,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/crud" element={<Crud />} />
-          <Route path="/table" element={<TableWithPaginationAndSearch />} />
+          <Route path="/table" element={<TableCateory />} />
+          <Route path="/table2" element={<TableDiscount />} />
         </Routes>
         <Footer />
       </BrowserRouter>

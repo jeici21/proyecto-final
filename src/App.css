@@ -78,10 +78,17 @@ textarea {
   border-color: #db8f00 !important;
 }
 
+.btn-succes {
+  background-color: #26e54c !important;
+}
+
 .btn-success:hover {
   cursor: pointer;
   /* background-color: rgb(102, 255, 0) !important;
   border-color: rgb(83, 207, 0) !important; */
+}
+.cont{
+  min-height: 75vh !important;
 }
 
 .pagination .page-link:hover {
@@ -93,7 +100,13 @@ textarea {
   background-color: rgb(102, 255, 0);
   color: #fff;
 }
-
+.tablebg{
+  background-image: linear-gradient(to right, 
+                                  #ff873c4e, 
+                                  #e6fc69a1, 
+                                  #80f96d8e, 
+                                  #7aedff9d);
+}
 /* Nav */
 #templatemo_nav_top {
   min-height: 40px;
