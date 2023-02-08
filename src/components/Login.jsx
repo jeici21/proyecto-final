@@ -274,7 +274,7 @@ const Login = ({ loading, error, ...props }) => {
                     Close
                   </button>
 
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
                     Guardar
                   </button>
                 </div>
