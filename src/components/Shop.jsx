@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { fetchUserData } from "../../src/api/authenticationService";
-import { useNavigate } from "react-router-dom";
+
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -9,24 +8,7 @@ const Shop = () => {
     makeAPICall();
   }, []);
 
-  const [data, setData] = useState({});
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    fetchUserData()
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((e) => {
-        localStorage.clear();
-        navigate("/");
-      });
-  }, []);
-
-  const logOut = () => {
-    localStorage.clear();
-    navigate("/");
-  };
+  
 
   const makeAPICall = async () => {
     try {
@@ -52,7 +34,7 @@ const Shop = () => {
             <i className="fa fa-cart-arrow-down"></i>
             <h2>Productos KMarket</h2>
             <p>Esperamos que los productos que ofrecemos sean de su gusto.</p>
-            <h4> {data && `${data.firstName} ${data.lastName}`}</h4>
+        
           </div>
           <div className="row">
             {products.map((result) => {
