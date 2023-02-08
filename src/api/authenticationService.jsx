@@ -21,3 +21,10 @@ export const fetchUserData = (authRequest) => {
         }
     })
 }
+export const UserSave = (formData) => {
+    return axios({
+        'method': 'POST',
+        'url': `${process.env.hostUrl || 'http://localhost:8080'}/api/v1/save/user`,
+        'data': formData
+    })
+}
