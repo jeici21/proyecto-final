@@ -34,6 +34,7 @@ textarea {
   font-family: 'Roboto', sans-serif;
   font-size: 22px !important;
 }
+
 /*Style Whatsapp*/
 .float {
   position: fixed;
@@ -48,6 +49,9 @@ textarea {
   font-size: 30px;
   box-shadow: 2px 2px 3px #999;
   z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .float:hover {
@@ -59,6 +63,7 @@ textarea {
 .my-float {
   margin-top: 16px;
 }
+
 /* General */
 .logo {
   width: 250px auto !important;
@@ -111,7 +116,8 @@ textarea {
   /* background-color: rgb(102, 255, 0) !important;
   border-color: rgb(83, 207, 0) !important; */
 }
-.cont{
+
+.cont {
   min-height: 75vh !important;
 }
 
@@ -124,7 +130,8 @@ textarea {
   background-color: rgb(102, 255, 0);
   color: #fff;
 }
-.tablebg{
+
+.tablebg {
   /* background-image: linear-gradient(to right, 
                                   #ff873c4e, 
                                   #e6fc69a1, 
@@ -132,6 +139,7 @@ textarea {
                                   #7aedff9d); */
   background: #fbf67343;
 }
+
 /* Nav */
 #templatemo_nav_top {
   min-height: 40px;
@@ -614,7 +622,10 @@ figure img {
 @media screen and (max-width: 600px) {
 
   .contact-container,
-  button, .contact-col1, .contact-col2, .contact-row {
+  button,
+  .contact-col1,
+  .contact-col2,
+  .contact-row {
     width: 100%;
     margin-top: 0;
     display: block;
