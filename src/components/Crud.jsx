@@ -294,7 +294,7 @@ const Crud = () => {
             })
                 .then(response => {
                     abrirCerrarModalInsertarDescuento();
-                    peticionGetCategory();
+                    peticionGetDiscount();
                     console.log("Descuento registrado correctamente.");
                     console.log(response);
                 }).catch(error => {
@@ -897,7 +897,7 @@ const Crud = () => {
             </Modal>
 
             <Modal isOpen={modalEditardesc}>
-                <ModalHeader>Editar Producto</ModalHeader>
+                <ModalHeader>Editar Descuentos</ModalHeader>
                 <ModalBody>
                     <div className="form-group">
                         <label>Nombre: </label>
@@ -907,7 +907,7 @@ const Crud = () => {
                         <label>Descripción: </label>
                         <textarea type="text" className="form-control" name="longDesc" onChange={handleChangeDesc} value={SelectedDesc.longDesc} />
                         <br />
-                        <label>Descripción: </label>
+                        <label>% de descuento: </label>
                         <input type="text" className="form-control" name="discount_percent" onChange={handleChangeDesc} value={SelectedDesc.discount_percent} />
                         <br />
                     </div>
