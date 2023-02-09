@@ -1,151 +1,306 @@
-import { useState } from 'react';
-import { connect } from 'react-redux';
-import { authenticate, authFailure, authSuccess } from '../redux/authActions';
-import { userLogin } from '../api/authenticationService';
-import { Alert, Spinner } from 'react-bootstrap';
+import { useState } from "react";
+import { connect } from "react-redux";
+import {
+  authenticate,
+  authFailure,
+  authSuccess,
+} from "../redux/authActions";
+import { userLogin, UserSave } from "../api/authenticationService";
+import { Alert, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const Login = ({ loading, error, ...props }) => {
+  const [values, setValues] = useState({
+    userName: "",
+    password: "",
+  });
+  const navigate = useNavigate();
 
-    const [values, setValues] = useState({
-        userName: '',
-        password: ''
-    });
-    const navigate = useNavigate();
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    props.authenticate();
 
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-        props.authenticate();
+    userLogin(values)
+      .then((response) => {
+        console.log("response", response);
+        if (response.status === 200) {
+          props.setUser(response.data);
+          navigate("/shop");
+        } else {
+          props.loginFailure("Something Wrong! Please Try Again");
+        }
+      })
+      .catch((err) => {
+        if (err && err.response) {
+          switch (err.response.status) {
+            case 401:
+              console.log("401 status");
+              props.loginFailure("Authentication Failed. Bad Credentials");
+              break;
+            default:
+              props.loginFailure("Something Wrong! Please Try Again");
+          }
+        } else {
+          props.loginFailure("Something Wrong! Please Try Again");
+          console.log(err);
+        }
+      });
+    //console.log("Loading again",loading);
+  };
 
-        userLogin(values).then((response) => {
+  const handleChange = (e) => {
+    e.persist();
+    setValues((values) => ({
+      ...values,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  /*Registrarse */
 
-            console.log("response", response);
-            if (response.status === 200) {
-                props.setUser(response.data);
-                navigate('/dashboard');
-            }
-            else {
-                props.loginFailure('Autenticación fallida. Por favor, intenta de nuevo.');
-            }
-
-        }).catch((err) => {
-
-            if (err && err.response) {
-
-                switch (err.response.status) {
-                    case 401:
-                        console.log("401 status");
-                        props.loginFailure("Usuario o contraseña incorrectos.");
-                        break;
-                    default:
-                        props.loginFailure('Autenticación fallida. Por favor, intenta de nuevo.');
-                }
-            }
-            else {
-                props.loginFailure('Autenticación fallida. Por favor, intenta de nuevo.');
-                console.log(err);
-            }
-        });
-        //console.log("Loading again",loading);
-    }
-
-    const handleChange = (e) => {
-        e.persist();
-        setValues(values => ({
-            ...values,
-            [e.target.name]: e.target.value
-        }));
+  const handleSubmits = (event) => {
+    event.preventDefault();
+    const date = new Date();
+    const isoDate = date.toISOString();
+    const formData = {
+      firstName: document.getElementById("nombres").value,
+      lastName: document.getElementById("apellidos").value,
+      userName: document.getElementById("usuario").value,
+      password: document.getElementById("contraseña").value,
+      email: document.getElementById("email").value,
+      phoneNumber: document.getElementById("telefono").value,
+      createdAt: isoDate,
+      updatedAt: isoDate,
+      enabled: true,
+      authorities: [
+        {
+          roleCode: "ADMIN",
+          roleDescription: "Admin role",
+        },
+      ],
     };
-    console.log("Loading ", loading);
+    console.log(formData);
 
-    return (
-        <div className="login-page">
-            <section className="h-100">
-                <div className="container h-100">
-                    <div className="row justify-content-md-center h-100">
-                        <div className="card-wrapper">
-                            <div className="card fat">
-                                <div className="card-body">
-                                    <h4 className="card-title">Inicio de sesión</h4>
-                                    <form className="my-login-validation" onSubmit={handleSubmit} noValidate={false}>
-                                        <div className="form-group">
-                                            <label htmlFor="email">Nombre de Usuario</label>
-                                            <input id="username" type="text" className="form-control" minLength={5}
-                                                value={values.userName} onChange={handleChange} name="userName" required />
-                                            <div className="invalid-feedback">
-                                                UserId es inválido
-                                            </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label>Contraseña</label>
-                                            <input id="password" type="password" className="form-control" minLength={8}
-                                                value={values.password} onChange={handleChange} name="password" required />
-                                            <a href="forgot.html" className="float-right">
-                                                ¿Olvidó la contraseña?
-                                            </a>
-                                            <div className="invalid-feedback">
-                                                Contraseña requerida
-                                            </div>
-                                        </div>
+    UserSave(formData)
+      .then((response) => {
+        console.log("response", response);
+        if (response.status === 200) {
+          //   props.setUser(response.data);
+          //       navigate("/shop");
+          console.log("Ingresado Correctamente");
+        } else {
+          //    props.loginFailure("Something Wrong! Please Try Again");
+        }
+      })
+      .catch((err) => {
+        if (err && err.response) {
+          switch (err.response.status) {
+            case 401:
+              console.log("401 status");
+              //    props.loginFailure("Authentication Failed. Bad Credentials");
+              break;
+            default:
+            //   props.loginFailure("Something Wrong! Please Try Again");
+          }
+        } else {
+          //  props.loginFailure("Something Wrong! Please Try Again");
+          console.log(err);
+        }
+      });
+  };
 
-                                        <div className="form-group">
-                                            <div className="custom-control">
-                                                <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                                                <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                                            </div>
-                                        </div>
+  return (
+    <div className="login-page">
+      <section className="h-100">
+        <div className="container h-100">
+          <div className="row justify-content-md-center h-100">
+            <div className="card-wrapper">
+              <div className="card fat">
+                <div className="card-body">
+                  <h4 className="card-title">Login</h4>
+                  <form
+                    className="my-login-validation"
+                    onSubmit={handleSubmit}
+                    noValidate={false}
+                  >
+                    <div className="form-group">
+                      <label htmlFor="email">User Name</label>
+                      <input
+                        id="username"
+                        type="text"
+                        className="form-control"
+                        minLength={5}
+                        value={values.userName}
+                        onChange={handleChange}
+                        name="userName"
+                        required
+                      />
+                      <div className="invalid-feedback">UserId is invalid</div>
+                    </div>
+                    <div className="form-group">
+                      <label>Password</label>
+                      <input
+                        id="password"
+                        type="password"
+                        className="form-control"
+                        minLength={8}
+                        value={values.password}
+                        onChange={handleChange}
+                        name="password"
+                        required
+                      />
+                      <a href="forgot.html" className="float-right">
+                        Forgot Password?
+                      </a>
+                      <div className="invalid-feedback">
+                        Password is required
+                      </div>
+                    </div>
 
+                    <div className="form-group">
+                      <div className="custom-control">
+                        <input
+                          type="checkbox"
+                          className="custom-control-input"
+                          id="customCheck1"
+                        />
+                        <label
+                          className="custom-control-label"
+                          htmlFor="customCheck1"
+                        >
+                          Remember me
+                        </label>
+                      </div>
+                    </div>
 
-                                        <div className="form-group m-0">
-                                            <button type="submit" className="btn btn-primary">
-                                                Iniciar sesión
-                                                {loading && (
-                                                    <Spinner
-                                                        as="span"
-                                                        animation="border"
-                                                        size="sm"
-                                                        role="status"
-                                                        aria-hidden="true"
-                                                    />
-                                                )}
-                                                {/* <ClipLoader
+                    <div className="form-group m-0 ">
+                      <button type="submit" className="btn btn-primary btn-lg">
+                        Login
+                        {loading && (
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                        )}
+                        {/* <ClipLoader
                                         //css={override}
                                         size={20}
                                         color={"#123abc"}
                                         loading={loading}
                                         /> */}
-                                            </button>
-                                        </div>
-                                    </form>
-                                    {error &&
-                                        <Alert className='login-alert' variant="danger">
-                                            {error}
-                                        </Alert>
-                                    }
-                                </div>
-                            </div>
-                        </div>
+                      </button>
                     </div>
+                  </form>
+                  <div class="d-flex gap-1 justify-content-center mt-1">
+                    <div>Don't have an account?</div>
+                    <a
+                      href="#"
+                      class="text-decoration-none text-info fw-semibold"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      data-bs-whatever="@mdo"
+                    >
+                      Registrar{" "}
+                    </a>
+                  </div>
+                  {error && (
+                    <Alert className="login-alert" variant="danger">
+                      {error}
+                    </Alert>
+                  )}
                 </div>
-            </section>
+              </div>
+            </div>
+          </div>
         </div>
-    );
-}
+      </section>
+
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Registrarse
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            <form onSubmit={handleSubmits}>
+              <div class="modal-body">
+                <div class="form-group  ">
+                  <label for="nombres">Nombres:</label>
+                  <input type="text" class="form-control" id="nombres" />
+                </div>
+                <div class="form-group">
+                  <label for="apellidos">Apellidos:</label>
+                  <input type="text" class="form-control" id="apellidos" />
+                </div>
+                <div class="form-group">
+                  <label for="usuario">Usuario:</label>
+                  <input type="text" class="form-control" id="usuario" />
+                </div>
+                <div class="form-group">
+                  <label for="contraseña">Contraseña:</label>
+                  <input type="password" class="form-control" id="contraseña" />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" class="form-control" id="email" />
+                </div>
+                <div class="form-group">
+                  <label for="telefono">Teléfono:</label>
+                  <input type="text" class="form-control" id="telefono" />
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+
+                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
+                    Guardar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const mapStateToProps = ({ auth }) => {
-    console.log("state ", auth)
-    return {
-        loading: auth.loading,
-        error: auth.error
-    }
-}
+  console.log("state ", auth);
+  return {
+    loading: auth.loading,
+    error: auth.error,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        authenticate: () => dispatch(authenticate()),
-        setUser: (data) => dispatch(authSuccess(data)),
-        loginFailure: (message) => dispatch(authFailure(message))
-    }
-}
+  return {
+    authenticate: () => dispatch(authenticate()),
+    setUser: (data) => dispatch(authSuccess(data)),
+    loginFailure: (message) => dispatch(authFailure(message)),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

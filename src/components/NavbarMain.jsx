@@ -1,7 +1,29 @@
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../images/K-Market-2.png";
+import { fetchUserData } from "../../src/api/authenticationService";
+import { useNavigate } from "react-router-dom";
 
 const NavbarMain = () => {
+    const [data, setData] = useState({});
+    const navigate = useNavigate();
+    const [linkImage, setlinkImage] = useState("");
+  
+    React.useEffect(() => {
+      fetchUserData()
+        .then((response) => {
+          setData(response.data);
+        })
+        .catch((e) => {
+          localStorage.clear();
+          navigate("/");
+        });
+    }, []);
+  
+    const logOut = () => {
+      localStorage.clear();
+      navigate("/");
+    };
     return (
         <nav className="navbar navbar-expand-lg navbar-light shadow">
             <div className="container d-flex justify-content-between align-items-center">
@@ -58,6 +80,47 @@ const NavbarMain = () => {
                                 +99
                             </span> */}
                         </NavLink>
+                        <div class="flex-shrink-0 dropdown">
+              <a
+                href="#"
+                class="d-block link-dark text-decoration-none dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="https://avatars.githubusercontent.com/u/35409654?s=40&v=4"
+                  alt="mdo"
+                  width="32"
+                  height="32"
+                  class="rounded-circle"
+                />
+              </a>
+              <ul class="dropdown-menu text-small shadow">
+                <li>
+                  <a class="dropdown-item" href="#">
+                  {data && `${data.firstName} ${data.lastName}`}
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    Settings
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    Profile
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" onClick={() => logOut()}>
+                    Sign out
+                  </a>
+                </li>
+              </ul>
+            </div>
                     </div>
                 </div>
             </div>
