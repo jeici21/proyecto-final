@@ -56,8 +56,7 @@ textarea {
 
 .float:hover {
   text-decoration: none;
-  color: #25d366;
-  background-color: #fff;
+  background-color: #1fb054;
 }
 
 .my-float {
@@ -131,13 +130,25 @@ textarea {
   color: #fff;
 }
 
-.tablebg {
-  /* background-image: linear-gradient(to right, 
+/* .tablebg {
+  background-image: linear-gradient(to right, 
                                   #ff873c4e, 
                                   #e6fc69a1, 
                                   #80f96d8e, 
-                                  #7aedff9d); */
+                                  #7aedff9d);
   background: #fbf67343;
+} */
+
+.table-productos {
+  background-color: #26e54c !important;
+}
+
+.table-descuentos {
+  background-color: #ffca2c !important;
+}
+
+.table-categorias {
+  background-color: #31d2f2 !important;
 }
 
 /* Nav */

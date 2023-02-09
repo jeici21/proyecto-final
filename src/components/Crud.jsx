@@ -518,11 +518,11 @@ const Crud = () => {
             <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>
                 Agregar producto
             </button>
-            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>
-                Agregar categoría
-            </button>
             <button className="btn btn-warning  m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>
                 Agregar descuento
+            </button>
+            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>
+                Agregar categoría
             </button>
             <br /><br />
             <div className='d-flex justify-content-center'>
@@ -555,9 +555,9 @@ const Crud = () => {
                             <option value={20}>20</option>
                         </select>
                     </div>
-                    <table className="table table-responsive table-striped tablebg mt-3">
+                    <table className="table table-bordered table-hover table-responsive table-striped tablebg mt-3">
                         <thead>
-                            <tr>
+                            <tr className='table-productos'>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
@@ -585,11 +585,9 @@ const Crud = () => {
                                                 <Trash size={17} />
                                             </button>
                                         </div>
-
                                     </td>
                                 </tr>
                             ))}
-
 
                         </tbody>
 
@@ -600,9 +598,9 @@ const Crud = () => {
             {selectedTable === 3 && (
                 <div>
                     {/* <h2> Tabla de categorias</h2> */}
-                    <table className="table table-striped tablebg">
+                    <table className="table table-striped table-responsive table-hover table-bordered tablebg">
                         <thead>
-                            <tr>
+                            <tr className='table-categorias'>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
@@ -637,13 +635,13 @@ const Crud = () => {
             {selectedTable === 2 && (
                 <div>
                     {/* <h2> Tabla de descuento</h2> */}
-                    <table className="table table-striped tablebg">
+                    <table className="table table-bordered table-responsive table-hover table-striped tablebg">
                         <thead>
-                            <tr>
+                            <tr className='table-descuentos'>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
-                                <th>% de descuento</th>
+                                <th>Descuento</th>
                                 <th>Acciones</th>
                                 {/* <th>Activo</th> */}
                             </tr>
