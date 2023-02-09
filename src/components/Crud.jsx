@@ -526,16 +526,16 @@ const Crud = () => {
             </button>
             <br /><br />
             <div className='d-flex justify-content-center'>
-                <div className='m-2'>
-                    <input type="radio" name="table" value="1" onChange={handleRadioChange} checked={selectedTable === 1} />
+                <div className='m-2 form-check'>
+                    <input type="radio" name="table" className="form-check-input" value="1" onChange={handleRadioChange} checked={selectedTable === 1} />
                     Productos
                 </div >
-                <div className='m-2'>
-                    <input type="radio" name="table" value="2" onChange={handleRadioChange} checked={selectedTable === 2} />
+                <div className='m-2 form-check'>
+                    <input type="radio" name="table" className="form-check-input" value="2" onChange={handleRadioChange} checked={selectedTable === 2} />
                     Descuentos
                 </div >
-                <div className='m-2'>
-                    <input type="radio" name="table" value="3" onChange={handleRadioChange} checked={selectedTable === 3} />
+                <div className='m-2 form-check'>
+                    <input type="radio" name="table" className="form-check-input" value="3" onChange={handleRadioChange} checked={selectedTable === 3} />
                     Categorias
                 </div>
             </div>

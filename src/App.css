@@ -139,6 +139,11 @@ textarea {
   background: #fbf67343;
 } */
 
+table {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
 .table-productos {
   background-color: #26e54c !important;
 }
