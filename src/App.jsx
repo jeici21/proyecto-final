@@ -14,7 +14,7 @@ import LoginPage from './pages/LoginPage';
 import { Dashboard } from './pages/dashboard/dashboard';
 import Crud from './components/Crud';
 import TableCateory from './components/TableCategory';
-import TableDiscount from './components/TableDiscount';
+import Cart from './components/Cart';
 function App() {
   return (
     <div className="app">
@@ -30,8 +30,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/crud" element={<Crud />} />
-          <Route path="/table" element={<TableCateory />} />
-          <Route path="/table2" element={<TableDiscount />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
         <Footer />
       </BrowserRouter>

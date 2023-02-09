@@ -271,8 +271,8 @@ const Crud = () => {
         }
     }
 
-      //AQUÍ SE GUARDA EL OBJETO QUE CONTIENE LAS VARIABLES PARA EDITAR UNA CATEGORIA
-      const handleChangeDesc = e => {
+    //AQUÍ SE GUARDA EL OBJETO QUE CONTIENE LAS VARIABLES PARA EDITAR UNA CATEGORIA
+    const handleChangeDesc = e => {
         const { name, value } = e.target;
         setSelectedDesc((prevState) => ({
             ...prevState,
@@ -473,6 +473,45 @@ const Crud = () => {
     }, [])
 
 
+    //todo lo relaciona con la paginacion de productos 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [dataPerPage, setDataPerPage] = useState(5);
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const handleChangepage = (event) => {
+        setDataPerPage(event.target.value);
+        setCurrentPage(1);
+    };
+
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+        setCurrentPage(1);
+    };
+
+    const filteredData = data.filter((item) => {
+        return item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.price.toString().includes(searchTerm.toLowerCase());
+    });
+
+    const indexOfLastData = currentPage * dataPerPage;
+    const indexOfFirstData = indexOfLastData - dataPerPage;
+    const currentData = filteredData.slice(indexOfFirstData, indexOfLastData);
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(filteredData.length / dataPerPage); i++) {
+        pageNumbers.push(i);
+    }
+    const renderPageNumbers = pageNumbers.map((number) => {
+        return (
+            <button
+                key={number}
+                onClick={() => setCurrentPage(number)}
+                className={currentPage === number ? "active" : ""}
+            >
+                {number}
+            </button>
+        );
+    });
+
     return (
         <Container className='text-center cont' >
 
@@ -499,9 +538,22 @@ const Crud = () => {
                 </div>
             </div>
             {selectedTable === 1 && (
-                <div className=''>
+                <div className='p-2'>
                     {/* <h2> Tabla de productos</h2> */}
-                    <table className="table table-responsive table-striped tablebg">
+                    <div className="data-table-header">
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            value={searchTerm}
+                            onChange={handleSearch}
+                        />
+                        <select value={dataPerPage} onChange={handleChangepage}>
+                            <option value={5}>5</option>
+                            <option value={10}>10</option>
+                            <option value={20}>20</option>
+                        </select>
+                    </div>
+                    <table className="table table-responsive table-striped tablebg mt-3">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -514,7 +566,7 @@ const Crud = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(product => (
+                            {currentData.map(product => (
                                 <tr key={product.id}>
                                     <td> <img src={product.img} alt="Publication" width="50" height="50" /></td>
                                     <td>{product.name}</td>
@@ -536,6 +588,7 @@ const Crud = () => {
                         </tbody>
 
                     </table>
+                    <div className="pagination">{renderPageNumbers}</div>
                 </div>
             )}
             {selectedTable === 3 && (
@@ -547,6 +600,7 @@ const Crud = () => {
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -580,6 +634,7 @@ const Crud = () => {
                                 <th>Nombre</th>
                                 <th>Descripción</th>
                                 <th>% de descuento</th>
+                                <th>Acciones</th>
                                 {/* <th>Activo</th> */}
                             </tr>
                         </thead>

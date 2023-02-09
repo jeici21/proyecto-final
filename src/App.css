@@ -101,11 +101,12 @@ textarea {
   color: #fff;
 }
 .tablebg{
-  background-image: linear-gradient(to right, 
+  /* background-image: linear-gradient(to right, 
                                   #ff873c4e, 
                                   #e6fc69a1, 
                                   #80f96d8e, 
-                                  #7aedff9d);
+                                  #7aedff9d); */
+  background: #fbf67343;
 }
 /* Nav */
 #templatemo_nav_top {

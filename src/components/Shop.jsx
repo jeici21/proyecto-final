@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
+import Cart from './Cart';
 const Shop = () => {
     const [products, setProducts] = useState([]);
     useEffect(() => {
@@ -21,6 +21,12 @@ const Shop = () => {
           console.log(e)
         }
       }
+
+      const [cart, setCart] = useState([]);
+
+      const handleAddToCart = (product) => {
+        setCart([...cart, product]);
+      };
     return (
         <div className="main_container">
             <section className="our-publication pt-50 pb-50">
@@ -40,9 +46,10 @@ const Shop = () => {
                                                 <img src={result.img} alt="Publication" />
                                             </a>
                                             <ul> 
-                                                <li><a href="#" title="Añadir a Favoritos"><i className="fa fa-heart"></i></a></li>
+                                                <li><a href="#" title="Añadir a Favoritos" onClick={() => handleAddToCart(result)}><i className="fa fa-heart"></i></a></li>
                                                 <li><a href="#" title="Añadir a comparación"><i className="fa fa-refresh"></i></a></li>
                                                 <li><a href="#" title="Vistazo Rápido"><i className="fa fa-search"></i></a></li>
+                                                
                                             </ul>
                                         </figure>
                                         <div className="publication-content">
@@ -65,8 +72,11 @@ const Shop = () => {
                             );
                         })}
                     </div>
+                    <Cart items={cart} />
                 </div>
             </section>
+
+            
         </div>
     );
 }
