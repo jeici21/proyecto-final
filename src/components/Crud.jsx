@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import axios from 'axios';
+import { PencilSquare, Trash } from 'react-bootstrap-icons';
 //import { clippingParents } from '@popperjs/core';
 
 const Crud = () => {
@@ -59,14 +60,14 @@ const Crud = () => {
 
 
     const [SelectedProduct, setSelectedProduct] = useState({
-        "productInventory": {
-            "quantity": 0,
+        productInventory: {
+            quantity: 0,
         },
-        "productCategory": {
-            "id": 0,
+        productCategory: {
+            id: 0,
         },
-        "discount": {
-            "id": 0,
+        discount: {
+            id: 0,
         }
     });
     const [SelectedProductAdd, setSelectedProductAdd] = useState({});
@@ -108,7 +109,7 @@ const Crud = () => {
             });
         } else if (name === "Category") {
             const nameid = "id";
-            console.log("entro a categoria");
+            console.log("entro a categoría");
             setSelectedProduct({
                 ...SelectedProduct,
                 productCategory: {
@@ -261,7 +262,7 @@ const Crud = () => {
                 .then(response => {
                     abrirCerrarModalInsertarCategoria();
                     peticionGetCategory();
-                    console.log("categoria registrada correctamente.");
+                    console.log("categoría registrada correctamente.");
                     console.log(response);
                 }).catch(error => {
                     console.log(error);
@@ -393,7 +394,6 @@ const Crud = () => {
         }
     }
 
-
     // ACTUALIZACION DEL inventario DE UN PRODUCTO
     const EditInventory = async () => {
         try {
@@ -514,17 +514,19 @@ const Crud = () => {
 
     return (
         <Container className='text-center cont' >
-
-
             <br />
-            <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
-            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>Agregar category</button>
-            <button className="btn btn-warning  m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>Agregar descuento</button>
+            <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>
+                Agregar producto
+            </button>
+            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>
+                Agregar categoría
+            </button>
+            <button className="btn btn-warning  m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>
+                Agregar descuento
+            </button>
             <br /><br />
-            <div className='d-flex  justify-content-center'>
-
-
-                <div className='m-2 '>
+            <div className='d-flex justify-content-center'>
+                <div className='m-2'>
                     <input type="radio" name="table" value="1" onChange={handleRadioChange} checked={selectedTable === 1} />
                     Productos
                 </div >
@@ -576,8 +578,12 @@ const Crud = () => {
                                     <td>{currencyFormatter(product.price)}</td>
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}>
+                                                <PencilSquare size={17} />
+                                            </button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}>
+                                                <Trash size={17} />
+                                            </button>
                                         </div>
 
                                     </td>
@@ -611,8 +617,12 @@ const Crud = () => {
                                     <td>{product.longDesc}</td>
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}>
+                                                <PencilSquare size={17} />
+                                            </button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}>
+                                                <Trash size={17} />
+                                            </button>
                                         </div>
 
                                     </td>
@@ -648,8 +658,12 @@ const Crud = () => {
                                     {/* <td>{product.active}</td> */}
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModaldesc(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModaldesc(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModaldesc(product, "Editar")}>
+                                                <PencilSquare size={17} />
+                                            </button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModaldesc(product, "Eliminar")}>
+                                                <Trash size={17} />
+                                            </button>
                                         </div>
 
                                     </td>
