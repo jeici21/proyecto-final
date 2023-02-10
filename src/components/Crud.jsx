@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import axios from 'axios';
+import { PencilSquare, Trash } from 'react-bootstrap-icons';
 //import { clippingParents } from '@popperjs/core';
 
 const Crud = () => {
@@ -59,14 +60,14 @@ const Crud = () => {
 
 
     const [SelectedProduct, setSelectedProduct] = useState({
-        "productInventory": {
-            "quantity": 0,
+        productInventory: {
+            quantity: 0,
         },
-        "productCategory": {
-            "id": 0,
+        productCategory: {
+            id: 0,
         },
-        "discount": {
-            "id": 0,
+        discount: {
+            id: 0,
         }
     });
     const [SelectedProductAdd, setSelectedProductAdd] = useState({});
@@ -108,7 +109,7 @@ const Crud = () => {
             });
         } else if (name === "Category") {
             const nameid = "id";
-            console.log("entro a categoria");
+            console.log("entro a categoría");
             setSelectedProduct({
                 ...SelectedProduct,
                 productCategory: {
@@ -261,7 +262,7 @@ const Crud = () => {
                 .then(response => {
                     abrirCerrarModalInsertarCategoria();
                     peticionGetCategory();
-                    console.log("categoria registrada correctamente.");
+                    console.log("categoría registrada correctamente.");
                     console.log(response);
                 }).catch(error => {
                     console.log(error);
@@ -393,7 +394,6 @@ const Crud = () => {
         }
     }
 
-
     // ACTUALIZACION DEL inventario DE UN PRODUCTO
     const EditInventory = async () => {
         try {
@@ -514,26 +514,28 @@ const Crud = () => {
 
     return (
         <Container className='text-center cont' >
-
-
             <br />
-            <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
-            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>Agregar category</button>
-            <button className="btn btn-warning  m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>Agregar descuento</button>
+            <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>
+                Agregar producto
+            </button>
+            <button className="btn btn-warning  m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>
+                Agregar descuento
+            </button>
+            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>
+                Agregar categoría
+            </button>
             <br /><br />
-            <div className='d-flex  justify-content-center'>
-
-
-                <div className='m-2 '>
-                    <input type="radio" name="table" value="1" onChange={handleRadioChange} checked={selectedTable === 1} />
+            <div className='d-flex justify-content-center'>
+                <div className='m-2 form-check'>
+                    <input type="radio" name="table" className="form-check-input" value="1" onChange={handleRadioChange} checked={selectedTable === 1} />
                     Productos
                 </div >
-                <div className='m-2'>
-                    <input type="radio" name="table" value="2" onChange={handleRadioChange} checked={selectedTable === 2} />
+                <div className='m-2 form-check'>
+                    <input type="radio" name="table" className="form-check-input" value="2" onChange={handleRadioChange} checked={selectedTable === 2} />
                     Descuentos
                 </div >
-                <div className='m-2'>
-                    <input type="radio" name="table" value="3" onChange={handleRadioChange} checked={selectedTable === 3} />
+                <div className='m-2 form-check'>
+                    <input type="radio" name="table" className="form-check-input" value="3" onChange={handleRadioChange} checked={selectedTable === 3} />
                     Categorias
                 </div>
             </div>
@@ -553,9 +555,9 @@ const Crud = () => {
                             <option value={20}>20</option>
                         </select>
                     </div>
-                    <table className="table table-responsive table-striped tablebg mt-3">
+                    <table className="table table-bordered table-hover table-responsive table-striped tablebg mt-3">
                         <thead>
-                            <tr>
+                            <tr className='table-productos'>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
@@ -576,14 +578,16 @@ const Crud = () => {
                                     <td>{currencyFormatter(product.price)}</td>
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}>
+                                                <PencilSquare size={17} />
+                                            </button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}>
+                                                <Trash size={17} />
+                                            </button>
                                         </div>
-
                                     </td>
                                 </tr>
                             ))}
-
 
                         </tbody>
 
@@ -594,9 +598,9 @@ const Crud = () => {
             {selectedTable === 3 && (
                 <div>
                     {/* <h2> Tabla de categorias</h2> */}
-                    <table className="table table-striped tablebg">
+                    <table className="table table-striped table-responsive table-hover table-bordered tablebg">
                         <thead>
-                            <tr>
+                            <tr className='table-categorias'>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
@@ -611,8 +615,12 @@ const Crud = () => {
                                     <td>{product.longDesc}</td>
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}>
+                                                <PencilSquare size={17} />
+                                            </button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}>
+                                                <Trash size={17} />
+                                            </button>
                                         </div>
 
                                     </td>
@@ -627,13 +635,13 @@ const Crud = () => {
             {selectedTable === 2 && (
                 <div>
                     {/* <h2> Tabla de descuento</h2> */}
-                    <table className="table table-striped tablebg">
+                    <table className="table table-bordered table-responsive table-hover table-striped tablebg">
                         <thead>
-                            <tr>
+                            <tr className='table-descuentos'>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
-                                <th>% de descuento</th>
+                                <th>Descuento</th>
                                 <th>Acciones</th>
                                 {/* <th>Activo</th> */}
                             </tr>
@@ -648,8 +656,12 @@ const Crud = () => {
                                     {/* <td>{product.active}</td> */}
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModaldesc(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModaldesc(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModaldesc(product, "Editar")}>
+                                                <PencilSquare size={17} />
+                                            </button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModaldesc(product, "Eliminar")}>
+                                                <Trash size={17} />
+                                            </button>
                                         </div>
 
                                     </td>
@@ -897,7 +909,7 @@ const Crud = () => {
             </Modal>
 
             <Modal isOpen={modalEditardesc}>
-                <ModalHeader>Editar Producto</ModalHeader>
+                <ModalHeader>Editar Descuentos</ModalHeader>
                 <ModalBody>
                     <div className="form-group">
                         <label>Nombre: </label>
@@ -907,7 +919,7 @@ const Crud = () => {
                         <label>Descripción: </label>
                         <textarea type="text" className="form-control" name="longDesc" onChange={handleChangeDesc} value={SelectedDesc.longDesc} />
                         <br />
-                        <label>Descripción: </label>
+                        <label>% de descuento: </label>
                         <input type="text" className="form-control" name="discount_percent" onChange={handleChangeDesc} value={SelectedDesc.discount_percent} />
                         <br />
                     </div>
