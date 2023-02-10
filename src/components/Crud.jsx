@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import axios from 'axios';
-import { PencilSquare, Trash } from 'react-bootstrap-icons';
 //import { clippingParents } from '@popperjs/core';
 
 const Crud = () => {
@@ -60,14 +59,14 @@ const Crud = () => {
 
 
     const [SelectedProduct, setSelectedProduct] = useState({
-        productInventory: {
-            quantity: 0,
+        "productInventory": {
+            "quantity": 0,
         },
-        productCategory: {
-            id: 0,
+        "productCategory": {
+            "id": 0,
         },
-        discount: {
-            id: 0,
+        "discount": {
+            "id": 0,
         }
     });
     const [SelectedProductAdd, setSelectedProductAdd] = useState({});
@@ -109,7 +108,7 @@ const Crud = () => {
             });
         } else if (name === "Category") {
             const nameid = "id";
-            console.log("entro a categoría");
+            console.log("entro a categoria");
             setSelectedProduct({
                 ...SelectedProduct,
                 productCategory: {
@@ -262,7 +261,7 @@ const Crud = () => {
                 .then(response => {
                     abrirCerrarModalInsertarCategoria();
                     peticionGetCategory();
-                    console.log("categoría registrada correctamente.");
+                    console.log("categoria registrada correctamente.");
                     console.log(response);
                 }).catch(error => {
                     console.log(error);
@@ -327,11 +326,11 @@ const Crud = () => {
 
     //ELIMINAR PRODUCTOS 
     const peticionDeletedesc = async () => {
-        await axios.delete(DiscountUrl + "/delete/" + SelectedProduct.id)
+        await axios.delete(DiscountUrl + "/delete/" + SelectedDesc.id)
             .then(response => {
-                setData(data.filter(Product => Product.id !== SelectedProduct.id));
+                setData(data.filter(Product => Product.id !== SelectedDesc.id));
                 peticionGetDiscount();
-                abrirCerrarModalEliminar();
+                abrirCerrarModalEliminarDesc();
             }).catch(error => {
                 console.log(error);
             })
@@ -393,6 +392,7 @@ const Crud = () => {
             console.error(error);
         }
     }
+
 
     // ACTUALIZACION DEL inventario DE UN PRODUCTO
     const EditInventory = async () => {
@@ -478,9 +478,25 @@ const Crud = () => {
     const [dataPerPage, setDataPerPage] = useState(5);
     const [searchTerm, setSearchTerm] = useState("");
 
+
+    const [currentPageCat, setCurrentPageCat] = useState(1);
+    const [dataPerPageCat, setDataPerPageCat] = useState(5);
+
+
+    const [currentPageDesc, setCurrentPageDesc] = useState(1);
+    const [dataPerPageDesc, setDataPerPageDesc] = useState(5);
+
     const handleChangepage = (event) => {
         setDataPerPage(event.target.value);
         setCurrentPage(1);
+    };
+    const handleChangepageCat = (event) => {
+        setDataPerPageCat(event.target.value);
+        setCurrentPageCat(1);
+    };
+    const handleChangepageDesc = (event) => {
+        setDataPerPageDesc(event.target.value);
+        setCurrentPageDesc(1);
     };
 
     const handleSearch = (event) => {
@@ -492,14 +508,41 @@ const Crud = () => {
         return item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.price.toString().includes(searchTerm.toLowerCase());
     });
 
+    const filteredDataCat = dataCategory.filter((item) => {
+        return item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
+    const filteredDataDesc = dataDiscount.filter((item) => {
+        return item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
     const indexOfLastData = currentPage * dataPerPage;
     const indexOfFirstData = indexOfLastData - dataPerPage;
+
+    const indexOfLastDataCat = currentPageCat * dataPerPageCat;
+    const indexOfFirstDataCat = indexOfLastDataCat - dataPerPageCat;
+
+    const indexOfLastDataDesc = currentPageDesc * dataPerPageDesc;
+    const indexOfFirstDataDesc = indexOfLastDataDesc - dataPerPageDesc;
+
     const currentData = filteredData.slice(indexOfFirstData, indexOfLastData);
+    const currentDataCat = filteredDataCat.slice(indexOfFirstDataCat, indexOfLastDataCat);
+    const currentDataDesc = filteredDataDesc.slice(indexOfFirstDataDesc, indexOfLastDataDesc);
 
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(filteredData.length / dataPerPage); i++) {
         pageNumbers.push(i);
     }
+
+    const pageNumbersCat = [];
+    for (let i = 1; i <= Math.ceil(filteredDataCat.length / dataPerPageCat); i++) {
+        pageNumbersCat.push(i);
+    }
+
+    const pageNumbersDesc = [];
+    for (let i = 1; i <= Math.ceil(filteredDataDesc.length / dataPerPageDesc); i++) {
+        pageNumbersDesc.push(i);
+    }
+
     const renderPageNumbers = pageNumbers.map((number) => {
         return (
             <button
@@ -512,30 +555,51 @@ const Crud = () => {
         );
     });
 
+    const renderPageNumbersCat = pageNumbersCat.map((number) => {
+        return (
+            <button
+                key={number}
+                onClick={() => setCurrentPageCat(number)}
+                className={currentPageCat === number ? "active" : ""}
+            >
+                {number}
+            </button>
+        );
+    });
+    const renderPageNumbersDesc = pageNumbersDesc.map((number) => {
+        return (
+            <button
+                key={number}
+                onClick={() => setCurrentPageDesc(number)}
+                className={currentPageDesc === number ? "active" : ""}
+            >
+                {number}
+            </button>
+        );
+    });
+
     return (
         <Container className='text-center cont' >
+
+
             <br />
-            <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>
-                Agregar producto
-            </button>
-            <button className="btn btn-warning  m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>
-                Agregar descuento
-            </button>
-            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>
-                Agregar categoría
-            </button>
+            <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
+            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>Agregar category</button>
+            <button className="btn btn-warning  m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>Agregar descuento</button>
             <br /><br />
-            <div className='d-flex justify-content-center'>
-                <div className='m-2 form-check'>
-                    <input type="radio" name="table" className="form-check-input" value="1" onChange={handleRadioChange} checked={selectedTable === 1} />
+            <div className='d-flex  justify-content-center'>
+
+
+                <div className='m-2 '>
+                    <input type="radio" name="table" value="1" onChange={handleRadioChange} checked={selectedTable === 1} />
                     Productos
                 </div >
-                <div className='m-2 form-check'>
-                    <input type="radio" name="table" className="form-check-input" value="2" onChange={handleRadioChange} checked={selectedTable === 2} />
+                <div className='m-2'>
+                    <input type="radio" name="table" value="2" onChange={handleRadioChange} checked={selectedTable === 2} />
                     Descuentos
                 </div >
-                <div className='m-2 form-check'>
-                    <input type="radio" name="table" className="form-check-input" value="3" onChange={handleRadioChange} checked={selectedTable === 3} />
+                <div className='m-2'>
+                    <input type="radio" name="table" value="3" onChange={handleRadioChange} checked={selectedTable === 3} />
                     Categorias
                 </div>
             </div>
@@ -555,9 +619,9 @@ const Crud = () => {
                             <option value={20}>20</option>
                         </select>
                     </div>
-                    <table className="table table-bordered table-hover table-responsive table-striped tablebg mt-3">
+                    <table className="table table-responsive table-striped tablebg mt-3">
                         <thead>
-                            <tr className='table-productos'>
+                            <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
@@ -578,16 +642,14 @@ const Crud = () => {
                                     <td>{currencyFormatter(product.price)}</td>
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}>
-                                                <PencilSquare size={17} />
-                                            </button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}>
-                                                <Trash size={17} />
-                                            </button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
                                         </div>
+
                                     </td>
                                 </tr>
                             ))}
+
 
                         </tbody>
 
@@ -598,9 +660,22 @@ const Crud = () => {
             {selectedTable === 3 && (
                 <div>
                     {/* <h2> Tabla de categorias</h2> */}
-                    <table className="table table-striped table-responsive table-hover table-bordered tablebg">
+                    <div className="data-table-header">
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            value={searchTerm}
+                            onChange={handleSearch}
+                        />
+                        <select value={dataPerPageCat} onChange={handleChangepageCat}>
+                            <option value={5}>5</option>
+                            <option value={10}>10</option>
+                            <option value={20}>20</option>
+                        </select>
+                    </div>
+                    <table className="table table-striped tablebg">
                         <thead>
-                            <tr className='table-categorias'>
+                            <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
@@ -608,19 +683,15 @@ const Crud = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {dataCategory.map(product => (
+                            {currentDataCat.map(product => (
                                 <tr key={product.id}>
                                     <td>{product.id}</td>
                                     <td>{product.name}</td>
                                     <td>{product.longDesc}</td>
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}>
-                                                <PencilSquare size={17} />
-                                            </button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}>
-                                                <Trash size={17} />
-                                            </button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
                                         </div>
 
                                     </td>
@@ -628,26 +699,39 @@ const Crud = () => {
                             ))}
 
                         </tbody>
-
                     </table>
+                    <div className="pagination">{renderPageNumbersCat}</div>
                 </div>
             )}
             {selectedTable === 2 && (
                 <div>
                     {/* <h2> Tabla de descuento</h2> */}
-                    <table className="table table-bordered table-responsive table-hover table-striped tablebg">
+                    <div className="data-table-header">
+                        <input
+                            type="text"
+                            placeholder="Search"
+                            value={searchTerm}
+                            onChange={handleSearch}
+                        />
+                        <select value={dataPerPageDesc} onChange={handleChangepageDesc}>
+                            <option value={5}>5</option>
+                            <option value={10}>10</option>
+                            <option value={20}>20</option>
+                        </select>
+                    </div>
+                    <table className="table table-striped tablebg">
                         <thead>
-                            <tr className='table-descuentos'>
+                            <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
-                                <th>Descuento</th>
+                                <th>% de descuento</th>
                                 <th>Acciones</th>
                                 {/* <th>Activo</th> */}
                             </tr>
                         </thead>
                         <tbody>
-                            {dataDiscount.map(product => (
+                            {currentDataDesc.map(product => (
                                 <tr key={product.id}>
                                     <td>{product.id}</td>
                                     <td>{product.name}</td>
@@ -656,12 +740,8 @@ const Crud = () => {
                                     {/* <td>{product.active}</td> */}
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModaldesc(product, "Editar")}>
-                                                <PencilSquare size={17} />
-                                            </button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModaldesc(product, "Eliminar")}>
-                                                <Trash size={17} />
-                                            </button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModaldesc(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModaldesc(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
                                         </div>
 
                                     </td>
@@ -669,8 +749,8 @@ const Crud = () => {
                             ))}
 
                         </tbody>
-
                     </table>
+                    <div className="pagination">{renderPageNumbersDesc}</div>
                 </div>
             )}
 
@@ -909,7 +989,7 @@ const Crud = () => {
             </Modal>
 
             <Modal isOpen={modalEditardesc}>
-                <ModalHeader>Editar Descuentos</ModalHeader>
+                <ModalHeader>Editar Producto</ModalHeader>
                 <ModalBody>
                     <div className="form-group">
                         <label>Nombre: </label>
@@ -919,7 +999,7 @@ const Crud = () => {
                         <label>Descripción: </label>
                         <textarea type="text" className="form-control" name="longDesc" onChange={handleChangeDesc} value={SelectedDesc.longDesc} />
                         <br />
-                        <label>% de descuento: </label>
+                        <label>Descripción: </label>
                         <input type="text" className="form-control" name="discount_percent" onChange={handleChangeDesc} value={SelectedDesc.discount_percent} />
                         <br />
                     </div>
@@ -933,7 +1013,7 @@ const Crud = () => {
             <Modal isOpen={modalEliminardesc}>
                 <ModalBody>
                     <div>
-                        ¿Estás seguro de que deseas eliminar la categoria {SelectedProduct && SelectedProduct.name}?
+                        ¿Estás seguro de que deseas eliminar la categoria {SelectedDesc && SelectedDesc.name}?
                     </div>
                 </ModalBody>
                 <ModalFooter>

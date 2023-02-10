@@ -23,9 +23,19 @@ function App() {
     const [cart, setCart] = useState([]);
   
     const handleAddToCart = (product) => {
-      setCart([...cart, product]);
+      if (!cart.find((p) => p.id === product.id)) {
+        setCart([...cart, product]);
+        //window.alert(`${product.name} was added to the cart`);
+    } else {
+      //window.alert(`${product.name} is already in the cart`);
+    }
       console.log(cart);
     };
+
+    function handleRemoveFromCart(productToRemove) {
+      setCart(cart.filter((product) => product.id !== productToRemove.id));
+    }
+
   return (
     <div className="app">
       <BrowserRouter>
@@ -35,7 +45,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />}></Route>
           <Route path='/shop' element={<Shop onAddToCart={handleAddToCart}/>}></Route>
-          <Route path="/cart" element={<ShoppingCart items={cart}/>} />
+          <Route path="/cart" element={<ShoppingCart items={cart} onRemoveToCart={handleRemoveFromCart}/>} />
           <Route path='/about' element={<Aboutpage />}></Route>
           <Route path='/contact' element={<Contactpage />}></Route>
           <Route path="/login" element={<LoginPage />} />

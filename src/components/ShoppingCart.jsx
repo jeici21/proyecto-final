@@ -12,26 +12,27 @@ import {
 } from "mdb-react-ui-kit";
 import axios from "axios";
 
-function ShoppingCart({ items }) {
+function ShoppingCart({ items, onRemoveToCart}) {
     const [products, setProducts] = useState([]);
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState([]);
     const [subtotal, setSubTotal] = useState(0);
 
     useEffect(() => {
             setProducts(items);
-
     }, []);
 
     const handleChange = e => {
         setQuantity(e.target.value);
-        setSubTotal(products.reduce((acc, product) => acc + product.price, 0));
+       // setSubTotal(products.reduce((acc, product) => acc + product.price, 0));
     };
 
-    const handleRemoveProduct = (index) => {
-        const updatedProducts = [...products];
-        updatedProducts.splice(index, 1);
-        setProducts(updatedProducts);
+    const handleRemoveProduct = (product) => {
+        setProducts(products.filter((products) => products.id !== product.id));
+        onRemoveToCart(product);
     };
+     function calculateTotal(item) {
+    return item.price * 2;
+  }
 
     return (
         <section className="h-100 h-custom">
@@ -71,7 +72,7 @@ function ShoppingCart({ items }) {
                                                     <div className="d-flex justify-content-between">
                                                         <div className="d-flex flex-row align-items-center">
                                                             <div>
-                                                                <MDBCardImage src={product.img} fluid className="rounded-3"
+                                                                <MDBCardImage src={product.img}width="200" height="200"  className="rounded-3"
                                                                     alt={product.name} />
                                                             </div>
                                                             <div className="ms-3">
@@ -81,16 +82,17 @@ function ShoppingCart({ items }) {
                                                         </div>
                                                         <div className="d-flex flex-row align-items-center">
                                                             <div className="cart-quantity">
-                                                                <MDBInput type="number" name="quantity"
-                                                                    onChange={(e) => setProducts({ ...product, handleChange })} />
+                                                                <MDBInput type="number" name="quantity"/> 
+                                                                
+                                                                  {/* onChange={(e) => setProducts({ ...product, handleChange })} /> */}
                                                             </div>
                                                             <div className="cart-price">
                                                                 <MDBTypography tag="h5" className="mb-0">
-                                                                    ${product.price * product.quantity}
+                                                                {calculateTotal(product)}
                                                                 </MDBTypography>
                                                             </div>
                                                             <a href="#!" className="cart-delete"
-                                                                onClick={() => handleRemoveProduct(index)}>
+                                                                onClick={() => handleRemoveProduct(product)}>
                                                                 <MDBIcon fas icon="trash-alt" />
                                                             </a>
                                                         </div>
