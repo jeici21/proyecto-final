@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 
-const Shop = () => {
+const Shop = ({ onAddToCart }) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     makeAPICall();
@@ -88,9 +88,9 @@ const Shop = () => {
                       <h4 className="price">${result.price}</h4>
                     </div>
                     <div className="add-to-cart">
-                      <a href="#" className="default-btn">
+                      <button   className="default-btn" onClick={() => onAddToCart(result)}>
                         Añadir al Carro
-                      </a>
+                      </button >
                     </div>
                   </div>
                 </div>

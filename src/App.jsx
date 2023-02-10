@@ -12,10 +12,30 @@ import Contactpage from './pages/Contactpage';
 import Shoppage from './pages/Shoppage';
 import LoginPage from './pages/LoginPage';
 import { Dashboard } from './pages/dashboard/dashboard';
+import React, {useState } from "react";
 import Crud from './components/Crud';
 import TableCateory from './components/TableCategory';
-import Cart from './components/Cart';
+import Cart from './components/Cart'; 
+import Shop from './components/Shop';
+import ShoppingCart from './components/ShoppingCart';
 function App() {
+
+    const [cart, setCart] = useState([]);
+  
+    const handleAddToCart = (product) => {
+      if (!cart.find((p) => p.id === product.id)) {
+        setCart([...cart, product]);
+        //window.alert(`${product.name} was added to the cart`);
+    } else {
+      //window.alert(`${product.name} is already in the cart`);
+    }
+      console.log(cart);
+    };
+
+    function handleRemoveFromCart(productToRemove) {
+      setCart(cart.filter((product) => product.id !== productToRemove.id));
+    }
+
   return (
     <div className="app">
       <BrowserRouter>
@@ -24,13 +44,13 @@ function App() {
         <Search />
         <Routes>
           <Route path='/' element={<Homepage />}></Route>
-          <Route path='/shop' element={<Shoppage />}></Route>
+          <Route path='/shop' element={<Shop onAddToCart={handleAddToCart}/>}></Route>
+          <Route path="/cart" element={<ShoppingCart items={cart} onRemoveToCart={handleRemoveFromCart}/>} />
           <Route path='/about' element={<Aboutpage />}></Route>
           <Route path='/contact' element={<Contactpage />}></Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/crud" element={<Crud />} />
-          <Route path="/cart" element={<Cart />} />
         </Routes>
         <Footer />
       </BrowserRouter>
