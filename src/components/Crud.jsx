@@ -658,7 +658,7 @@ const Crud = () => {
                 </div>
             )}
             {selectedTable === 3 && (
-                <div>
+                <div className='p-2'>
                     {/* <h2> Tabla de categorias</h2> */}
                     <div className="data-table-header">
                         <input
@@ -673,7 +673,7 @@ const Crud = () => {
                             <option value={20}>20</option>
                         </select>
                     </div>
-                    <table className="table table-striped tablebg">
+                    <table className="table table-responsive table-striped tablebg mt-3">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -704,7 +704,7 @@ const Crud = () => {
                 </div>
             )}
             {selectedTable === 2 && (
-                <div>
+                <div className='p-2'>
                     {/* <h2> Tabla de descuento</h2> */}
                     <div className="data-table-header">
                         <input
@@ -719,7 +719,7 @@ const Crud = () => {
                             <option value={20}>20</option>
                         </select>
                     </div>
-                    <table className="table table-striped tablebg">
+                    <table className="table table-responsive table-striped tablebg mt-3">
                         <thead>
                             <tr>
                                 <th>ID</th>
