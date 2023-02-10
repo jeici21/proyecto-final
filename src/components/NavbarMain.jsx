@@ -27,7 +27,7 @@ const NavbarMain = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light shadow">
             <div className="container d-flex justify-content-between align-items-center">
-                <NavLink to="/"  exact="true" className="navbar-brand text-success h1 align-self-center" href="/">
+                <NavLink to="/"  exact="true" className="navbar-brand text-success h1 align-self-center"  >
                     <img src={logo} alt="KMarket" className="logo" />
                 </NavLink>
                 <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -68,22 +68,25 @@ const NavbarMain = () => {
                         <a className="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
                             <i className="fa fa-fw fa-search text-dark mr-2"></i>
                         </a>
-                        <a className="nav-icon position-relative text-decoration-none" href="/cart">
+                        <NavLink className="nav-icon position-relative text-decoration-none" to="/cart">
+                          
+                        
                             <i className="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
                             <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
                                 7
                             </span>
-                        </a>
+                      
+                        </NavLink>
                         <NavLink to="/login" activeclassname="active" className="nav-icon position-relative text-decoration-none">
                             <i className="fa fa-fw fa-user text-dark mr-3"></i>
 {/*                             <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
                                 +99
                             </span> */}
                         </NavLink>
-                        <div class="flex-shrink-0 dropdown">
+                        <div className="flex-shrink-0 dropdown">
               <a
                 href="#"
-                class="d-block link-dark text-decoration-none dropdown-toggle"
+                className="d-block link-dark text-decoration-none dropdown-toggle"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -92,30 +95,30 @@ const NavbarMain = () => {
                   alt="mdo"
                   width="32"
                   height="32"
-                  class="rounded-circle"
+                  className="rounded-circle"
                 />
               </a>
-              <ul class="dropdown-menu text-small shadow">
+              <ul className="dropdown-menu text-small shadow">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                   {data && `${data.firstName} ${data.lastName}`}
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Settings
                   </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a className="dropdown-item" href="#">
                     Profile
                   </a>
                 </li>
                 <li>
-                  <hr class="dropdown-divider" />
+                  <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#" onClick={() => logOut()}>
+                  <a className="dropdown-item" href="#" onClick={() => logOut()}>
                     Sign out
                   </a>
                 </li>

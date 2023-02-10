@@ -193,11 +193,11 @@ const Login = ({ loading, error, ...props }) => {
                       </button>
                     </div>
                   </form>
-                  <div class="d-flex gap-1 justify-content-center mt-1">
+                  <div className="d-flex gap-1 justify-content-center mt-1">
                     <div>Don't have an account?</div>
                     <a
                       href="#"
-                      class="text-decoration-none text-info fw-semibold"
+                      className="text-decoration-none text-info fw-semibold"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
                       data-bs-whatever="@mdo"
@@ -218,57 +218,57 @@ const Login = ({ loading, error, ...props }) => {
       </section>
 
       <div
-        class="modal fade"
+        className="modal fade"
         id="exampleModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
                 Registrarse
               </h1>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
 
             <form onSubmit={handleSubmits}>
-              <div class="modal-body">
-                <div class="form-group  ">
+              <div className="modal-body">
+                <div className="form-group  ">
                   <label for="nombres">Nombres:</label>
-                  <input type="text" class="form-control" id="nombres" />
+                  <input type="text" className="form-control" id="nombres" />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="apellidos">Apellidos:</label>
-                  <input type="text" class="form-control" id="apellidos" />
+                  <input type="text" className="form-control" id="apellidos" />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="usuario">Usuario:</label>
-                  <input type="text" class="form-control" id="usuario" />
+                  <input type="text" className="form-control" id="usuario" />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="contraseña">Contraseña:</label>
-                  <input type="password" class="form-control" id="contraseña" />
+                  <input type="password" className="form-control" id="contraseña" />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="email">Email:</label>
-                  <input type="email" class="form-control" id="email" />
+                  <input type="email" className="form-control" id="email" />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                   <label for="telefono">Teléfono:</label>
-                  <input type="text" class="form-control" id="telefono" />
+                  <input type="text" className="form-control" id="telefono" />
                 </div>
 
-                <div class="modal-footer">
+                <div className="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-secondary"
+                    className="btn btn-secondary"
                     data-bs-dismiss="modal"
                   >
                     Close

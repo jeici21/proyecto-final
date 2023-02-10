@@ -294,7 +294,7 @@ const Crud = () => {
             })
                 .then(response => {
                     abrirCerrarModalInsertarDescuento();
-                    peticionGetCategory();
+                    peticionGetDiscount();
                     console.log("Descuento registrado correctamente.");
                     console.log(response);
                 }).catch(error => {
