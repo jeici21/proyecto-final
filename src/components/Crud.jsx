@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import axios from 'axios';
+import { PencilSquare, Trash3 } from 'react-bootstrap-icons';
 //import { clippingParents } from '@popperjs/core';
 
 const Crud = () => {
@@ -600,7 +601,7 @@ const Crud = () => {
                 <div className='m-2 form-check'>
                     <input type="radio" name="table" id='categorias' className="btn-check" value="3"
                         onChange={handleRadioChange} checked={selectedTable === 3} />
-                    <label htmlFor="categorias" className='btn btn-outline-success'>Categorias</label>
+                    <label htmlFor="categorias" className='btn btn-outline-success'>Categorías</label>
                 </div>
             </div>
             {selectedTable === 1 && (
@@ -642,8 +643,12 @@ const Crud = () => {
                                     <td>{currencyFormatter(product.price)}</td>
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}>
+                                                <PencilSquare size={15} />
+                                            </button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}>
+                                                <Trash3 size={15} />
+                                            </button>
                                         </div>
 
                                     </td>
@@ -654,7 +659,7 @@ const Crud = () => {
                         </tbody>
 
                     </table>
-                    <div className="pagination">{renderPageNumbers}</div>
+                    <div className="pagination justify-content-center page-item">{renderPageNumbers}</div>
                 </div>
             )}
             {selectedTable === 3 && (
@@ -690,8 +695,12 @@ const Crud = () => {
                                     <td>{product.longDesc}</td>
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}>
+                                                <PencilSquare size={15} />
+                                            </button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}>
+                                                <Trash3 size={15} />
+                                            </button>
                                         </div>
 
                                     </td>
@@ -725,7 +734,7 @@ const Crud = () => {
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
-                                <th>% de descuento</th>
+                                <th>Descuento</th>
                                 <th>Acciones</th>
                                 {/* <th>Activo</th> */}
                             </tr>
@@ -740,8 +749,12 @@ const Crud = () => {
                                     {/* <td>{product.active}</td> */}
                                     <td>
                                         <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModaldesc(product, "Editar")}><i className="fab fa-instagram fa-sm fa-fw "></i></button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModaldesc(product, "Eliminar")}><i className="fa-solid fa-trash"></i></button>
+                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModaldesc(product, "Editar")}>
+                                                <PencilSquare size={15} />
+                                            </button>
+                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModaldesc(product, "Eliminar")}>
+                                                <Trash3 size={15} />
+                                            </button>
                                         </div>
 
                                     </td>

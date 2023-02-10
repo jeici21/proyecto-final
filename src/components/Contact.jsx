@@ -10,7 +10,7 @@ const Contact = () => {
 
     useEffect(() => {
         function handleResize() {
-            setMapHeight(window.innerHeight);
+            setMapHeight(window.innerHeight * 0.9);
         }
         window.addEventListener('resize', handleResize);
         handleResize();

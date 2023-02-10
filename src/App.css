@@ -120,15 +120,16 @@ textarea {
   min-height: 75vh !important;
 }
 
-.pagination .page-link:hover {
+/* .pagination .page-link:hover {
   color: #000;
+  border-radius: 5px !important;
 }
 
 .pagination .page-link:hover,
 .pagination .page-link.active {
   background-color: rgb(102, 255, 0);
   color: #fff;
-}
+} */
 
 /* .tablebg {
   background-image: linear-gradient(to right, 
@@ -630,7 +631,7 @@ figure img {
 
 .contact-container form {
   border-radius: 5px;
-  background-color: #f2f2f2;
+  background-color: #cdcdcd;
   padding: 10px;
 }
 
