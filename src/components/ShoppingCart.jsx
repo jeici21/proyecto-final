@@ -12,27 +12,44 @@ import {
 } from "mdb-react-ui-kit";
 import axios from "axios";
 
-function ShoppingCart({ items, onRemoveToCart}) {
+import { NavLink } from "react-router-dom";
+
+function ShoppingCart({ items, onRemoveToCart }) {
     const [products, setProducts] = useState([]);
-    const [quantity, setQuantity] = useState([]);
-    const [subtotal, setSubTotal] = useState(0);
+    //const [quantity, setQuantity] = useState(1);
+    //const [quantities, setQuantities] = useState(Array(products.length).fill(1));
+    const [quantities, setQuantities] = useState([]);
+    //  const [total, setTotal] = useState(0);
+
 
     useEffect(() => {
-            setProducts(items);
-    }, []);
+        setProducts(items);
+        if (products) {
+            setQuantities(Array(products.length).fill(1));
+            //const newTotal = products.reduce((acc, product, index) => acc + product.price * quantities[index], 0);
+            //setTotal(newTotal);
+        } else {
+            console.log("products vacio")
+        }
+    }, [products]);
 
-    const handleChange = e => {
-        setQuantity(e.target.value);
-       // setSubTotal(products.reduce((acc, product) => acc + product.price, 0));
+    const total = products.reduce((acc, product, index) => acc + product.price * quantities[index], 0);
+    const cant = products.length;
+    const handleChange = (index, event) => {
+        const value = Number(event.target.value);
+        if (value >= 1) {
+            const newQuantities = [...quantities];
+            newQuantities[index] = value;
+            setQuantities(newQuantities);
+        }
     };
+
 
     const handleRemoveProduct = (product) => {
         setProducts(products.filter((products) => products.id !== product.id));
         onRemoveToCart(product);
     };
-     function calculateTotal(item) {
-    return item.price * 2;
-  }
+
 
     return (
         <section className="h-100 h-custom">
@@ -44,16 +61,17 @@ function ShoppingCart({ items, onRemoveToCart}) {
                                 <MDBRow>
                                     <MDBCol lg="7">
                                         <MDBTypography tag="h5">
-                                            <a href="#!" className="text-body">
+                                            <NavLink to="/shop" activeclassname="active" exact="true" className="nav-link">
+
                                                 <MDBIcon fas icon="long-arrow-alt-left me-2" />
-                                                Continuar con la compra
-                                            </a>
+                                                Continuar comprando
+                                            </NavLink>
                                         </MDBTypography>
 
                                         <div className="d-flex justify-content-between align-items-center mb-4">
                                             <div>
                                                 <p className="mb-1">Carrito de compras</p>
-                                                <p className="mb-0">Tiene {quantity} productos en su carrito</p>
+                                                <p className="mb-0">Tiene  productos {cant} en su carrito</p>
                                             </div>
                                             <div>
                                                 <p>
@@ -72,7 +90,7 @@ function ShoppingCart({ items, onRemoveToCart}) {
                                                     <div className="d-flex justify-content-between">
                                                         <div className="d-flex flex-row align-items-center">
                                                             <div>
-                                                                <MDBCardImage src={product.img}width="200" height="200"  className="rounded-3"
+                                                                <MDBCardImage src={product.img} width="200" height="200" className="rounded-3"
                                                                     alt={product.name} />
                                                             </div>
                                                             <div className="ms-3">
@@ -82,13 +100,12 @@ function ShoppingCart({ items, onRemoveToCart}) {
                                                         </div>
                                                         <div className="d-flex flex-row align-items-center">
                                                             <div className="cart-quantity">
-                                                                <MDBInput type="number" name="quantity"/> 
-                                                                
-                                                                  {/* onChange={(e) => setProducts({ ...product, handleChange })} /> */}
+                                                                <MDBInput type="number" value={quantities[index]} onChange={handleChange.bind(null, index)} />
+
                                                             </div>
                                                             <div className="cart-price">
                                                                 <MDBTypography tag="h5" className="mb-0">
-                                                                {calculateTotal(product)}
+                                                                    {product.price * quantities[index]}
                                                                 </MDBTypography>
                                                             </div>
                                                             <a href="#!" className="cart-delete"
@@ -149,17 +166,17 @@ function ShoppingCart({ items, onRemoveToCart}) {
 
                                                 <div className="d-flex justify-content-between">
                                                     <p className="mb-2">Subtotal</p>
-                                                    <p className="mb-2">${subtotal}</p>
+                                                    <p className="mb-2">${(total).toFixed(2)}</p>
                                                 </div>
 
                                                 <div className="d-flex justify-content-between">
-                                                    <p className="mb-2">Descuento</p>
-                                                    <p className="mb-2">${products.discount}</p>
+                                                    <p className="mb-2">Descuento %10</p>
+                                                    <p className="mb-2">  {(total * 0.10).toFixed(2)}</p>
                                                 </div>
 
                                                 <div className="d-flex justify-content-between">
                                                     <p className="mb-2">Total(Incl. descuento)</p>
-                                                    <p className="mb-2">${subtotal + products.discount}</p>
+                                                    <p className="mb-2">{(total - (total * 0.10)).toFixed(2)}</p>
                                                 </div>
                                                 <div className="checkout-button-container">
                                                     <button className="checkout-button">
