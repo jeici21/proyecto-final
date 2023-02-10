@@ -55,7 +55,6 @@ const Crud = () => {
     const seleccionarModaldesc = (Product, caso) => {
         setSelectedDesc(Product);
         (caso === "Editar") ? abrirCerrarModalEditarDesc() : abrirCerrarModalEliminarDesc();
-
     }
 
 
@@ -527,16 +526,19 @@ const Crud = () => {
             <br /><br />
             <div className='d-flex justify-content-center'>
                 <div className='m-2 form-check'>
-                    <input type="radio" name="table" className="form-check-input" value="1" onChange={handleRadioChange} checked={selectedTable === 1} />
-                    Productos
-                </div >
+                    <input type="radio" name="table" id='productos' className="btn-check" value="1"
+                        onChange={handleRadioChange} checked={selectedTable === 1} />
+                    <label htmlFor="productos" className='btn btn-outline-success'>Productos</label>
+                </div>
                 <div className='m-2 form-check'>
-                    <input type="radio" name="table" className="form-check-input" value="2" onChange={handleRadioChange} checked={selectedTable === 2} />
-                    Descuentos
-                </div >
+                    <input type="radio" name="table" id='descuentos' className="btn-check" value="2"
+                        onChange={handleRadioChange} checked={selectedTable === 2} />
+                    <label htmlFor="descuentos" className='btn btn-outline-success'>Descuentos</label>
+                </div>
                 <div className='m-2 form-check'>
-                    <input type="radio" name="table" className="form-check-input" value="3" onChange={handleRadioChange} checked={selectedTable === 3} />
-                    Categorias
+                    <input type="radio" name="table" id='categorias' className="btn-check" value="3"
+                        onChange={handleRadioChange} checked={selectedTable === 3} />
+                    <label htmlFor="categorias" className='btn btn-outline-success'>Categorias</label>
                 </div>
             </div>
             {selectedTable === 1 && (
