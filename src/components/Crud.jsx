@@ -659,7 +659,7 @@ const Crud = () => {
                         </tbody>
 
                     </table>
-                    <div className="pagination justify-content-center page-item">{renderPageNumbers}</div>
+                    <div className='pagination'>{renderPageNumbers}</div>
                 </div>
             )}
             {selectedTable === 3 && (

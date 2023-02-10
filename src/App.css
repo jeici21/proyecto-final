@@ -120,12 +120,26 @@ textarea {
   min-height: 75vh !important;
 }
 
-/* .pagination .page-link:hover {
-  color: #000;
-  border-radius: 5px !important;
+.pagination {
+  justify-content: center;
 }
 
-.pagination .page-link:hover,
+.pagination button {
+  border-radius: 5px !important;
+  border: 1px solid #ced4da;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination .active {
+  border: 2px solid black !important;
+}
+
+.pagination button:not(.active):hover {
+  background-color: #d6d6d6 !important;
+}
+
+/* .pagination .page-link:hover,
 .pagination .page-link.active {
   background-color: rgb(102, 255, 0);
   color: #fff;
