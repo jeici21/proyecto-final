@@ -1,14 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import logo from "../images/K-Market-2.png";
 
 const Shop = ({ onAddToCart }) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     makeAPICall();
   }, []);
-
-  
 
   const makeAPICall = async () => {
     try {
@@ -31,10 +29,9 @@ const Shop = ({ onAddToCart }) => {
       <section className="our-publication pt-50 pb-50">
         <div className="container">
           <div className="section-header">
-            <i className="fa fa-cart-arrow-down"></i>
-            <h2>Productos KMarket</h2>
-            <p>Esperamos que los productos que ofrecemos sean de su gusto.</p>
-        
+            {/* <i className="fa fa-cart-arrow-down" /> */}
+            <h2>Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
+            <p>Aquí podrá contemplar los productos a nuestra disposición.</p>
           </div>
           <div className="row">
             {products.map((result) => {
@@ -88,7 +85,7 @@ const Shop = ({ onAddToCart }) => {
                       <h4 className="price">${result.price}</h4>
                     </div>
                     <div className="add-to-cart">
-                      <button   className="default-btn" onClick={() => onAddToCart(result)}>
+                      <button className="default-btn" onClick={() => onAddToCart(result)}>
                         Añadir al Carro
                       </button >
                     </div>

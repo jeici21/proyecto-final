@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const NavbarMain = () => {
   const [data, setData] = useState({});
   const navigate = useNavigate();
-  const [linkImage, setlinkImage] = useState("");
+  //const [linkImage, setlinkImage] = useState("");
 
   React.useEffect(() => {
     fetchUserData()
@@ -18,6 +18,7 @@ const NavbarMain = () => {
         localStorage.clear();
         navigate("/");
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const logOut = () => {
