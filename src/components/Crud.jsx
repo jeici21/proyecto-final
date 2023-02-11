@@ -59,14 +59,14 @@ const Crud = () => {
 
 
     const [SelectedProduct, setSelectedProduct] = useState({
-        "productInventory": {
-            "quantity": 0,
+        productInventory: {
+            quantity: 0,
         },
-        "productCategory": {
-            "id": 0,
+        productCategory: {
+            id: 0,
         },
-        "discount": {
-            "id": 0,
+        discount: {
+            id: 0,
         }
     });
     const [SelectedProductAdd, setSelectedProductAdd] = useState({});
@@ -580,8 +580,6 @@ const Crud = () => {
 
     return (
         <Container className='text-center cont' >
-
-
             <br />
             <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
             <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>Agregar category</button>
@@ -654,8 +652,6 @@ const Crud = () => {
                                     </td>
                                 </tr>
                             ))}
-
-
                         </tbody>
 
                     </table>
@@ -702,7 +698,6 @@ const Crud = () => {
                                                 <Trash3 size={15} />
                                             </button>
                                         </div>
-
                                     </td>
                                 </tr>
                             ))}
@@ -756,7 +751,6 @@ const Crud = () => {
                                                 <Trash3 size={15} />
                                             </button>
                                         </div>
-
                                     </td>
                                 </tr>
                             ))}
@@ -830,8 +824,6 @@ const Crud = () => {
                     <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertar()}>Cancelar</button>
                 </ModalFooter>
             </Modal>
-
-
 
             <Modal isOpen={modalEditar}>
                 <ModalHeader>Editar Producto</ModalHeader>

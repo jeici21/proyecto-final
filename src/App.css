@@ -206,6 +206,11 @@ table {
   background: #efefef !important;
 }
 
+.img-fluid {
+  height: 400px !important;
+  width: 400px !important;
+}
+
 /* Accordion */
 .templatemo-accordion a {
   color: #000;
