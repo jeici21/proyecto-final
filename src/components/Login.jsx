@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import {
-  authenticate,
-  authFailure,
-  authSuccess,
-} from "../redux/authActions";
+import { authenticate, authFailure, authSuccess } from "../redux/authActions";
 import { userLogin, UserSave } from "../api/authenticationService";
 import { Alert, Spinner } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 const Login = ({ loading, error, ...props }) => {
   const [values, setValues] = useState({
@@ -25,6 +21,7 @@ const Login = ({ loading, error, ...props }) => {
         console.log("response", response);
         if (response.status === 200) {
           props.setUser(response.data);
+          localStorage.setItem("currentUser", JSON.stringify(response.data));
           navigate("/shop");
         } else {
           props.loginFailure("Something Wrong! Please Try Again");
@@ -48,6 +45,7 @@ const Login = ({ loading, error, ...props }) => {
     //console.log("Loading again",loading);
   };
 
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const handleChange = (e) => {
     e.persist();
     setValues((values) => ({
@@ -110,113 +108,134 @@ const Login = ({ loading, error, ...props }) => {
 
   return (
     <div className="login-page">
-      <section className="h-100">
-        <div className="container h-100">
-          <div className="row justify-content-md-center h-100">
-            <div className="card-wrapper">
-              <div className="card fat">
-                <div className="card-body">
-                  <h4 className="card-title">Login</h4>
-                  <form
-                    className="my-login-validation"
-                    onSubmit={handleSubmit}
-                    noValidate={false}
-                  >
-                    <div className="form-group">
-                      <label htmlFor="email">User Name</label>
-                      <input
-                        id="username"
-                        type="text"
-                        className="form-control"
-                        minLength={5}
-                        value={values.userName}
-                        onChange={handleChange}
-                        name="userName"
-                        required
-                      />
-                      <div className="invalid-feedback">UserId is invalid</div>
-                    </div>
-                    <div className="form-group">
-                      <label>Password</label>
-                      <input
-                        id="password"
-                        type="password"
-                        className="form-control"
-                        minLength={8}
-                        value={values.password}
-                        onChange={handleChange}
-                        name="password"
-                        required
-                      />
-                      <a href="forgot.html" className="float-right">
-                        Forgot Password?
-                      </a>
-                      <div className="invalid-feedback">
-                        Password is required
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <div className="custom-control">
+      {currentUser ? (
+        <div class="card text-center">
+          <div class="card-header"></div>
+          <div class="card-body">
+            <h5 class="card-title">Sesión Activa</h5>
+            <p class="card-text">
+              Cuando estas registrado e iniciado la sesión puedes realizar
+              compras .
+            </p>
+            <button type="button" class="btn btn-info">
+              {" "}
+              <NavLink to="/shop">Ir a Comprar</NavLink>
+            </button>
+          </div>
+        </div>
+      ) : (
+        <section className="h-100">
+          <div className="container h-100">
+            <div className="row justify-content-md-center h-100">
+              <div className="card-wrapper">
+                <div className="card fat">
+                  <div className="card-body">
+                    <h4 className="card-title">Login</h4>
+                    <form
+                      className="my-login-validation"
+                      onSubmit={handleSubmit}
+                      noValidate={false}
+                    >
+                      <div className="form-group">
+                        <label htmlFor="email">User Name</label>
                         <input
-                          type="checkbox"
-                          className="custom-control-input"
-                          id="customCheck1"
+                          id="username"
+                          type="text"
+                          className="form-control"
+                          minLength={5}
+                          value={values.userName}
+                          onChange={handleChange}
+                          name="userName"
+                          required
                         />
-                        <label
-                          className="custom-control-label"
-                          htmlFor="customCheck1"
-                        >
-                          Remember me
-                        </label>
+                        <div className="invalid-feedback">
+                          UserId is invalid
+                        </div>
                       </div>
-                    </div>
+                      <div className="form-group">
+                        <label>Password</label>
+                        <input
+                          id="password"
+                          type="password"
+                          className="form-control"
+                          minLength={8}
+                          value={values.password}
+                          onChange={handleChange}
+                          name="password"
+                          required
+                        />
+                        <a href="forgot.html" className="float-right">
+                          Forgot Password?
+                        </a>
+                        <div className="invalid-feedback">
+                          Password is required
+                        </div>
+                      </div>
 
-                    <div className="form-group m-0 ">
-                      <button type="submit" className="btn btn-primary btn-lg">
-                        Login
-                        {loading && (
-                          <Spinner
-                            as="span"
-                            animation="border"
-                            size="sm"
-                            role="status"
-                            aria-hidden="true"
+                      <div className="form-group">
+                        <div className="custom-control">
+                          <input
+                            type="checkbox"
+                            className="custom-control-input"
+                            id="customCheck1"
                           />
-                        )}
-                        {/* <ClipLoader
+                          <label
+                            className="custom-control-label"
+                            htmlFor="customCheck1"
+                          >
+                            Remember me
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="form-group m-0 ">
+                        <button
+                          type="submit"
+                          className="btn btn-primary btn-lg"
+                        >
+                          Login
+                          {loading && (
+                            <Spinner
+                              as="span"
+                              animation="border"
+                              size="sm"
+                              role="status"
+                              aria-hidden="true"
+                            />
+                          )}
+                          {/* <ClipLoader
                                         //css={override}
                                         size={20}
                                         color={"#123abc"}
                                         loading={loading}
                                         /> */}
-                      </button>
+                        </button>
+                      </div>
+                    </form>
+                    <div className="d-flex gap-1 justify-content-center mt-1">
+                      <div>Don't have an account?</div>
+                      <a
+                        href="#"
+                        className="text-decoration-none text-info fw-semibold"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdo"
+                      >
+                        Registrar{" "}
+                      </a>
                     </div>
-                  </form>
-                  <div className="d-flex gap-1 justify-content-center mt-1">
-                    <div>Don't have an account?</div>
-                    <a
-                      href="#"
-                      className="text-decoration-none text-info fw-semibold"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      data-bs-whatever="@mdo"
-                    >
-                      Registrar{" "}
-                    </a>
+                    {error && (
+                      <Alert className="login-alert" variant="danger">
+                        {error}
+                      </Alert>
+                    )}
                   </div>
-                  {error && (
-                    <Alert className="login-alert" variant="danger">
-                      {error}
-                    </Alert>
-                  )}
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
+        </section>
+      )}
       <div
         className="modal fade"
         id="exampleModal"
@@ -254,7 +273,11 @@ const Login = ({ loading, error, ...props }) => {
                 </div>
                 <div className="form-group">
                   <label for="contraseña">Contraseña:</label>
-                  <input type="password" className="form-control" id="contraseña" />
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="contraseña"
+                  />
                 </div>
                 <div className="form-group">
                   <label for="email">Email:</label>
@@ -274,7 +297,11 @@ const Login = ({ loading, error, ...props }) => {
                     Close
                   </button>
 
-                  <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
                     Guardar
                   </button>
                 </div>

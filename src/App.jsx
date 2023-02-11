@@ -18,6 +18,7 @@ import Crud from './components/Crud';
 //import Cart from './components/Cart'; 
 import Shop from './components/Shop';
 import ShoppingCart from './components/ShoppingCart';
+import Context from '../src/redux/controlUsuario/Context';
 
 function App() {
     const [cart, setCart] = useState([]);
@@ -35,9 +36,22 @@ function App() {
     function handleRemoveFromCart(productToRemove) {
       setCart(cart.filter((product) => product.id !== productToRemove.id));
     }
+    const Provider = ({ children }) => {
+      const [state, setState] = React.useState({});
+     
+    
+      return (
+        <Context.Provider value={{ state, setState }}>
+          {children}
+        </Context.Provider>
+      );
+    };
+
+
 
   return (
     <div className="app">
+        <Provider>
       <BrowserRouter>
         <NavbarInfo />
         <NavbarMain />
@@ -54,6 +68,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
+      </Provider>
     </div>
   );
 }
