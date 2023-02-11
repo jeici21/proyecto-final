@@ -106,7 +106,7 @@ const Footer = () => {
                 <div className="container">
                     <div className="row pt-2">
                         <div className="col-12">
-                            <p className="text-left text-light">
+                            <p className="text-center text-light">
                                 Copyright &copy; {year} KMarket Corporation
                                 | Designed by <a rel="sponsored" href="#" target="_blank">KMarket</a>
                             </p>

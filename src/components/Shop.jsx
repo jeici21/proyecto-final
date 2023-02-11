@@ -12,11 +12,9 @@ const Shop = ({ onAddToCart }) => {
     try {
       //https://api.escuelajs.co/api/v1/products
       //http://localhost:8080/product
-      axios
-        .get(
+      axios.get(
           "http://localhost:8080/product" // , { mode: 'no-cors' // 'cors' by default}
-        )
-        .then((res) => {
+        ).then((res) => {
           setProducts(res.data);
           console.log(res.data);
         });
