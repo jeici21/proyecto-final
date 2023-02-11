@@ -565,6 +565,9 @@ figure img {
 .about-container .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin: 8px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .about-container .about-section {
@@ -592,6 +595,11 @@ figure img {
 .about-container div,
 .about-container img {
   width: 100%;
+}
+
+.about-container .about-github-container {
+  display: flex;
+  align-items: flex-end;
 }
 
 @media screen and (max-width: 650px) {
