@@ -1,9 +1,41 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import logo from "../images/K-Market-2.png";
+import Context from "../../src/redux/controlUsuario/Context";
+import { fetchUserData } from "../../src/api/authenticationService";
+import { useNavigate } from "react-router-dom";
 
 const Shop = ({ onAddToCart }) => {
   const [products, setProducts] = useState([]);
+  const { state, setState } = useContext(Context);
+  const navigate = useNavigate();
+  const [data, setData] = useState({});
+
+  React.useEffect(() => {
+    fetchUserData()
+      .then((response) => {
+        setData(response.data);
+        setState({ ...state, data: response.data });
+      })
+      .catch((e) => {
+        localStorage.clear();
+        navigate("/shop");
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  let firstName;
+  let lastName;
+  if (state && state.data) {
+    firstName = state.data.firstName;
+    lastName = state.data.lastName;
+  }
+
+  const logOut = () => {
+    localStorage.clear();
+    setState("cerrado Sesion");
+    navigate("/");
+  };
   useEffect(() => {
     makeAPICall();
   }, []);

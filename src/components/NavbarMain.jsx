@@ -36,6 +36,7 @@ const NavbarMain = () => {
     setState("cerrado Sesion");
     navigate("/");
   };
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   return (
     <nav className="navbar navbar-expand-lg navbar-light shadow">
       <div className="container d-flex justify-content-between align-items-center">
@@ -146,61 +147,76 @@ const NavbarMain = () => {
                 7
               </span>
             </NavLink>
-            <NavLink
-              to="/login"
-              activeclassname="active"
-              className="nav-icon position-relative text-decoration-none"
-            >
-              <i className="fa fa-fw fa-user text-dark mr-3"></i>
-              {/*                             <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
-                                +99
-                            </span> */}
-            </NavLink>
-            <div className="flex-shrink-0 dropdown">
-              <a
-                href="#"
-                className="d-block link-dark text-decoration-none dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img
-                  src="https://electronicssoftware.net/wp-content/uploads/user.png"
-                  alt="mdo"
-                  width="32"
-                  height="32"
-                  className="rounded-circle"
-                />
-              </a>
-              <ul className="dropdown-menu text-small shadow">
-                <li>
-                <a class="dropdown-item" href="#">
-          {firstName && `${firstName} ${lastName}`}
-        </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Settings
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Profile
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    onClick={() => logOut()}
-                  >
-                    Sign out
-                  </a>
-                </li>
-              </ul>
-            </div>
+
+            {currentUser ? (
+              <div className="flex-shrink-0 dropdown">
+                <a
+                  href="#"
+                  className="d-block link-dark text-decoration-none dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="https://electronicssoftware.net/wp-content/uploads/user.png"
+                    alt="mdo"
+                    width="32"
+                    height="32"
+                    className="rounded-circle"
+                  />
+                </a>
+                {currentUser ? (
+                  <ul className="dropdown-menu text-small shadow">
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        {firstName && `${firstName} ${lastName}`}
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Configuración
+                      </a>
+                    </li>
+                    <li>
+                      <a className="dropdown-item" href="#">
+                        Perfil
+                      </a>
+                    </li>
+                    <li>
+                      <hr className="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a
+                        className="dropdown-item"
+                        href="#"
+                        onClick={() => logOut()}
+                      >
+                        Cerrar Sessión
+                      </a>
+                    </li>
+                  </ul>
+                ) : (
+                  <ul className="dropdown-menu text-small shadow">
+                    <li>
+                      <hr className="dropdown-divider" />
+                    </li>
+                    <li>
+                      <NavLink
+                        to="/login"
+                        className="nav-icon position-relative text-decoration-none "
+                      >
+                        Iniciar Sessión
+                      </NavLink>
+                    </li>
+                  </ul>
+                )}
+              </div>
+            ) : (
+              <div class="">
+                <NavLink to="/login" className="btn btn-outline-primary me-2">
+                  Iniciar Sesión
+                </NavLink>
+              </div>
+            )}
           </div>
         </div>
       </div>
