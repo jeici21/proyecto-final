@@ -9,17 +9,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from './pages/Homepage';
 import Aboutpage from './pages/Aboutpage';
 import Contactpage from './pages/Contactpage';
-import Shoppage from './pages/Shoppage';
+//import Shoppage from './pages/Shoppage';
 import LoginPage from './pages/LoginPage';
 import { Dashboard } from './pages/dashboard/dashboard';
 import React, {useState } from "react";
 import Crud from './components/Crud';
-import TableCateory from './components/TableCategory';
-import Cart from './components/Cart'; 
+//import TableCateory from './components/TableCategory';
+//import Cart from './components/Cart'; 
 import Shop from './components/Shop';
 import ShoppingCart from './components/ShoppingCart';
-function App() {
 
+function App() {
     const [cart, setCart] = useState([]);
   
     const handleAddToCart = (product) => {

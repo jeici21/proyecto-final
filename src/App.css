@@ -35,18 +35,13 @@ textarea {
   font-size: 22px !important;
 }
 
-/*Style Whatsapp*/
-.float {
+/*Style Whatsapp and Scroll to top buttons*/
+
+.float,
+.scroll-to-top-button {
   position: fixed;
-  width: 60px;
-  height: 60px;
-  bottom: 40px;
-  right: 40px;
-  background-color: #25d366;
   color: #FFF;
   border-radius: 50px;
-  text-align: center;
-  font-size: 30px;
   box-shadow: 2px 2px 3px #999;
   z-index: 100;
   display: flex;
@@ -54,9 +49,34 @@ textarea {
   justify-content: center;
 }
 
+.float:hover,
+.scroll-to-top-button:hover {
+  cursor: pointer;
+}
+
+.float {
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #25d366;
+}
+
 .float:hover {
-  text-decoration: none;
   background-color: #1fb054;
+}
+
+.scroll-to-top-button {
+  width: 40px;
+  height: 40px;
+  bottom: 120px;
+  right: 50px;
+  background-color: #2576d3;
+  border: none;
+}
+
+.scroll-to-top-button:hover {
+  background-color: #1e5fab;
 }
 
 .my-float {
