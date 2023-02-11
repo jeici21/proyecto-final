@@ -16,11 +16,11 @@ const Footer = () => {
                             </li>
                             <li>
                                 <i className="fa fa-phone fa-fw"></i>
-                                <a className="text-decoration-none" href="#">000-000-0000</a>
+                                <a className="text-decoration-none" href="#">042-987-543</a>
                             </li>
                             <li>
                                 <i className="fa fa-envelope fa-fw"></i>
-                                <a className="text-decoration-none" href="#">info@company.com</a>
+                                <a className="text-decoration-none" href="#">KMarket@Kruger.com</a>
                             </li>
                         </ul>
                     </div>
@@ -92,14 +92,14 @@ const Footer = () => {
                             </li>
                         </ul>
                     </div>
-                    <div className="col-auto">
+{/*                     <div className="col-auto">
                         <label className="sr-only" htmlFor="subscribeEmail">Correo electrónico</label>
                         <div className="input-group mb-2">
                             <input type="text" className="form-control bg-dark border-light" id="subscribeEmail"
                                 placeholder="Correo electrónico" />
                             <div className="input-group-text btn-success text-light">Suscripción</div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className="w-100 bg-black py-3">

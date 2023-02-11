@@ -5,9 +5,9 @@ const NavbarInfo = () => {
         <div className="w-100 d-flex justify-content-between">
           <div>
             <i className="fa fa-envelope mx-2"></i>
-            <a className="navbar-sm-brand text-light text-decoration-none" href="#">info@company.com</a>
+            <a className="navbar-sm-brand text-light text-decoration-none" href="#">KMarket@Kruger.com</a>
             <i className="fa fa-phone mx-2"></i>
-            <a className="navbar-sm-brand text-light text-decoration-none" href="#">010-000-0000</a>
+            <a className="navbar-sm-brand text-light text-decoration-none" href="#">042-987-543</a>
           </div>
           <div>
             <a className="text-light" href="#" target="_blank" rel="sponsored"><i className="fab fa-facebook-f fa-sm fa-fw me-2"></i></a>

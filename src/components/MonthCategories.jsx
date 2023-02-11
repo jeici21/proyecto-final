@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const MonthCategories = () => {
     return (
         <section className="container py-5">
@@ -5,9 +7,8 @@ const MonthCategories = () => {
                 <div className="col-lg-6 m-auto">
                     <h1 className="h1">Categorías del Mes</h1>
                     <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        Los siguientes productos han sido los más adquiridos por nuestros clientes.
+                        ¡Puede darles un vistazo y obtenerlos si le parecen atractivos!
                     </p>
                 </div>
             </div>
@@ -18,7 +19,11 @@ const MonthCategories = () => {
                             className="rounded-circle img-fluid border" alt="" />
                     </a>
                     <h5 className="text-center mt-3 mb-3">Relojes</h5>
-                    <p className="text-center"><a className="btn btn-success">Ir a la tienda</a></p>
+                    <p className="text-center">
+                        <NavLink to="/shop" activeclassname="active" exact="true" className="btn btn-success">
+                            Ir a la tienda
+                        </NavLink>
+                    </p>
                 </div>
                 <div className="col-12 col-md-4 p-5 mt-3">
                     <a href="#">
@@ -26,7 +31,11 @@ const MonthCategories = () => {
                             className="rounded-circle img-fluid border" alt="" />
                     </a>
                     <h2 className="h5 text-center mt-3 mb-3">Zapatos</h2>
-                    <p className="text-center"><a className="btn btn-success">Ir a la tienda</a></p>
+                    <p className="text-center">
+                        <NavLink to="/shop" activeclassname="active" exact="true" className="btn btn-success">
+                            Ir a la tienda
+                        </NavLink>
+                    </p>
                 </div>
                 <div className="col-12 col-md-4 p-5 mt-3">
                     <a href="#">
@@ -34,7 +43,11 @@ const MonthCategories = () => {
                             className="rounded-circle img-fluid border" alt="" />
                     </a>
                     <h2 className="h5 text-center mt-3 mb-3">Accessorios</h2>
-                    <p className="text-center"><a className="btn btn-success">Ir a la tienda</a></p>
+                    <p className="text-center">
+                        <NavLink to="/shop" activeclassname="active" exact="true" className="btn btn-success">
+                            Ir a la tienda
+                        </NavLink>
+                    </p>
                 </div>
             </div>
         </section>

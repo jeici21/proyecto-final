@@ -204,11 +204,7 @@ table {
 /* Hero Carousel */
 #template-mo-jassa-hero-carousel {
   background: #efefef !important;
-}
-
-.img-fluid {
-  height: 400px !important;
-  width: 400px !important;
+  height: 650px;
 }
 
 /* Accordion */
