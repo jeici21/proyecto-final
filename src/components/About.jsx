@@ -19,7 +19,7 @@ const About = () => {
                         <div className="container">
                             <h2>Jorge Castro</h2>
                             <p className="title">Programador</p>
-                            <p>Alguien que disfruta mucho programar y jugar videojuegos. Bla bla bla.</p>
+                            <p>Alguien que disfruta mucho programar y jugar videojuegos.</p>
                             <p>david92_jc@yahoo.es</p>
                             <p className="about-github-container">
                                 <a className="btn btn-success" href='https://github.com/jeici21'
