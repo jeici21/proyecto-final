@@ -21,7 +21,7 @@ const About = () => {
                             <p className="title">Programador</p>
                             <p>Alguien que disfruta mucho programar y jugar videojuegos.</p>
                             <p>david92_jc@yahoo.es</p>
-                            <p>
+                            <p className="about-github-container">
                                 <a className="btn btn-success" href='https://github.com/jeici21'
                                     target="_blank" rel="noreferrer">
                                     <Github color="white" size={30}></Github>
@@ -39,7 +39,7 @@ const About = () => {
                             <p className="title">Programador</p>
                             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
                             <p>luisitoylag@gmail.com</p>
-                            <p>
+                            <p className="about-github-container">
                                 <a className="btn btn-success" href='https://github.com/LuisRAnrrango'
                                     target="_blank" rel="noreferrer">
                                     <Github color="white" size={30}></Github>
@@ -57,7 +57,7 @@ const About = () => {
                             <p className="title">Programador</p>
                             <p>Some text that describes me lorem ipsum ipsum lorem.</p>
                             <p>arielpiguave@gmail.com</p>
-                            <p>
+                            <p className="about-github-container">
                                 <a className="btn btn-success" href='https://github.com/Piguave'
                                     target="_blank" rel="noreferrer">
                                     <Github color="white" size={30}></Github>

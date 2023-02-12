@@ -61,7 +61,7 @@ const Shop = ({ onAddToCart }) => {
           <div className="section-header">
             {/* <i className="fa fa-cart-arrow-down" /> */}
             <h2>Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
-            <p>Aquí podrá contemplar los productos a nuestra disposición.</p>
+            <p>Aquí podrá revisar nuestro catálogo de productos.</p>
           </div>
           <div className="row">
             {products.map((result) => {

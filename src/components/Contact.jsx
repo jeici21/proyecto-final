@@ -56,7 +56,7 @@ const Contact = () => {
             <h1>Nuestra ubicación</h1>
             <div className="contact-row">
                 <div className="contact-col1">
-                    <h1>Contáctanos:</h1>
+                    <h2>Contáctanos:</h2>
                     <form onSubmit={(e) => { onSubmitHandler(e); }} className="contact-form">
                         <input type="text" required placeholder="Nombres" value={nombre}
                             onChange={(e) => { onChangeHandler("nombre", e.target.value); }} />
