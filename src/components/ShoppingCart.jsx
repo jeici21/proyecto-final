@@ -10,7 +10,6 @@ import {
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
-import axios from "axios";
 
 import { NavLink } from "react-router-dom";
 
@@ -24,10 +23,7 @@ function ShoppingCart({ items, onRemoveToCart }) {
   useEffect(() => {
     if (localStorage.getItem("quantities") !== null) {
       setQuantities(JSON.parse(localStorage.getItem("quantities")));
-      console.log("aqui 0")
     } else {
-      //setQuantities(Array(products.length).fill(1));
-      console.log("aqui 1")
       setQuantities(items.map(() => 1));
       localStorage.setItem("quantities", JSON.stringify(quantities));
       console.log(items.map(() => 1))
@@ -55,7 +51,12 @@ function ShoppingCart({ items, onRemoveToCart }) {
   };
 
 
-  const handleRemoveProduct = (product) => {
+  const handleRemoveProduct = (product, index) => {
+    console.log("index del producto eliminado: "+index);
+    const newQuantities = quantities.filter((_, i) => i !== index);
+    setQuantities(newQuantities);
+    localStorage.setItem("quantities", JSON.stringify(newQuantities));
+
     setProducts(products.filter((products) => products.id !== product.id));
     onRemoveToCart(product);
   };
@@ -115,11 +116,11 @@ function ShoppingCart({ items, onRemoveToCart }) {
                                 </div>
                                 <div className="cart-price">
                                   <MDBTypography tag="h5" className="mb-0">
-                                    {product.price * quantities[index]}
+                                    {(product.price * quantities[index]).toFixed(2)}
                                   </MDBTypography>
                                 </div>
                                 <a href="#!" className="cart-delete"
-                                  onClick={() => handleRemoveProduct(product)}>
+                                  onClick={() => handleRemoveProduct(product, index)}>
                                   <MDBIcon fas icon="trash-alt" />
                                 </a>
                               </div>

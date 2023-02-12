@@ -22,6 +22,7 @@ import Context from '../src/redux/controlUsuario/Context';
 import PageDetails from './components/PageDetails';
 function App() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('product')) || []);
+  const [quan, setQuan] = useState(localStorage.getItem("quantities") || []);
 
   const handleAddToCart = (product) => {
     if (!cart.find((p) => p.id === product.id)) {
@@ -30,6 +31,11 @@ function App() {
       setCart(existingProducts);
       localStorage.setItem("product", JSON.stringify(existingProducts));
       localStorage.setItem("itemscart", JSON.stringify(existingProducts.length));
+
+
+      let existingQuantities = JSON.parse(localStorage.getItem("quantities")) || [];
+      existingQuantities.push(1);
+      localStorage.setItem("quantities", JSON.stringify(existingQuantities));
       //window.alert(`${product.name} was added to the cart`);
     } else {
       //window.alert(`${product.name} is already in the cart`);
