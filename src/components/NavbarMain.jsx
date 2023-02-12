@@ -38,6 +38,7 @@ const NavbarMain = () => {
     navigate("/");
   };
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const rolUser = localStorage.getItem("rolUser");
   return (
     <nav className="navbar navbar-expand-lg navbar-light shadow">
       <div className="container d-flex justify-content-between align-items-center">
@@ -106,6 +107,7 @@ const NavbarMain = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
+              {rolUser === '"ADMIN"' ? (
                 <NavLink
                   to="/crud"
                   activeclassname="active"
@@ -114,6 +116,9 @@ const NavbarMain = () => {
                 >
                   Gestión de productos
                 </NavLink>
+                 ) : (
+                  <></>
+                  )}
               </li>
             </ul>
           </div>

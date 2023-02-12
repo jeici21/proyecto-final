@@ -31,6 +31,8 @@ const Crud = () => {
     const [modalInsertarCategoria, setModalInsertarCategoria] = useState(false);
     const [modalEditarcate, setModalEditarcate] = useState(false);
     const [modalEliminarcate, setModalEliminarcate] = useState(false);
+    let rolUser = localStorage.getItem('rolUser');
+
     const abrirCerrarModalEditarcate = () => {
         setModalEditarcate(!modalEditarcate);
         if (modalEditarcate === "false") { setSelectedCate({}); }
@@ -579,6 +581,8 @@ const Crud = () => {
     });
 
     return (
+        <>
+        {rolUser === '"ADMIN"' ? (
         <Container className='text-center cont' >
             <br />
             <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
@@ -1033,7 +1037,8 @@ const Crud = () => {
                 </ModalFooter>
             </Modal>
         </Container>
-
+ ) : null}
+ </>
     );
 }
 

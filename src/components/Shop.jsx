@@ -25,6 +25,13 @@ const Shop = ({ onAddToCart }) => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const array = data.roles;
+  if (array) {
+    localStorage.setItem("rolUser", JSON.stringify(array[0].roleCode));
+    //console.log("Inicio de Session"+state[0].roleCode);
+  } else {
+    console.log("Cerrado y sin datos desde nav");
+  }
 
   let firstName;
   let lastName;
