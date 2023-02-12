@@ -72,11 +72,11 @@ function App() {
           <NavbarMain />
           <Search />
           <Routes>
-            <Route path='/' element={<Homepage />}></Route>
-            <Route path='/shop' element={<Shop onAddToCart={handleAddToCart} />}></Route>
+            <Route path='/' element={<Homepage />} />
+            <Route path='/shop' element={<Shop onAddToCart={handleAddToCart} />} />
             <Route path="/cart" element={<ShoppingCart items={cart} onRemoveToCart={handleRemoveFromCart} />} />
-            <Route path='/about' element={<Aboutpage />}></Route>
-            <Route path='/contact' element={<Contactpage />}></Route>
+            <Route path='/about' element={<Aboutpage />} />
+            <Route path='/contact' element={<Contactpage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/crud" element={<Crud />} />

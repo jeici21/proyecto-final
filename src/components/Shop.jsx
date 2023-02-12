@@ -72,18 +72,18 @@ const Shop = ({ onAddToCart }) => {
                 <div className="col-sm-6 col-lg-3" key={result.id}>
                   <div className="single-publication">
                     <figure>
-                      <a href="#">
+                      <a href="#" className="product-image">
                         <img src={result.img} alt="Publication" />
                       </a>
                       <ul>
                         <li>
                           <a href="#" title="Añadir a Favoritos">
-                            <i className="fa fa-heart"></i>
+                            <i className="fa fa-heart" />
                           </a>
                         </li>
                         <li>
                           <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido">
-                            <i className="fa fa-search"></i>
+                            <i className="fa fa-search" />
                           </NavLink>
                         </li>
                       </ul>
@@ -95,19 +95,19 @@ const Shop = ({ onAddToCart }) => {
                       </h3>
                       <ul>
                         <li>
-                          <i className="icofont-star"></i>
+                          <i className="icofont-star" />
                         </li>
                         <li>
-                          <i className="icofont-star"></i>
+                          <i className="icofont-star" />
                         </li>
                         <li>
-                          <i className="icofont-star"></i>
+                          <i className="icofont-star" />
                         </li>
                         <li>
-                          <i className="icofont-star"></i>
+                          <i className="icofont-star" />
                         </li>
                         <li>
-                          <i className="icofont-star"></i>
+                          <i className="icofont-star" />
                         </li>
                       </ul>
                       <h4 className="price">${result.price}</h4>
@@ -115,7 +115,7 @@ const Shop = ({ onAddToCart }) => {
                     <div className="add-to-cart">
                       <button className="default-btn" onClick={() => onAddToCart(result)}>
                         Añadir al Carro
-                      </button >
+                      </button>
                     </div>
                   </div>
                 </div>

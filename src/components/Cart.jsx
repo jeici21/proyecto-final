@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 function Cart({ items }) {
-  const [datalist, setdDtalist] = useState(items);
+  const [datalist, setDatalist] = useState(items);
   console.log("Lista de datos enviados")
   console.log(datalist);
 
