@@ -233,6 +233,24 @@ table {
   height: 650px;
 }
 
+.carousel-item {
+  transform: translateX(100%) !important;
+  transition: transform 0.5s !important;
+}
+
+.carousel-item.active {
+  transform: translateX(0) !important;
+}
+
+.carousel-control-prev.active {
+  transform: translateX(-100%);
+}
+
+.carousel-control-prev {
+  transform: translateX(0);
+  transition: transform 0.5s;
+}
+
 /* Accordion */
 .templatemo-accordion a {
   color: #000;
