@@ -8,7 +8,7 @@ const About = () => {
         <div className="about-container">
             <div className="about-section">
                 <h1>Sobre Nosotros</h1>
-                <p>Agradecemos a estos programadores por su gran esfuerzo para poder crear este sitio web.</p>
+                <p>Agradecemos a los siguientes programadores por su gran esfuerzo para poder crear este sitio web.</p>
             </div>
 
             <h2>Nuestro equipo</h2>

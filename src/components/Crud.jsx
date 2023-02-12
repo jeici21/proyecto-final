@@ -582,7 +582,7 @@ const Crud = () => {
         <Container className='text-center cont' >
             <br />
             <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
-            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>Agregar category</button>
+            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>Agregar categoría</button>
             <button className="btn btn-warning  m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>Agregar descuento</button>
             <br /><br />
             <div className='d-flex justify-content-center'>

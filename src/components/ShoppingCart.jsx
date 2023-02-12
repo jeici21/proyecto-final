@@ -81,7 +81,7 @@ function ShoppingCart({ items, onRemoveToCart }) {
                       <div className="d-flex justify-content-between align-items-center mb-4">
                         <div>
                           <p className="mb-1">Carrito de compras</p>
-                          <p className="mb-0">Tiene  productos {cant} en su carrito</p>
+                          <p className="mb-0">Tiene {cant} productos en su carrito</p>
                         </div>
                         <div>
                           <p>
@@ -211,10 +211,9 @@ function ShoppingCart({ items, onRemoveToCart }) {
         </MDBContainer>
       ) : (
         <div class="card text-center">
-          <div class="card-header"></div>
           <div class="card-body">
-            <h5 class="card-title">Ups para continuar comprando</h5>
-            <p class="card-text">Necesitas registrate e iniciar Sesión .</p>
+            <h5 class="card-title">Aún no has iniciado sesión.</h5>
+            <p class="card-text">Para comenzar a comprar, debe iniciar sesión o registrarse.</p>
             <button type="button" class="btn btn-info">
               {" "}
               <NavLink to="/login">Registrarse</NavLink>

@@ -114,8 +114,7 @@ const Login = ({ loading, error, ...props }) => {
           <div class="card-body">
             <h5 class="card-title">Sesión Activa</h5>
             <p class="card-text">
-              Cuando estas registrado e iniciado la sesión puedes realizar
-              compras .
+              Solo puedes realizar compras si has iniciado sesión.
             </p>
             <button type="button" class="btn btn-info">
               {" "}
