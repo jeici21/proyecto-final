@@ -12,7 +12,7 @@ import Contactpage from './pages/Contactpage';
 //import Shoppage from './pages/Shoppage';
 import LoginPage from './pages/LoginPage';
 import { Dashboard } from './pages/dashboard/dashboard';
-import React, {useState } from "react";
+import React, { useState } from "react";
 import Crud from './components/Crud';
 //import TableCateory from './components/TableCategory';
 //import Cart from './components/Cart'; 
@@ -21,60 +21,64 @@ import ShoppingCart from './components/ShoppingCart';
 import Context from '../src/redux/controlUsuario/Context';
 import PageDetails from './components/PageDetails';
 function App() {
-    const [cart, setCart] = useState([]);
-    const [itemscart, setItemscart] = useState(0);
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('product')) || []);
 
-    const handleAddToCart = (product) => {
-      if (!cart.find((p) => p.id === product.id)) {
-        setCart([...cart, product]);
-        setItemscart(cart.length + 1);
-        localStorage.setItem("itemscart", JSON.stringify(cart.length + 1));
-        //window.alert(`${product.name} was added to the cart`);
-      } else {
-        //window.alert(`${product.name} is already in the cart`);
-      }
-  
-      console.log(cart);
-    };
-  
-  
-    function handleRemoveFromCart(productToRemove) {
-      setCart(cart.filter((product) => product.id !== productToRemove.id));
-      setItemscart(cart.length-1);
-      localStorage.setItem("itemscart", JSON.stringify(cart.length)-1);
+  const handleAddToCart = (product) => {
+    if (!cart.find((p) => p.id === product.id)) {
+      let existingProducts = JSON.parse(localStorage.getItem("product")) || [];
+      existingProducts.push(product);
+      setCart(existingProducts);
+      localStorage.setItem("product", JSON.stringify(existingProducts));
+      localStorage.setItem("itemscart", JSON.stringify(existingProducts.length));
+      //window.alert(`${product.name} was added to the cart`);
+    } else {
+      //window.alert(`${product.name} is already in the cart`);
     }
-    const Provider = ({ children }) => {
-      const [state, setState] = React.useState({});
-     
-    
-      return (
-        <Context.Provider value={{ state, setState }}>
-          {children}
-        </Context.Provider>
-      );
-    };
+
+    console.log(" cart: " + cart);
+  };
+
+
+  function handleRemoveFromCart(productToRemove) {
+
+    let existingProducts = JSON.parse(localStorage.getItem("product")) || [];
+    let updatedProducts = existingProducts.filter((p) => p.id !== productToRemove.id);
+    setCart(updatedProducts);
+    localStorage.setItem("product", JSON.stringify(updatedProducts));
+    localStorage.setItem("itemscart", JSON.stringify(updatedProducts.length));
+  }
+  const Provider = ({ children }) => {
+    const [state, setState] = React.useState({});
+
+
+    return (
+      <Context.Provider value={{ state, setState }}>
+        {children}
+      </Context.Provider>
+    );
+  };
 
   return (
     <div className="app">
-        <Provider>
-      <BrowserRouter>
-        <NavbarInfo />
-        <NavbarMain cont={itemscart}  />
-        <Search />
-        <Routes>
-          <Route path='/' element={<Homepage />}></Route>
-          <Route path='/shop' element={<Shop onAddToCart={handleAddToCart}/>}></Route>
-          <Route path="/cart" element={<ShoppingCart items={cart} onRemoveToCart={handleRemoveFromCart}/>} />
-          <Route path='/about' element={<Aboutpage />}></Route>
-          <Route path='/contact' element={<Contactpage />}></Route>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/crud" element={<Crud />} />
-          
-          <Route path="/details/:id" element={<PageDetails onAddToCart={handleAddToCart}/>} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <Provider>
+        <BrowserRouter>
+          <NavbarInfo />
+          <NavbarMain />
+          <Search />
+          <Routes>
+            <Route path='/' element={<Homepage />}></Route>
+            <Route path='/shop' element={<Shop onAddToCart={handleAddToCart} />}></Route>
+            <Route path="/cart" element={<ShoppingCart items={cart} onRemoveToCart={handleRemoveFromCart} />} />
+            <Route path='/about' element={<Aboutpage />}></Route>
+            <Route path='/contact' element={<Contactpage />}></Route>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/crud" element={<Crud />} />
+
+            <Route path="/details/:id" element={<PageDetails onAddToCart={handleAddToCart} />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
       </Provider>
     </div>
   );

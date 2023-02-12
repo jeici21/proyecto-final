@@ -5,14 +5,13 @@ import { fetchUserData } from "../../src/api/authenticationService";
 import { useNavigate } from "react-router-dom";
 import Context from "../../src/redux/controlUsuario/Context";
 
-const NavbarMain = (cont) => {
+const NavbarMain = () => {
   const { state, setState } = useContext(Context);
   const [data, setData] = useState({});
   const navigate = useNavigate();
-  const { cont: count } = cont;
-    console.log(count);
+  const [item, setItem] = useState(JSON.parse(localStorage.getItem('itemscart')) || 0);
   //const [linkImage, setlinkImage] = useState("");
-
+  console.log(item);
   React.useEffect(() => {
     fetchUserData()
       .then((response) => {
@@ -146,7 +145,7 @@ const NavbarMain = (cont) => {
             >
               <i className="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
               <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
-              {count}
+                {item}
               </span>
             </NavLink>
 
