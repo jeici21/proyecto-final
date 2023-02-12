@@ -67,15 +67,14 @@ const Contact = () => {
                         <input type="text" required placeholder="Asunto" value={asunto}
                             onChange={(e) => { onChangeHandler("asunto", e.target.value); }} />
                         <textarea id="textarea" required placeholder="Escriba su mensaje..." value={textarea}
-                            onChange={(e) => { onChangeHandler("textarea", e.target.value); }}>
-                        </textarea>
+                            onChange={(e) => { onChangeHandler("textarea", e.target.value); }} />
                         <button type="submit">Enviar mensaje</button>
                     </form>
                 </div>
                 <div className="contact-col2">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.797523579702!2d-78.47663845039307!3d-0.18499463546593084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59080303a2eb1%3A0x523b5f69ac3065dd!2sKruger%20Corp!5e0!3m2!1ses-419!2sec!4v1675739142115!5m2!1ses-419!2sec"
                         width="90%" height={mapHeight} allowfullscreen loading="lazy" title="Ubicación"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        referrerpolicy="no-referrer-when-downgrade" />
                 </div>
             </div>
         </div>
