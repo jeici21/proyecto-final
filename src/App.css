@@ -57,10 +57,11 @@ textarea {
 
 @keyframes spin-anim {
   0% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
+
   100% {
-      transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -656,9 +657,14 @@ figure img {
 }
 
 .about-container .btn-success,
-.about-container div,
-.about-container img {
+.about-container div {
   width: 100%;
+}
+
+.about-container img {
+  width: 75%;
+  height: 75%;
+  align-self: center;
 }
 
 .about-container .about-github-container {

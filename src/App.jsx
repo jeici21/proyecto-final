@@ -27,7 +27,7 @@ function App() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   const handleAddToCart = (product) => {
@@ -37,8 +37,6 @@ function App() {
       setCart(existingProducts);
       localStorage.setItem("product", JSON.stringify(existingProducts));
       localStorage.setItem("itemscart", JSON.stringify(existingProducts.length));
-
-
       let existingQuantities = JSON.parse(localStorage.getItem("quantities")) || [];
       existingQuantities.push(1);
       localStorage.setItem("quantities", JSON.stringify(existingQuantities));
@@ -46,23 +44,19 @@ function App() {
     } else {
       //window.alert(`${product.name} is already in the cart`);
     }
-
     console.log(" cart: " + cart);
   };
 
-
   function handleRemoveFromCart(productToRemove) {
-
     let existingProducts = JSON.parse(localStorage.getItem("product")) || [];
     let updatedProducts = existingProducts.filter((p) => p.id !== productToRemove.id);
     setCart(updatedProducts);
     localStorage.setItem("product", JSON.stringify(updatedProducts));
     localStorage.setItem("itemscart", JSON.stringify(updatedProducts.length));
   }
+
   const Provider = ({ children }) => {
     const [state, setState] = React.useState({});
-
-
     return (
       <Context.Provider value={{ state, setState }}>
         {children}
@@ -91,7 +85,6 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/crud" element={<Crud />} />
-
               <Route path="/details/:id" element={<PageDetails onAddToCart={handleAddToCart} />} />
             </Routes>
             <Footer />

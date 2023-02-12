@@ -1,6 +1,6 @@
-import team1 from "../images/team1.jpg";
+import team1 from "../images/team1.jpeg";
 import team2 from "../images/team2.jpg";
-import team3 from "../images/team3.jpg";
+import team3 from "../images/team3.jpeg";
 import { Github } from "react-bootstrap-icons";
 
 const About = () => {
@@ -23,9 +23,7 @@ const About = () => {
                             <p>david92_jc@yahoo.es</p>
                             <p className="about-github-container">
                                 <a className="btn btn-success" href='https://github.com/jeici21'
-                                    target="_blank" rel="noreferrer">
-                                    <Github color="white" size={30}></Github>
-                                </a>
+                                    target="_blank" rel="noreferrer"><Github color="white" size={30} /></a>
                             </p>
                         </div>
                     </div>
@@ -41,9 +39,7 @@ const About = () => {
                             <p>luisitoylag@gmail.com</p>
                             <p className="about-github-container">
                                 <a className="btn btn-success" href='https://github.com/LuisRAnrrango'
-                                    target="_blank" rel="noreferrer">
-                                    <Github color="white" size={30}></Github>
-                                </a>
+                                    target="_blank" rel="noreferrer"><Github color="white" size={30} /></a>
                             </p>
                         </div>
                     </div>
@@ -59,9 +55,7 @@ const About = () => {
                             <p>arielpiguave@gmail.com</p>
                             <p className="about-github-container">
                                 <a className="btn btn-success" href='https://github.com/Piguave'
-                                    target="_blank" rel="noreferrer">
-                                    <Github color="white" size={30}></Github>
-                                </a>
+                                    target="_blank" rel="noreferrer"><Github color="white" size={30} /></a>
                             </p>
                         </div>
                     </div>

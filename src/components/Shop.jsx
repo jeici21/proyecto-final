@@ -18,7 +18,7 @@ const Shop = ({ onAddToCart }) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
   }, []);
 
   useEffect(() => {
@@ -84,7 +84,6 @@ const Shop = ({ onAddToCart }) => {
               {/* <i className="fa fa-cart-arrow-down" /> */}
               <h2>Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
               <p>Aquí podrá revisar nuestro catálogo de productos.</p>
-
             </div>
             <div className="row">
               {products.map((result) => {
