@@ -12,8 +12,16 @@ const Shop = ({ onAddToCart }) => {
   const { state, setState } = useContext(Context);
   const navigate = useNavigate();
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  useEffect(() => {
     fetchUserData()
       .then((response) => {
         setData(response.data);
@@ -65,72 +73,78 @@ const Shop = ({ onAddToCart }) => {
   };
   return (
     <div className="main_container">
-      <section className="our-publication pt-50 pb-50">
-        <div className="container">
-          <div className="section-header">
-            {/* <i className="fa fa-cart-arrow-down" /> */}
-            <h2>Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
-            <p>Aquí podrá revisar nuestro catálogo de productos.</p>
+      {loading ? (
+        <div className="loader-container">
+          <div className="spinner" />
+        </div>
+      ) : (
+        <section className="our-publication pt-50 pb-50">
+          <div className="container">
+            <div className="section-header">
+              {/* <i className="fa fa-cart-arrow-down" /> */}
+              <h2>Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
+              <p>Aquí podrá revisar nuestro catálogo de productos.</p>
 
-          </div>
-          <div className="row">
-            {products.map((result) => {
-              return (
-                <div className="col-sm-6 col-lg-3" key={result.id}>
-                  <div className="single-publication">
-                    <figure>
-                      <a href="#" className="product-image">
-                        <img src={result.img} alt="Publication" />
-                      </a>
-                      <ul>
-                        <li>
-                          <a href="#" title="Añadir a Favoritos">
-                            <i className="fa fa-heart" />
-                          </a>
-                        </li>
-                        <li>
-                          <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido">
-                            <i className="fa fa-search" />
-                          </NavLink>
-                        </li>
-                      </ul>
-                    </figure>
-                    <div className="publication-content">
-                      <span className="category">Productos</span>
-                      <h3>
-                        <a href="#">{result.name}</a>
-                      </h3>
-                      <ul>
-                        <li>
-                          <i className="icofont-star" />
-                        </li>
-                        <li>
-                          <i className="icofont-star" />
-                        </li>
-                        <li>
-                          <i className="icofont-star" />
-                        </li>
-                        <li>
-                          <i className="icofont-star" />
-                        </li>
-                        <li>
-                          <i className="icofont-star" />
-                        </li>
-                      </ul>
-                      <h4 className="price">${result.price}</h4>
-                    </div>
-                    <div className="add-to-cart">
-                      <button className="default-btn" onClick={() => onAddToCart(result)}>
-                        Añadir al Carro
-                      </button>
+            </div>
+            <div className="row">
+              {products.map((result) => {
+                return (
+                  <div className="col-sm-6 col-lg-3" key={result.id}>
+                    <div className="single-publication">
+                      <figure>
+                        <a href="#" className="product-image">
+                          <img src={result.img} alt="Publication" />
+                        </a>
+                        <ul>
+                          <li>
+                            <a href="#" title="Añadir a Favoritos">
+                              <i className="fa fa-heart" />
+                            </a>
+                          </li>
+                          <li>
+                            <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido">
+                              <i className="fa fa-search" />
+                            </NavLink>
+                          </li>
+                        </ul>
+                      </figure>
+                      <div className="publication-content">
+                        <span className="category">Productos</span>
+                        <h3>
+                          <a href="#">{result.name}</a>
+                        </h3>
+                        <ul>
+                          <li>
+                            <i className="icofont-star" />
+                          </li>
+                          <li>
+                            <i className="icofont-star" />
+                          </li>
+                          <li>
+                            <i className="icofont-star" />
+                          </li>
+                          <li>
+                            <i className="icofont-star" />
+                          </li>
+                          <li>
+                            <i className="icofont-star" />
+                          </li>
+                        </ul>
+                        <h4 className="price">${result.price}</h4>
+                      </div>
+                      <div className="add-to-cart">
+                        <button className="default-btn" onClick={() => onAddToCart(result)}>
+                          Añadir al Carro
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )};
     </div>
   );
 };

@@ -1,13 +1,31 @@
+import { useEffect, useState } from "react";
 import Carousel from "../components/Carousel";
 import FeaturedProducts from "../components/FeaturedProducts";
 import MonthCategories from "../components/MonthCategories";
 
 const Homepage = () => {
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    }, []);
+
     return (
         <>
-            <Carousel />
-            <MonthCategories />
-            <FeaturedProducts />
+            {loading ? (
+                <div className="loader-container">
+                    <div className="spinner" />
+                </div>
+            ) : (
+                <>
+                    <Carousel />
+                    <MonthCategories />
+                    <FeaturedProducts />
+                </>
+            )};
         </>
     );
 }

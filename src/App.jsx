@@ -9,20 +9,26 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from './pages/Homepage';
 import Aboutpage from './pages/Aboutpage';
 import Contactpage from './pages/Contactpage';
-//import Shoppage from './pages/Shoppage';
 import LoginPage from './pages/LoginPage';
 import { Dashboard } from './pages/dashboard/dashboard';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Crud from './components/Crud';
-//import TableCateory from './components/TableCategory';
-//import Cart from './components/Cart'; 
 import Shop from './components/Shop';
 import ShoppingCart from './components/ShoppingCart';
 import Context from '../src/redux/controlUsuario/Context';
 import PageDetails from './components/PageDetails';
+
 function App() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('product')) || []);
   const [quan, setQuan] = useState(localStorage.getItem("quantities") || []);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   const handleAddToCart = (product) => {
     if (!cart.find((p) => p.id === product.id)) {
@@ -66,26 +72,32 @@ function App() {
 
   return (
     <div className="app">
-      <Provider>
-        <BrowserRouter>
-          <NavbarInfo />
-          <NavbarMain />
-          <Search />
-          <Routes>
-            <Route path='/' element={<Homepage />} />
-            <Route path='/shop' element={<Shop onAddToCart={handleAddToCart} />} />
-            <Route path="/cart" element={<ShoppingCart items={cart} onRemoveToCart={handleRemoveFromCart} />} />
-            <Route path='/about' element={<Aboutpage />} />
-            <Route path='/contact' element={<Contactpage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/crud" element={<Crud />} />
+      {loading ? (
+        <div className="loader-container">
+          <div className="spinner" />
+        </div>
+      ) : (
+        <Provider>
+          <BrowserRouter>
+            <NavbarInfo />
+            <NavbarMain />
+            <Search />
+            <Routes>
+              <Route path='/' element={<Homepage />} />
+              <Route path='/shop' element={<Shop onAddToCart={handleAddToCart} />} />
+              <Route path="/cart" element={<ShoppingCart items={cart} onRemoveToCart={handleRemoveFromCart} />} />
+              <Route path='/about' element={<Aboutpage />} />
+              <Route path='/contact' element={<Contactpage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/crud" element={<Crud />} />
 
-            <Route path="/details/:id" element={<PageDetails onAddToCart={handleAddToCart} />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
-      </Provider>
+              <Route path="/details/:id" element={<PageDetails onAddToCart={handleAddToCart} />} />
+            </Routes>
+            <Footer />
+          </BrowserRouter>
+        </Provider>
+      )};
     </div>
   );
 }
