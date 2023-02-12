@@ -5,10 +5,12 @@ import { fetchUserData } from "../../src/api/authenticationService";
 import { useNavigate } from "react-router-dom";
 import Context from "../../src/redux/controlUsuario/Context";
 
-const NavbarMain = () => {
+const NavbarMain = (cont) => {
   const { state, setState } = useContext(Context);
   const [data, setData] = useState({});
   const navigate = useNavigate();
+  const { cont: count } = cont;
+    console.log(count);
   //const [linkImage, setlinkImage] = useState("");
 
   React.useEffect(() => {
@@ -144,7 +146,7 @@ const NavbarMain = () => {
             >
               <i className="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
               <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
-                7
+              {count}
               </span>
             </NavLink>
 

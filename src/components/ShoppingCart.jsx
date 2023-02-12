@@ -15,29 +15,35 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 function ShoppingCart({ items, onRemoveToCart }) {
-  const [products, setProducts] = useState([]);
-  //const [quantity, setQuantity] = useState(1);
-  //const [quantities, setQuantities] = useState(Array(products.length).fill(1));
-  const [quantities, setQuantities] = useState([]);
-  //  const [total, setTotal] = useState(0);
-
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+  const [products, setProducts] = useState([]);
+  const [quantities, setQuantities] = useState(
+    JSON.parse(localStorage.getItem('quantities')) || Array(items.length).fill(1));
+
   useEffect(() => {
-    setProducts(items);
-    if (products) {
-      setQuantities(Array(products.length).fill(1));
-      //const newTotal = products.reduce((acc, product, index) => acc + product.price * quantities[index], 0);
-      //setTotal(newTotal);
+    if (localStorage.getItem("quantities") !== null) {
+      setQuantities(JSON.parse(localStorage.getItem("quantities")));
+      console.log("aqui 0")
     } else {
-      console.log("products vacio");
+      //setQuantities(Array(products.length).fill(1));
+      console.log("aqui 1")
+      setQuantities(items.map(() => 1));
+      localStorage.setItem("quantities", JSON.stringify(quantities));
+      console.log(items.map(() => 1))
     }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("quantities", JSON.stringify(quantities));
+  }, [quantities]);
+
+  useEffect(() => {
+    setProducts(items)
+    console.log(products);
   }, [products]);
 
-  const total = products.reduce(
-    (acc, product, index) => acc + product.price * quantities[index],
-    0
-  );
+  const total = products.reduce((acc, product, index) => acc + product.price * quantities[index], 0);
   const cant = products.length;
   const handleChange = (index, event) => {
     const value = Number(event.target.value);
@@ -47,6 +53,7 @@ function ShoppingCart({ items, onRemoveToCart }) {
       setQuantities(newQuantities);
     }
   };
+
 
   const handleRemoveProduct = (product) => {
     setProducts(products.filter((products) => products.id !== product.id));
@@ -64,12 +71,8 @@ function ShoppingCart({ items, onRemoveToCart }) {
                   <MDBRow>
                     <MDBCol lg="7">
                       <MDBTypography tag="h5">
-                        <NavLink
-                          to="/shop"
-                          activeclassname="active"
-                          exact="true"
-                          className="nav-link"
-                        >
+                        <NavLink to="/shop" activeclassname="active" exact="true" className="nav-link">
+
                           <MDBIcon fas icon="long-arrow-alt-left me-2" />
                           Continuar comprando
                         </NavLink>
@@ -78,9 +81,7 @@ function ShoppingCart({ items, onRemoveToCart }) {
                       <div className="d-flex justify-content-between align-items-center mb-4">
                         <div>
                           <p className="mb-1">Carrito de compras</p>
-                          <p className="mb-0">
-                            Tiene productos {cant} en su carrito
-                          </p>
+                          <p className="mb-0">Tiene  productos {cant} en su carrito</p>
                         </div>
                         <div>
                           <p>
@@ -99,41 +100,26 @@ function ShoppingCart({ items, onRemoveToCart }) {
                             <div className="d-flex justify-content-between">
                               <div className="d-flex flex-row align-items-center">
                                 <div>
-                                  <MDBCardImage
-                                    src={product.img}
-                                    width="200"
-                                    height="200"
-                                    className="rounded-3"
-                                    alt={product.name}
-                                  />
+                                  <MDBCardImage src={product.img} width="200" height="200" className="rounded-3"
+                                    alt={product.name} />
                                 </div>
                                 <div className="ms-3">
-                                  <MDBTypography tag="h5">
-                                    {product.name}
-                                  </MDBTypography>
-                                  <p className="small mb-0">
-                                    {product.description}
-                                  </p>
+                                  <MDBTypography tag="h5">{product.name}</MDBTypography>
+                                  <p className="small mb-0">{product.description}</p>
                                 </div>
                               </div>
                               <div className="d-flex flex-row align-items-center">
                                 <div className="cart-quantity">
-                                  <MDBInput
-                                    type="number"
-                                    value={quantities[index]}
-                                    onChange={handleChange.bind(null, index)}
-                                  />
+                                  <MDBInput type="number" value={quantities[index] || 1} onChange={handleChange.bind(null, index)} />
+
                                 </div>
                                 <div className="cart-price">
                                   <MDBTypography tag="h5" className="mb-0">
                                     {product.price * quantities[index]}
                                   </MDBTypography>
                                 </div>
-                                <a
-                                  href="#!"
-                                  className="cart-delete"
-                                  onClick={() => handleRemoveProduct(product)}
-                                >
+                                <a href="#!" className="cart-delete"
+                                  onClick={() => handleRemoveProduct(product)}>
                                   <MDBIcon fas icon="trash-alt" />
                                 </a>
                               </div>
@@ -150,12 +136,8 @@ function ShoppingCart({ items, onRemoveToCart }) {
                             <MDBTypography tag="h5" className="mb-0">
                               Detalles de la tarjeta
                             </MDBTypography>
-                            <MDBCardImage
-                              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-                              fluid
-                              className="rounded-3"
-                              alt="Avatar"
-                            />
+                            <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                              fluid className="rounded-3" alt="Avatar" />
                           </div>
 
                           <p className="small">Tipo de la tarjeta</p>
@@ -173,77 +155,48 @@ function ShoppingCart({ items, onRemoveToCart }) {
                           </a>
 
                           <form className="mt-4">
-                            <MDBInput
-                              className="mb-4"
-                              label="Cardholder's Name"
-                              type="text"
-                              size="lg"
-                              placeholder="Cardholder's Name"
-                              contrast
-                            />
+                            <MDBInput className="mb-4" label="Cardholder's Name" type="text" size="lg"
+                              placeholder="Cardholder's Name" contrast />
 
-                            <MDBInput
-                              className="mb-4"
-                              label="Card Number"
-                              type="text"
-                              size="lg"
-                              minLength="19"
-                              maxLength="19"
-                              placeholder="1234 5678 9012 3457"
-                              contrast
-                            />
+                            <MDBInput className="mb-4" label="Card Number" type="text" size="lg"
+                              minLength="19" maxLength="19" placeholder="1234 5678 9012 3457" contrast />
 
                             <MDBRow className="mb-4">
                               <MDBCol md="6">
-                                <MDBInput
-                                  className="mb-4"
-                                  label="Expiration"
-                                  type="text"
-                                  size="lg"
-                                  minLength="7"
-                                  maxLength="7"
-                                  placeholder="MM/YYYY"
-                                  contrast
-                                />
+                                <MDBInput className="mb-4" label="Expiration" type="text" size="lg"
+                                  minLength="7" maxLength="7" placeholder="MM/YYYY" contrast />
                               </MDBCol>
                               <MDBCol md="6">
-                                <MDBInput
-                                  className="mb-4"
-                                  label="Cvv"
-                                  type="text"
-                                  size="lg"
-                                  minLength="3"
-                                  maxLength="3"
-                                  placeholder="&#9679;&#9679;&#9679;"
-                                  contrast
-                                />
+                                <MDBInput className="mb-4" label="Cvv" type="text" size="lg"
+                                  minLength="3" maxLength="3" placeholder="&#9679;&#9679;&#9679;"
+                                  contrast />
                               </MDBCol>
                             </MDBRow>
                           </form>
 
                           <div className="d-flex justify-content-between">
                             <p className="mb-2">Subtotal</p>
-                            <p className="mb-2">${total.toFixed(2)}</p>
+                            <p className="mb-2">${(total).toFixed(2)}</p>
                           </div>
 
                           <div className="d-flex justify-content-between">
                             <p className="mb-2">Descuento %10</p>
-                            <p className="mb-2"> {(total * 0.1).toFixed(2)}</p>
+                            <p className="mb-2">  {(total * 0.10).toFixed(2)}</p>
                           </div>
 
                           <div className="d-flex justify-content-between">
                             <p className="mb-2">Total(Incl. descuento)</p>
-                            <p className="mb-2">
-                              {(total - total * 0.1).toFixed(2)}
-                            </p>
+                            <p className="mb-2">{(total - (total * 0.10)).toFixed(2)}</p>
                           </div>
                           <div className="checkout-button-container">
                             <button className="checkout-button">
                               <div className="d-flex justify-content-between">
-                                <span>
-                                  Checkout{" "}
-                                  <i className="fas fa-long-arrow-alt-right ms-2"></i>
-                                </span>
+                                <NavLink to="/payment" title="Vistazo Rápido">
+                                  <span>
+                                    Completar pago
+                                    <i className="fas fa-long-arrow-alt-right ms-2"></i>
+                                  </span>
+                                </NavLink>
                               </div>
                             </button>
                           </div>

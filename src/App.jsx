@@ -19,22 +19,29 @@ import Crud from './components/Crud';
 import Shop from './components/Shop';
 import ShoppingCart from './components/ShoppingCart';
 import Context from '../src/redux/controlUsuario/Context';
-
+import PageDetails from './components/PageDetails';
 function App() {
     const [cart, setCart] = useState([]);
-  
+    const [itemscart, setItemscart] = useState(0);
+
     const handleAddToCart = (product) => {
       if (!cart.find((p) => p.id === product.id)) {
         setCart([...cart, product]);
+        setItemscart(cart.length + 1);
+        localStorage.setItem("itemscart", JSON.stringify(cart.length + 1));
         //window.alert(`${product.name} was added to the cart`);
-    } else {
-      //window.alert(`${product.name} is already in the cart`);
-    }
+      } else {
+        //window.alert(`${product.name} is already in the cart`);
+      }
+  
       console.log(cart);
     };
-
+  
+  
     function handleRemoveFromCart(productToRemove) {
       setCart(cart.filter((product) => product.id !== productToRemove.id));
+      setItemscart(cart.length-1);
+      localStorage.setItem("itemscart", JSON.stringify(cart.length)-1);
     }
     const Provider = ({ children }) => {
       const [state, setState] = React.useState({});
@@ -52,7 +59,7 @@ function App() {
         <Provider>
       <BrowserRouter>
         <NavbarInfo />
-        <NavbarMain />
+        <NavbarMain cont={itemscart}  />
         <Search />
         <Routes>
           <Route path='/' element={<Homepage />}></Route>
@@ -63,6 +70,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/crud" element={<Crud />} />
+          
+          <Route path="/details/:id" element={<PageDetails onAddToCart={handleAddToCart}/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -924,6 +924,29 @@ figure img {
     height: 12px;
   }
 }
+.ProductDetails {
+  background-color: rgb(255, 255, 255) !important;
+  color: rgb(16, 62, 53) !important;
+  display: flex !important;
+  flex-direction: row !important;
+  font-size: 20px;
+}
+.DetailsTitle {
+  padding-top: var(--title-padding-top);;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.DetailsImg {
+  padding-top: 100px;
+  margin-bottom: 10px;
+  width: 100%;
+
+}
+
+.backBtnContainer{
+  text-align: center;
+}
 /* Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {}

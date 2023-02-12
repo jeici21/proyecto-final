@@ -5,6 +5,8 @@ import Context from "../../src/redux/controlUsuario/Context";
 import { fetchUserData } from "../../src/api/authenticationService";
 import { useNavigate } from "react-router-dom";
 
+import { NavLink } from "react-router-dom";
+
 const Shop = ({ onAddToCart }) => {
   const [products, setProducts] = useState([]);
   const { state, setState } = useContext(Context);
@@ -45,11 +47,11 @@ const Shop = ({ onAddToCart }) => {
       //https://api.escuelajs.co/api/v1/products
       //http://localhost:8080/product
       axios.get(
-          "http://localhost:8080/product" // , { mode: 'no-cors' // 'cors' by default}
-        ).then((res) => {
-          setProducts(res.data);
-          console.log(res.data);
-        });
+        "http://localhost:8080/product" // , { mode: 'no-cors' // 'cors' by default}
+      ).then((res) => {
+        setProducts(res.data);
+        console.log(res.data);
+      });
     } catch (e) {
       console.log(e);
     }
@@ -62,6 +64,7 @@ const Shop = ({ onAddToCart }) => {
             {/* <i className="fa fa-cart-arrow-down" /> */}
             <h2>Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
             <p>Aquí podrá revisar nuestro catálogo de productos.</p>
+
           </div>
           <div className="row">
             {products.map((result) => {
@@ -79,14 +82,9 @@ const Shop = ({ onAddToCart }) => {
                           </a>
                         </li>
                         <li>
-                          <a href="#" title="Añadir a comparación">
-                            <i className="fa fa-refresh"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" title="Vistazo Rápido">
+                          <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido">
                             <i className="fa fa-search"></i>
-                          </a>
+                          </NavLink>
                         </li>
                       </ul>
                     </figure>
@@ -129,5 +127,4 @@ const Shop = ({ onAddToCart }) => {
     </div>
   );
 };
-
 export default Shop;
