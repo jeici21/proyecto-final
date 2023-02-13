@@ -215,10 +215,13 @@ function ShoppingCart({ items, onRemoveToCart }) {
           <div class="card-body">
             <h5 class="card-title">Aún no has iniciado sesión.</h5>
             <p class="card-text">Para comenzar a comprar, debe iniciar sesión o registrarse.</p>
-            <button type="button" class="btn btn-info">
+              <NavLink to="/login">
+            <button type="button" class="btn-login btn">
               {" "}
-              <NavLink to="/login">Registrarse</NavLink>
+                Registrarse
+                
             </button>
+                </NavLink>
           </div>
         </div>
       )}
