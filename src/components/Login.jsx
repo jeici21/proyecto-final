@@ -190,7 +190,7 @@ const Login = ({ loading, error, ...props }) => {
                       <div className="form-group m-0 ">
                         <button
                           type="submit"
-                          className="btn btn-primary btn-lg"
+                          className="btn-login btn btn-primary btn-lg"
                         >
                           Login
                           {loading && (
@@ -298,7 +298,7 @@ const Login = ({ loading, error, ...props }) => {
 
                   <button
                     type="submit"
-                    className="btn btn-primary"
+                    className="btn-login btn btn-primary"
                     data-bs-dismiss="modal"
                   >
                     Guardar
