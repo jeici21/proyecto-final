@@ -51,7 +51,7 @@ const NavbarMain = () => {
           aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
         </button>
-        <div className="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between"
+        <div className="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between"
           id="templatemo_main_nav">
           <div className="flex-fill">
             <ul className="nav navbar-nav d-flex justify-content-between mx-lg-auto">

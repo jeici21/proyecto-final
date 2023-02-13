@@ -21,14 +21,14 @@ import PageDetails from './components/PageDetails';
 function App() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('product')) || []);
   const [quan, setQuan] = useState(localStorage.getItem("quantities") || []);
-  const [loading, setLoading] = useState(false);
+/*   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-  }, []);
+  }, []); */
 
   const handleAddToCart = (product) => {
     if (!cart.find((p) => p.id === product.id)) {
@@ -44,7 +44,7 @@ function App() {
     } else {
       //window.alert(`${product.name} is already in the cart`);
     }
-    console.log(" cart: " + cart);
+    console.log("cart: " + cart);
   };
 
   function handleRemoveFromCart(productToRemove) {
@@ -66,11 +66,11 @@ function App() {
 
   return (
     <div className="app">
-      {loading ? (
+{/*       {loading ? (
         <div className="loader-container">
           <div className="spinner" />
         </div>
-      ) : (
+      ) : ( */}
         <Provider>
           <BrowserRouter>
             <NavbarInfo />
@@ -90,7 +90,7 @@ function App() {
             <Footer />
           </BrowserRouter>
         </Provider>
-      )};
+      {/* )}; */}
     </div>
   );
 }
