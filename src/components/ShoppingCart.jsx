@@ -18,7 +18,9 @@ function ShoppingCart({ items, onRemoveToCart }) {
 
   const [products, setProducts] = useState([]);
   const [quantities, setQuantities] = useState(
-    JSON.parse(localStorage.getItem('quantities')) || Array(items.length).fill(1));
+    JSON.parse(localStorage.getItem("quantities")) ||
+      Array(items.length).fill(1)
+  );
 
   useEffect(() => {
     if (localStorage.getItem("quantities") !== null) {
@@ -26,7 +28,7 @@ function ShoppingCart({ items, onRemoveToCart }) {
     } else {
       setQuantities(items.map(() => 1));
       localStorage.setItem("quantities", JSON.stringify(quantities));
-      console.log(items.map(() => 1))
+      console.log(items.map(() => 1));
     }
   }, []);
 
@@ -35,11 +37,14 @@ function ShoppingCart({ items, onRemoveToCart }) {
   }, [quantities]);
 
   useEffect(() => {
-    setProducts(items)
+    setProducts(items);
     console.log(products);
   }, [products]);
 
-  const total = products.reduce((acc, product, index) => acc + product.price * quantities[index], 0);
+  const total = products.reduce(
+    (acc, product, index) => acc + product.price * quantities[index],
+    0
+  );
   const cant = products.length;
   const handleChange = (index, event) => {
     const value = Number(event.target.value);
@@ -50,15 +55,37 @@ function ShoppingCart({ items, onRemoveToCart }) {
     }
   };
 
-
   const handleRemoveProduct = (product, index) => {
-    console.log("index del producto eliminado: "+index);
+    console.log("index del producto eliminado: " + index);
     const newQuantities = quantities.filter((_, i) => i !== index);
     setQuantities(newQuantities);
     localStorage.setItem("quantities", JSON.stringify(newQuantities));
 
     setProducts(products.filter((products) => products.id !== product.id));
     onRemoveToCart(product);
+  };
+
+  const sendMessage = () => {
+    const phoneNumber = encodeURIComponent(593993273984);
+    let message = encodeURIComponent("");
+    message += `-------------------------*FACTURA*------------------------\n`;
+    products.forEach((product, index) => {
+      message +=
+        `*Producto ${index + 1}*\n` +
+        `*${product.name}* \n` +
+        `Descripcion: ${product.description}\n` +
+        `Imagen: ${product.img}\n\n` +
+        `Precio Unitario: ${product.price}\n\n`;
+    });
+
+    message +=
+      `*SubTotal:* ${total.toFixed(2)}\n\n` +
+      `*Descuento:* ${(total * 0.1).toFixed(2)}\n\n` +
+      `*Total:* ${(total - total * 0.1).toFixed(2)}\n\n`;
+
+    window.open(
+      `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+    );
   };
 
   return (
@@ -72,8 +99,12 @@ function ShoppingCart({ items, onRemoveToCart }) {
                   <MDBRow>
                     <MDBCol lg="7">
                       <MDBTypography tag="h5">
-                        <NavLink to="/shop" activeclassname="active" exact="true" className="nav-link">
-
+                        <NavLink
+                          to="/shop"
+                          activeclassname="active"
+                          exact="true"
+                          className="nav-link"
+                        >
                           <MDBIcon fas icon="long-arrow-alt-left me-2" />
                           Continuar comprando
                         </NavLink>
@@ -82,7 +113,9 @@ function ShoppingCart({ items, onRemoveToCart }) {
                       <div className="d-flex justify-content-between align-items-center mb-4">
                         <div>
                           <p className="mb-1">Carrito de compras</p>
-                          <p className="mb-0">Tiene {cant} productos en su carrito</p>
+                          <p className="mb-0">
+                            Tiene {cant} productos en su carrito
+                          </p>
                         </div>
                         <div>
                           <p>
@@ -101,26 +134,45 @@ function ShoppingCart({ items, onRemoveToCart }) {
                             <div className="d-flex justify-content-between">
                               <div className="d-flex flex-row align-items-center">
                                 <div>
-                                  <MDBCardImage src={product.img} width="200" height="200" className="rounded-3"
-                                    alt={product.name} />
+                                  <MDBCardImage
+                                    src={product.img}
+                                    width="200"
+                                    height="200"
+                                    className="rounded-3"
+                                    alt={product.name}
+                                  />
                                 </div>
                                 <div className="ms-3">
-                                  <MDBTypography tag="h5">{product.name}</MDBTypography>
-                                  <p className="small mb-0">{product.description}</p>
+                                  <MDBTypography tag="h5">
+                                    {product.name}
+                                  </MDBTypography>
+                                  <p className="small mb-0">
+                                    {product.description}
+                                  </p>
                                 </div>
                               </div>
                               <div className="d-flex flex-row align-items-center">
                                 <div className="cart-quantity">
-                                  <MDBInput type="number" value={quantities[index] || 1} onChange={handleChange.bind(null, index)} />
-
+                                  <MDBInput
+                                    type="number"
+                                    value={quantities[index] || 1}
+                                    onChange={handleChange.bind(null, index)}
+                                  />
                                 </div>
                                 <div className="cart-price">
                                   <MDBTypography tag="h5" className="mb-0">
-                                    {(product.price * quantities[index]).toFixed(2)}
+                                    {(
+                                      product.price * quantities[index]
+                                    ).toFixed(2)}
                                   </MDBTypography>
                                 </div>
-                                <a href="#!" className="cart-delete"
-                                  onClick={() => handleRemoveProduct(product, index)}>
+                                <a
+                                  href="#!"
+                                  className="cart-delete"
+                                  onClick={() =>
+                                    handleRemoveProduct(product, index)
+                                  }
+                                >
                                   <MDBIcon fas icon="trash-alt" />
                                 </a>
                               </div>
@@ -137,8 +189,12 @@ function ShoppingCart({ items, onRemoveToCart }) {
                             <MDBTypography tag="h5" className="mb-0">
                               Detalles de la tarjeta
                             </MDBTypography>
-                            <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-                              fluid className="rounded-3" alt="Avatar" />
+                            <MDBCardImage
+                              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                              fluid
+                              className="rounded-3"
+                              alt="Avatar"
+                            />
                           </div>
 
                           <p className="small">Tipo de la tarjeta</p>
@@ -156,38 +212,69 @@ function ShoppingCart({ items, onRemoveToCart }) {
                           </a>
 
                           <form className="mt-4">
-                            <MDBInput className="mb-4" label="Cardholder's Name" type="text" size="lg"
-                              placeholder="Cardholder's Name" contrast />
+                            <MDBInput
+                              className="mb-4"
+                              label="Cardholder's Name"
+                              type="text"
+                              size="lg"
+                              placeholder="Cardholder's Name"
+                              contrast
+                            />
 
-                            <MDBInput className="mb-4" label="Card Number" type="text" size="lg"
-                              minLength="19" maxLength="19" placeholder="1234 5678 9012 3457" contrast />
+                            <MDBInput
+                              className="mb-4"
+                              label="Card Number"
+                              type="text"
+                              size="lg"
+                              minLength="19"
+                              maxLength="19"
+                              placeholder="1234 5678 9012 3457"
+                              contrast
+                            />
 
                             <MDBRow className="mb-4">
                               <MDBCol md="6">
-                                <MDBInput className="mb-4" label="Expiration" type="text" size="lg"
-                                  minLength="7" maxLength="7" placeholder="MM/YYYY" contrast />
+                                <MDBInput
+                                  className="mb-4"
+                                  label="Expiration"
+                                  type="text"
+                                  size="lg"
+                                  minLength="7"
+                                  maxLength="7"
+                                  placeholder="MM/YYYY"
+                                  contrast
+                                />
                               </MDBCol>
                               <MDBCol md="6">
-                                <MDBInput className="mb-4" label="Cvv" type="text" size="lg"
-                                  minLength="3" maxLength="3" placeholder="&#9679;&#9679;&#9679;"
-                                  contrast />
+                                <MDBInput
+                                  className="mb-4"
+                                  label="Cvv"
+                                  type="text"
+                                  size="lg"
+                                  minLength="3"
+                                  maxLength="3"
+                                  placeholder="&#9679;&#9679;&#9679;"
+                                  contrast
+                                />
                               </MDBCol>
                             </MDBRow>
                           </form>
 
                           <div className="d-flex justify-content-between">
                             <p className="mb-2">Subtotal</p>
-                            <p className="mb-2">${(total).toFixed(2)}</p>
+                            <p className="mb-2">${total.toFixed(2)}</p>
                           </div>
 
                           <div className="d-flex justify-content-between">
                             <p className="mb-2">Descuento %10</p>
-                            <p className="mb-2">  {(total * 0.10).toFixed(2)}</p>
+                            <p className="mb-2"> {(total * 0.1).toFixed(2)}</p>
                           </div>
 
                           <div className="d-flex justify-content-between">
                             <p className="mb-2">Total(Incl. descuento)</p>
-                            <p className="mb-2">{(total - (total * 0.10)).toFixed(2)}</p>
+                            <p className="mb-2">
+                              {(total - total * 0.1).toFixed(2)}
+                            </p>
                           </div>
                           <div className="checkout-button-container">
                             <button className="checkout-button">
@@ -198,6 +285,9 @@ function ShoppingCart({ items, onRemoveToCart }) {
                                     <i className="fas fa-long-arrow-alt-right ms-2"></i>
                                   </span>
                                 </NavLink>
+                                <button type="button" onClick={sendMessage}>
+                                  Pagar con Whatsapp
+                                </button>
                               </div>
                             </button>
                           </div>
@@ -214,7 +304,9 @@ function ShoppingCart({ items, onRemoveToCart }) {
         <div class="card text-center">
           <div class="card-body">
             <h5 class="card-title">Aún no has iniciado sesión.</h5>
-            <p class="card-text">Para comenzar a comprar, debe iniciar sesión o registrarse.</p>
+            <p class="card-text">
+              Para comenzar a comprar, debe iniciar sesión o registrarse.
+            </p>
             <button type="button" class="btn btn-info">
               {" "}
               <NavLink to="/login">Registrarse</NavLink>
