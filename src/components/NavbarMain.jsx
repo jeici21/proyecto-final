@@ -42,57 +42,60 @@ const NavbarMain = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light shadow">
-      <div className="container d-flex justify-content-between align-items-center">
-        <NavLink to="/" exact="true" className="navbar-brand text-success h1 align-self-center">
-          <img src={logo} alt="KMarket" className="logo" />
-        </NavLink>
-        <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-          data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon" />
-        </button>
-        <div className="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between"
-          id="templatemo_main_nav">
-          <div className="flex-fill">
-            <ul className="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-              <li className="nav-item">
-                <NavLink to="/" activeclassname="active" exact="true" className="nav-link">Inicio</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/shop" activeclassname="active" exact="true" className="nav-link">Tienda</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/about" activeclassname="active" exact="true" className="nav-link">Acerca de</NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/contact" activeclassname="active" exact="true" className="nav-link">Contacto</NavLink>
-              </li>
-              <li className="nav-item">
-                {rolUser === '"ADMIN"' ? (
-                  <NavLink to="/crud" activeclassname="active" exact="true" className="nav-link">Gestión de productos</NavLink>
-                ) : (
-                  <></>
-                )}
-              </li>
-            </ul>
+  <div className="container d-flex justify-content-between align-items-center">
+    <NavLink to="/" exact="true" className="navbar-brand text-success h1 align-self-center">
+      <img src={logo} alt="KMarket" className="logo" />
+    </NavLink>
+    <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+      data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon" />
+    </button>
+    <div className="align-self-center collapse navbar-collapse flex-fill justify-content-between"
+      id="templatemo_main_nav">
+      <div className="flex-fill">
+        <ul className="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+          <li className="nav-item">
+            <NavLink to="/" activeclassname="active" exact="true" className="nav-link">Inicio</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/shop" activeclassname="active" exact="true" className="nav-link">Tienda</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/about" activeclassname="active" exact="true" className="nav-link">Acerca de</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/contact" activeclassname="active" exact="true" className="nav-link">Contacto</NavLink>
+          </li>
+          <li className="nav-item">
+            {rolUser === '"ADMIN"' ? (
+              <NavLink to="/crud" activeclassname="active" exact="true" className="nav-link">Gestión de productos</NavLink>
+            ) : (
+              <></>
+            )}
+          </li>
+        </ul>
+      </div>
+      <div className="navbar align-self-center d-flex flex-fill">
+        <div className="d-lg-none d-flex  mt-3 mb-4 col-7">
+          <div className="input-group ">
+            <input type="text" className=" form-control" id="inputMobileSearch" placeholder="Buscar..." />
+            <div className="input-group-text"><i className="fa fa-fw fa-search" /></div>
           </div>
-          <div className="navbar align-self-center d-flex">
-            <div className="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
-              <div className="input-group">
-                <input type="text" className="form-control" id="inputMobileSearch" placeholder="Buscar..." />
-                <div className="input-group-text"><i className="fa fa-fw fa-search" /></div>
-              </div>
-            </div>
-            <a className="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
-              <i className="fa fa-fw fa-search text-dark mr-2" />
-            </a>
-            <NavLink className="nav-icon position-relative text-decoration-none" to="/cart">
-              <i className="fa fa-fw fa-cart-arrow-down text-dark mr-1" />
+        </div>
+        <div>
+        <a className="nav-icon d-inline    position-relative text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+          <i className="fa fa-fw fa-search text-dark mr-2" />
+        </a>
+          </div>
+        <div className="d-flex">
+          <NavLink className="nav-icon position-relative text-decoration-none" to="/cart">
+            <i className="fa fa-fw fa-cart-arrow-down text-dark mr-1" />
               <span className="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">
                 {item}
               </span>
             </NavLink>
-
+            </div>       
             {currentUser ? (
               <div className="flex-shrink-0 dropdown">
                 <a href="#" className="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown"
@@ -118,9 +121,10 @@ const NavbarMain = () => {
                 )}
               </div>
             ) : (
-              <div class=""><NavLink to="/login" className="btn-success btn-login btn btn-outline-primary me-2">Iniciar Sesión</NavLink></div>
-            )}
+              <div className="mt-3"><NavLink to="/login" className="btn-success btn-login btn btn-outline-primary me-2">Iniciar Sesión</NavLink></div>
+              )}
           </div>
+             
         </div>
       </div>
     </nav>
