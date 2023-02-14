@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Alert } from "react-bootstrap";
 import logo from "../images/k-Market.png";
+import { Image } from 'react-bootstrap';
 
 
 const PaymentSuccess = () => {
@@ -8,6 +9,7 @@ const PaymentSuccess = () => {
     <Container>
       <Row className="justify-content-center">
         <Col md={6}>
+        <Image src={logo} fluid className="responsive-img" />
           <Alert variant="success">
             <Alert.Heading>Pago exitoso</Alert.Heading>
             <p>

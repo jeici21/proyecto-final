@@ -71,8 +71,49 @@ const Shop = ({ onAddToCart }) => {
       console.log(e);
     }
   };
+
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dataPerPage, setDataPerPage] = useState(5);
+  const [searchTerm, setSearchTerm] = useState("");
+  const indexOfLastData = currentPage * dataPerPage;
+  const indexOfFirstData = indexOfLastData - dataPerPage;
+  const handleChangepage = (event) => {
+    setDataPerPage(event.target.value);
+    setCurrentPage(1);
+  };
+
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1);
+  };
+
+  const filteredData = products.filter((item) => {
+    return item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.price.toString().includes(searchTerm.toLowerCase());
+  });
+
+  const currentData = filteredData.slice(indexOfFirstData, indexOfLastData);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(filteredData.length / dataPerPage); i++) {
+    pageNumbers.push(i);
+  }
+  const renderPageNumbers = pageNumbers.map((number) => {
+    return (
+      <button
+        key={number}
+        onClick={() => setCurrentPage(number)}
+        className={currentPage === number ? "active" : ""}
+      >
+        {number}
+      </button>
+    );
+  });
   return (
     <div className="main_container">
+
+
       {loading ? (
         <div className="loader-container">
           <div className="spinner" />
@@ -85,8 +126,23 @@ const Shop = ({ onAddToCart }) => {
               <h2>Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
               <p>Aquí podrá revisar nuestro catálogo de productos.</p>
             </div>
+            <div className="data-table-header pb-4">
+            <select value={dataPerPage} onChange={handleChangepage}>
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+              </select>
+              <input
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={handleSearch}
+                className=""
+              />
+             
+            </div>
             <div className="row">
-              {products.map((result) => {
+              {currentData.map((result) => {
                 return (
                   <div className="col-sm-6 col-lg-3" key={result.id}>
                     <div className="single-publication">
@@ -142,8 +198,10 @@ const Shop = ({ onAddToCart }) => {
               })}
             </div>
           </div>
+          <div className='pagination'>{renderPageNumbers}</div>
         </section>
       )};
+     
     </div>
   );
 };
