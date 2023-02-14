@@ -108,11 +108,11 @@ textarea:hover {
   height: 60px;
   bottom: 40px;
   right: 40px;
-  background-color: #25d366;
+  background-color: rgb(47, 182, 62);
 }
 
 .float:hover {
-  background-color: #1fb054;
+  background-color: rgb(70, 166, 81);
 }
 
 .scroll-to-top-button {
@@ -185,6 +185,7 @@ textarea:hover {
   background-color: #ffa500 !important;
   border-color: #f6b132 !important;
 }
+
 
 .btn-login{
   background-color: #ffa500!important;
@@ -653,16 +654,20 @@ figure img {
   box-sizing: inherit;
 }
 
-.about-container h2,
 .about-container .about-section {
   text-align: center;
-  margin: 20px 0;
+}
+
+.about-container h2{
+  margin: 20px 0 50px 0;
 }
 
 .about_main_container{
   display: flex;
   justify-content: center;
   margin: 50px 0;
+  justify-content: center;
+  gap: 1em;
 }
 
 .about-container .column {
@@ -989,6 +994,10 @@ figure img {
 .product-wap .product-color-dot {
   width: 6px;
   height: 6px;
+}
+
+.btn_search{
+  background-color: #f6b132!important;
 }
 
 @media (min-width: 576px) {
