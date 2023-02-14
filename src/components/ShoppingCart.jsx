@@ -52,7 +52,6 @@ function ShoppingCart({ items, onRemoveToCart }) {
 
 
   const handleRemoveProduct = (product, index) => {
-    console.log("index del producto eliminado: "+index);
     const newQuantities = quantities.filter((_, i) => i !== index);
     setQuantities(newQuantities);
     localStorage.setItem("quantities", JSON.stringify(newQuantities));

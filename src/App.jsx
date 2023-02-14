@@ -17,6 +17,7 @@ import Shop from './components/Shop';
 import ShoppingCart from './components/ShoppingCart';
 import Context from '../src/redux/controlUsuario/Context';
 import PageDetails from './components/PageDetails';
+import PaymentSuccess from './components/PaymentSuccess';
 
 function App() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem('product')) || []);
@@ -86,6 +87,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/crud" element={<Crud />} />
               <Route path="/details/:id" element={<PageDetails onAddToCart={handleAddToCart} />} />
+              <Route path="/payment" element={<PaymentSuccess />} />
             </Routes>
             <Footer />
           </BrowserRouter>
