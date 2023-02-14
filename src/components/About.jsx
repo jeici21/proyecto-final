@@ -12,14 +12,14 @@ const About = () => {
             </div>
 
             <h2>Nuestro equipo</h2>
-            <div className="row">
+            <div className="about_main_container row">
                 <div className="column">
-                    <div className="card">
+                    <div className="floating card">
                         <img src={team1} alt="Jorge" />
                         <div className="container">
                             <h2>Jorge Castro</h2>
                             <p className="title">Programador</p>
-                            <p>Alguien que disfruta mucho programar y jugar videojuegos.</p>
+                            <p>Disfruto mucho programar y jugar videojuegos.</p>
                             <p>david92_jc@yahoo.es</p>
                             <p className="about-github-container">
                                 <a className="btn btn-success" href='https://github.com/jeici21'
@@ -30,7 +30,7 @@ const About = () => {
                 </div>
 
                 <div className="column">
-                    <div className="card">
+                    <div className="floating card">
                         <img src={team2} alt="Luis" />
                         <div className="container">
                             <h2>Luis Anrrango</h2>
@@ -46,7 +46,7 @@ const About = () => {
                 </div>
 
                 <div className="column">
-                    <div className="card">
+                    <div className="floating card">
                         <img src={team3} alt="Ariel" />
                         <div className="container">
                             <h2>Ariel Piguave</h2>
