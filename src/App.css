@@ -14,7 +14,19 @@ textarea {
   font-family: 'Fira Sans', sans-serif;
   font-size: 18px !important;
   font-weight: 300 !important;
+  color: rgb(96, 96, 96) !important;
 }
+
+a:hover,
+.nav-link:hover,
+label:hover,
+input:hover,
+textarea:hover {
+
+  color: rgb(255, 157, 0) !important;
+}
+
+
 
 .h1 {
   font-family: 'Fira Sans', sans-serif;
@@ -50,7 +62,7 @@ textarea {
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: #3d5af1 transparent #3d5af1 transparent;
+  border-color: orange transparent orange transparent;
   border-radius: 50%;
   animation: spin-anim 1.2s linear infinite;
 }
@@ -101,12 +113,12 @@ textarea {
   height: 40px;
   bottom: 120px;
   right: 50px;
-  background-color: #2576d3;
+  background-color: orange;
   border: none;
 }
 
 .scroll-to-top-button:hover {
-  background-color: #1e5fab;
+  background-color: rgb(255, 188, 64);
 }
 
 .my-float {
@@ -141,6 +153,11 @@ textarea {
   color: #cfd6e1 !important;
 }
 
+.btn{
+  padding: 10px !important;
+  border: none !important;;
+}
+
 .bg-dark {
   background-color: #212934 !important;
 }
@@ -159,7 +176,22 @@ textarea {
 
 .btn-success {
   background-color: #ffa500 !important;
-  border-color: #db8f00 !important;
+  border-color: #f6b132 !important;
+}
+
+.btn-login{
+  background-color: #ffa500!important;
+  color: white !important;
+}
+
+.btn-login:hover{
+  background-color: #ffbf47!important;
+  color: white !important;
+}
+
+.btn-lg{
+  margin: 15px 0;
+  padding: 10px 25px !important;
 }
 
 .btn-succes {
@@ -168,8 +200,6 @@ textarea {
 
 .btn-success:hover {
   cursor: pointer;
-  /* background-color: rgb(102, 255, 0) !important;
-  border-color: rgb(83, 207, 0) !important; */
 }
 
 .cont {
@@ -350,7 +380,7 @@ table {
 }
 
 .card.product-wap a {
-  color: #000;
+    color: rgb(96, 96, 96) !important;
 }
 
 #carousel-related-product .slick-slide:focus {
@@ -636,8 +666,9 @@ figure img {
 
 .about-container .about-section {
   padding: 50px;
-  background-color: #474e5d;
+  background-color: rgb(216, 216, 216);
   color: white;
+  margin-bottom: 20px;
 }
 
 .about-container .container {
@@ -1005,3 +1036,4 @@ figure img {
 
 /* Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {}
+

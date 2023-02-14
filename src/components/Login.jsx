@@ -134,6 +134,9 @@ const Login = ({ loading, error, ...props }) => {
                       className="my-login-validation"
                       onSubmit={handleSubmit}
                       noValidate={false}
+                      style={{display:"flex",alignItems:"center", justifyContent:"center", gap:"1em", flexDirection:"column"}}
+
+
                     >
                       <div className="form-group">
                         <label htmlFor="email">User Name</label>
@@ -187,10 +190,11 @@ const Login = ({ loading, error, ...props }) => {
                         </div>
                       </div>
 
-                      <div className="form-group m-0 ">
+                      <div className="form-group m-0 " style={{width: "100%", display:"flex",alignItems:"center", justifyContent:"center"}}>
                         <button
                           type="submit"
-                          className="btn btn-primary btn-lg"
+                          className="btn-login btn btn-primary btn-lg"
+                          style={{width: "50%"}}
                         >
                           Login
                           {loading && (
@@ -215,7 +219,7 @@ const Login = ({ loading, error, ...props }) => {
                       <div>Don't have an account?</div>
                       <a
                         href="#"
-                        className="text-decoration-none text-info fw-semibold"
+                        className="text-decoration-none fw-semibold"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
                         data-bs-whatever="@mdo"
@@ -298,7 +302,7 @@ const Login = ({ loading, error, ...props }) => {
 
                   <button
                     type="submit"
-                    className="btn btn-primary"
+                    className="btn-login btn btn-primary"
                     data-bs-dismiss="modal"
                   >
                     Guardar
