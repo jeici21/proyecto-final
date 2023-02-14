@@ -144,7 +144,7 @@ const Shop = ({ onAddToCart }) => {
             <div className="row">
               {currentData.map((result) => {
                 return (
-                  <div className="col-sm-6 col-lg-3" key={result.id}>
+                  <div className="floating col-sm-6 col-lg-3" key={result.id}>
                     <div className="single-publication">
                       <figure>
                         <a href="#" className="product-image">

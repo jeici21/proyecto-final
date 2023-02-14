@@ -1,4 +1,6 @@
 import './App.css';
+import "./styles/Animations.css"
+import "./styles/Styles.css"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import NavbarInfo from './components/NavbarInfo';

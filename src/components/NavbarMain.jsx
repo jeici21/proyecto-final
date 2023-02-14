@@ -118,7 +118,7 @@ const NavbarMain = () => {
                 )}
               </div>
             ) : (
-              <div class=""><NavLink to="/login" className="btn btn-outline-primary me-2">Iniciar Sesión</NavLink></div>
+              <div class=""><NavLink to="/login" className="btn-success btn-login btn btn-outline-primary me-2">Iniciar Sesión</NavLink></div>
             )}
           </div>
         </div>

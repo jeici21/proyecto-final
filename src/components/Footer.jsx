@@ -102,13 +102,13 @@ const Footer = () => {
                     </div> */}
                 </div>
             </div>
-            <div className="w-100 bg-black py-3">
+            <div className="copy-footer w-100 bg-black py-3">
                 <div className="container">
                     <div className="row pt-2">
                         <div className="col-12">
                             <p className="text-center text-light">
                                 Copyright &copy; {year} KMarket Corporation
-                                | Designed by <a rel="sponsored" href="#" target="_blank">KMarket</a>
+                                | Designed by Kruger
                             </p>
                         </div>
                     </div>

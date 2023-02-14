@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch SpringSecurityDemoAppApplication",
+            "request": "launch",
+            "mainClass": "com.thecodeveal.app.SpringSecurityDemoAppApplication",
+            "projectName": "spring-security-demo-app"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-MsvcProductoApplication<msvc-producto>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

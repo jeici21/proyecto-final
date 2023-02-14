@@ -13,7 +13,7 @@ const FeaturedProducts = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-12 col-md-4 mb-4">
+                    <div className="floating col-12 col-md-4 mb-4">
                         <div className="card h-100">
                             <a href="#">
                                 <img src="https://therichpost.com/wp-content/uploads/2021/05/feature_prod_01.jpg"
@@ -38,7 +38,7 @@ const FeaturedProducts = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 col-md-4 mb-4">
+                    <div className="floating col-12 col-md-4 mb-4">
                         <div className="card h-100">
                             <a href="#">
                                 <img src="https://therichpost.com/wp-content/uploads/2021/05/feature_prod_02.jpg"
@@ -63,7 +63,7 @@ const FeaturedProducts = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 col-md-4 mb-4">
+                    <div className="floating col-12 col-md-4 mb-4">
                         <div className="card h-100">
                             <a href="#">
                                 <img src="https://therichpost.com/wp-content/uploads/2021/05/feature_prod_03.jpg"
