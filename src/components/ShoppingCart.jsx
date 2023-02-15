@@ -67,7 +67,8 @@ function ShoppingCart({ items, onRemoveToCart }) {
   const sendMessage = () => {
     const phoneNumber = encodeURIComponent(593993273984);
     let message = encodeURIComponent("");
-    message += `-------------------------*FACTURA*------------------------\n`;
+    message += `-------------------------*FACTURA*------------------------\n`+
+             `FACSIW001\n`;
     products.forEach((product, index) => {
       message +=
         `*Producto ${index + 1}*\n` +
