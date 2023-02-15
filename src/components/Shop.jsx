@@ -9,7 +9,6 @@ import { NavLink } from "react-router-dom";
 
 const Shop = ({ onAddToCart }) => {
 
-
   const CategoryUrl = "http://localhost:8080/category";
   const [products, setProducts] = useState([]);
   const [dataCategory, setDataCategory] = useState([]);

@@ -779,16 +779,11 @@ figure img {
   font-weight: bold;
 }
 
-.contact-container input[type=text],
-.contact-container input[type=email],
-.contact-container textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  margin-top: 10px;
-  margin-bottom: 16px;
-  resize: vertical;
-  border-radius: 5px;
+.contact_main_container input[type=text],
+.contact_main_container input[type=email],
+.contact_main_container textarea,
+.contact_main_container label:not([for="name"]):not([for="email"]) {
+  margin-top: 30px;
 }
 
 .contact-container textarea {
