@@ -112,9 +112,9 @@ const NavbarMain = () => {
                     <li><a className="dropdown-item" href="#" onClick={() => logOut()}>Cerrar Sessión</a></li>
                   </ul>
                 ) : (
-                  <ul className="dropdown-menu text-small shadow">
-                    <li><hr className="dropdown-divider" /></li>
-                    <li>
+                  <ul className="dropdown-menu text-small shadow align-self-center d-flex ">
+                    {/* <li><hr className="dropdown-divider" /></li> */}
+                    <li className="justify-content-between align-items-center align-self-center">
                       <NavLink to="/login" className="nav-icon position-relative text-decoration-none">Iniciar Sessión</NavLink>
                     </li>
                   </ul>
