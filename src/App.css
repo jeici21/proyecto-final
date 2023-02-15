@@ -1,6 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
 
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body,
 ul,
 li,
@@ -101,11 +108,11 @@ textarea:hover {
   height: 60px;
   bottom: 40px;
   right: 40px;
-  background-color: #25d366;
+  background-color: rgb(47, 182, 62);
 }
 
 .float:hover {
-  background-color: #1fb054;
+  background-color: rgb(70, 166, 81);
 }
 
 .scroll-to-top-button {
@@ -178,6 +185,7 @@ textarea:hover {
   background-color: #ffa500 !important;
   border-color: #f6b132 !important;
 }
+
 
 .btn-login{
   background-color: #ffa500!important;
@@ -634,8 +642,10 @@ figure img {
 
 /*About us map*/
 .about-container {
-  margin: 0;
-  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .about-container *,
@@ -644,21 +654,30 @@ figure img {
   box-sizing: inherit;
 }
 
-.about-container h2,
 .about-container .about-section {
   text-align: center;
 }
 
+.about-container h2{
+  margin: 20px 0 50px 0;
+}
+
+.about_main_container{
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+  justify-content: center;
+  gap: 1em;
+}
+
 .about-container .column {
   float: left;
-  width: 33.3%;
-  margin-bottom: 16px;
-  padding: 0 8px;
+  width: 30%;
 }
+
 
 .about-container .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin: 8px;
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -672,7 +691,7 @@ figure img {
 }
 
 .about-container .container {
-  padding: 0 16px;
+  padding: 0 30px;
 }
 
 .about-container .container::after,
@@ -692,6 +711,12 @@ figure img {
 }
 
 .about-container img {
+  width: 75%;
+  height: 75%;
+  align-self: center;
+  margin-bottom: 15px;
+}
+.about-container .about_img {
   width: 75%;
   height: 75%;
   align-self: center;
@@ -969,6 +994,10 @@ figure img {
 .product-wap .product-color-dot {
   width: 6px;
   height: 6px;
+}
+
+.btn_search{
+  background-color: #f6b132!important;
 }
 
 @media (min-width: 576px) {

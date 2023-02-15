@@ -55,7 +55,7 @@ const Contact = () => {
     <div class="row justify-content-center">
       <div class="col-md-12">
         <div class="wrapper">
-          <div class="row no-gutters mb-5">
+          <div class="contact_main_container row no-gutters mb-5">
             <div class="col-md-7">
               <div class="contact-wrap w-100 p-md-5 p-4">
                 <h3 class="mb-4">Contact Us</h3>
@@ -150,12 +150,11 @@ const Contact = () => {
                 </form>
               </div>
             </div>
-            <div class="col-md-5 d-flex align-items-stretch">
-              <div id="map">
+            <div class="container_map col-md-5 d-flex align-items-stretch">
+              <div className="container_map" id="map">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.797523579702!2d-78.47663845039307!3d-0.18499463546593084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59080303a2eb1%3A0x523b5f69ac3065dd!2sKruger%20Corp!5e0!3m2!1ses-419!2sec!4v1675739142115!5m2!1ses-419!2sec"
-                  width="200%"
-                  height="100%"
+                 className="contact_map"
                   allowfullscreen
                   loading="lazy"
                   title="Ubicación"
