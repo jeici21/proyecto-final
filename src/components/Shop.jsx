@@ -8,11 +8,16 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const Shop = ({ onAddToCart }) => {
+
+
+  const CategoryUrl = "http://localhost:8080/category";
   const [products, setProducts] = useState([]);
+  const [dataCategory, setDataCategory] = useState([]);
   const { state, setState } = useContext(Context);
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [category, setCategory] = useState('all');
 
   useEffect(() => {
     setLoading(true);
@@ -55,22 +60,29 @@ const Shop = ({ onAddToCart }) => {
   };
   useEffect(() => {
     makeAPICall();
+    peticionGetCategory();
   }, []);
 
   const makeAPICall = async () => {
     try {
-      //https://api.escuelajs.co/api/v1/products
-      //http://localhost:8080/product
       axios.get(
         "http://localhost:8080/product" // , { mode: 'no-cors' // 'cors' by default}
       ).then((res) => {
         setProducts(res.data);
-        console.log(res.data);
       });
     } catch (e) {
       console.log(e);
     }
   };
+
+  const peticionGetCategory = async () => {
+    await axios.get(CategoryUrl)
+      .then(response => {
+        setDataCategory(response.data);
+      }).catch(error => {
+        console.log(error);
+      })
+  }
 
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,8 +101,30 @@ const Shop = ({ onAddToCart }) => {
     setCurrentPage(1);
   };
 
+  // const filteredData = products.filter((item) => {
+  //   
+  //   return item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.price.toString().includes(searchTerm.toLowerCase());
+  // });
+
   const filteredData = products.filter((item) => {
-    return item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.price.toString().includes(searchTerm.toLowerCase());
+    if (category !== 'all') {
+      // Si se ha seleccionado una categoría específica, filtrar solo los productos de esa categoría
+      if (searchTerm.trim() === '') {
+        // Si el término de búsqueda está vacío, aplicar solo el filtro por categoría
+        return item.productCategory.id === parseInt(category);
+      } else {
+        // Si hay un término de búsqueda, aplicar tanto el filtro por categoría como el filtro por término de búsqueda
+        return (
+          item.productCategory.id === parseInt(category) &&
+          (item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.price.toString().includes(searchTerm.toLowerCase()))
+        );
+      }
+    } else {
+      return (
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.price.toString().includes(searchTerm.toLowerCase())
+      );
+    }
   });
 
   const currentData = filteredData.slice(indexOfFirstData, indexOfLastData);
@@ -127,7 +161,15 @@ const Shop = ({ onAddToCart }) => {
               <p>Aquí podrá revisar nuestro catálogo de productos.</p>
             </div>
             <div className="data-table-header pb-4">
-            <select value={dataPerPage} onChange={handleChangepage}>
+              <select name="category" id="selCategory" value={category} onChange={(e) => setCategory(e.target.value)} >
+                <option value="all" >Seleccione una categoría: </option>
+                {
+                  dataCategory.map((category) => (
+                    <option key={category.id} value={category.id}> {category.name}</option>
+                  ))
+                }
+              </select>
+              <select value={dataPerPage} onChange={handleChangepage}>
                 <option value={5}>5</option>
                 <option value={10}>10</option>
                 <option value={20}>20</option>
@@ -139,7 +181,7 @@ const Shop = ({ onAddToCart }) => {
                 onChange={handleSearch}
                 className=""
               />
-             
+
             </div>
             <div className="row">
               {currentData.map((result) => {
@@ -201,7 +243,7 @@ const Shop = ({ onAddToCart }) => {
           <div className='pagination'>{renderPageNumbers}</div>
         </section>
       )};
-     
+
     </div>
   );
 };

@@ -76,7 +76,7 @@ const NavbarMain = () => {
           </li>
         </ul>
       </div>
-      <div className="navbar align-self-center d-flex flex-fill">
+      <div className="navbar align-self-center d-flex ">
         <div className="d-lg-none d-flex  mt-3 mb-4 col-7">
           <div className="input-group ">
             <input type="text" className=" form-control" id="inputMobileSearch" placeholder="Buscar..." />
