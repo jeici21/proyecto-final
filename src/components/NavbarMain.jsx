@@ -121,7 +121,7 @@ const NavbarMain = () => {
                 )}
               </div>
             ) : (
-              <div className="mt-3"><NavLink to="/login" className="btn-success btn-login btn btn-outline-primary me-2">Iniciar Sesión</NavLink></div>
+              <div className=""><NavLink to="/login" className="btn-success btn-login btn btn-outline-primary me-2">Iniciar Sesión</NavLink></div>
               )}
           </div>
              

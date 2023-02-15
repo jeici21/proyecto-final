@@ -153,12 +153,12 @@ const Shop = ({ onAddToCart }) => {
           <div className="spinner" />
         </div>
       ) : (
-        <section className="our-publication pt-50 pb-50">
+        <section className="our-publication pt-50 pb-0">
           <div className="container">
             <div className="section-header">
               {/* <i className="fa fa-cart-arrow-down" /> */}
-              <h2>Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
-              <p>Aquí podrá revisar nuestro catálogo de productos.</p>
+              <h2 className="m-0">Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
+              <p className="mt-0">Aquí podrá revisar nuestro catálogo de productos.</p>
             </div>
             <div className="data-table-header pb-4">
               <select name="category" id="selCategory" value={category} onChange={(e) => setCategory(e.target.value)} >
@@ -186,8 +186,8 @@ const Shop = ({ onAddToCart }) => {
             <div className="row">
               {currentData.map((result) => {
                 return (
-                  <div className="floating col-sm-6 col-lg-3" key={result.id}>
-                    <div className="single-publication">
+                    <div className="floating col-sm-6 col-lg-3 " key={result.id}>
+                    <div className="single-publication border rounded">
                       <figure>
                         <a href="#" className="product-image">
                           <img src={result.img} alt="Publication" />
@@ -205,28 +205,12 @@ const Shop = ({ onAddToCart }) => {
                           </li>
                         </ul>
                       </figure>
-                      <div className="publication-content">
+                      <div className="publication-content m-0 p-0">
                         <span className="category">Productos</span>
                         <h3>
-                          <a href="#">{result.name}</a>
+                          <a className="text-decoration-none" href="#">{result.name}</a>
                         </h3>
-                        <ul>
-                          <li>
-                            <i className="icofont-star" />
-                          </li>
-                          <li>
-                            <i className="icofont-star" />
-                          </li>
-                          <li>
-                            <i className="icofont-star" />
-                          </li>
-                          <li>
-                            <i className="icofont-star" />
-                          </li>
-                          <li>
-                            <i className="icofont-star" />
-                          </li>
-                        </ul>
+                     
                         <h4 className="price">${result.price}</h4>
                       </div>
                       <div className="add-to-cart">
