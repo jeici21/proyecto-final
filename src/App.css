@@ -108,11 +108,11 @@ textarea:hover {
   height: 60px;
   bottom: 40px;
   right: 40px;
-  background-color: rgb(47, 182, 62);
+  background-color: #0ec144;
 }
 
 .float:hover {
-  background-color: rgb(70, 166, 81);
+  background-color: #0c9635;
 }
 
 .scroll-to-top-button {
