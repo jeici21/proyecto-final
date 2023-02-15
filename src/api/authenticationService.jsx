@@ -6,9 +6,9 @@ const getToken = () => {
 
 export const userLogin = (authRequest) => {
     return axios({
-        'method': 'POST',
-        'url': `${process.env.hostUrl || 'http://localhost:8090'}/api/v1/auth/login`,
-        'data': authRequest
+        method: 'POST',
+        url: `${process.env.hostUrl || 'http://localhost:8090'}/api/v1/auth/login`,
+        data: authRequest
     })
 }
 

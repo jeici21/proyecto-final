@@ -2,7 +2,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
 
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -160,9 +160,10 @@ textarea:hover {
   color: #cfd6e1 !important;
 }
 
-.btn{
+.btn {
   padding: 10px !important;
-  border: none !important;;
+  border: none !important;
+  ;
 }
 
 .bg-dark {
@@ -187,17 +188,17 @@ textarea:hover {
 }
 
 
-.btn-login{
-  background-color: #ffa500!important;
+.btn-login {
+  background-color: #ffa500 !important;
   color: white !important;
 }
 
-.btn-login:hover{
-  background-color: #ffbf47!important;
+.btn-login:hover {
+  background-color: #ffbf47 !important;
   color: white !important;
 }
 
-.btn-lg{
+.btn-lg {
   margin: 15px 0;
   padding: 10px 25px !important;
 }
@@ -388,7 +389,7 @@ table {
 }
 
 .card.product-wap a {
-    color: rgb(96, 96, 96) !important;
+  color: rgb(96, 96, 96) !important;
 }
 
 #carousel-related-product .slick-slide:focus {
@@ -658,11 +659,11 @@ figure img {
   text-align: center;
 }
 
-.about-container h2{
+.about-container h2 {
   margin: 20px 0 50px 0;
 }
 
-.about_main_container{
+.about_main_container {
   display: flex;
   justify-content: center;
   margin: 50px 0;
@@ -716,6 +717,7 @@ figure img {
   align-self: center;
   margin-bottom: 15px;
 }
+
 .about-container .about_img {
   width: 75%;
   height: 75%;
@@ -783,7 +785,7 @@ figure img {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
-  margin-top: 6px;
+  margin-top: 10px;
   margin-bottom: 16px;
   resize: vertical;
   border-radius: 5px;
@@ -794,7 +796,11 @@ figure img {
   height: 10em;
 }
 
-.contact-container button {
+#contact-submit {
+  margin-top: 30px;
+}
+
+/* .contact-container button {
   background-color: orange;
   color: white;
   padding: 12px 20px;
@@ -805,7 +811,7 @@ figure img {
 
 .contact-container button:hover {
   background-color: #ffaa00;
-}
+} */
 
 .contact-container form {
   border-radius: 5px;
@@ -996,8 +1002,8 @@ figure img {
   height: 6px;
 }
 
-.btn_search{
-  background-color: #f6b132!important;
+.btn_search {
+  background-color: #f6b132 !important;
 }
 
 @media (min-width: 576px) {
@@ -1065,4 +1071,3 @@ figure img {
 
 /* Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {}
-
