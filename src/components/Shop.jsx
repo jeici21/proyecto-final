@@ -158,7 +158,7 @@ const Shop = ({ onAddToCart }) => {
             <div className="section-header">
               {/* <i className="fa fa-cart-arrow-down" /> */}
               <h2>Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
-              <p>Aquí podrá revisar nuestro catálogo de productos.</p>
+              <p>Transforma tu vida con nuestros productos únicos y de alta calidad.</p>
             </div>
             <div className="data-table-header pb-4">
               <select name="category" id="selCategory" value={category} onChange={(e) => setCategory(e.target.value)} >
