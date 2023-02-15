@@ -479,7 +479,7 @@ table {
 
 .single-publication {
   border: 1px solid #f2eee2;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
   position: relative;
   overflow: hidden;
 }
@@ -530,7 +530,8 @@ table {
 
 .single-publication .publication-content {
   text-align: center;
-  padding: 20px;
+  padding: 0px;
+  background: #ffd48a3a;
 }
 
 .single-publication .publication-content .category {
@@ -743,6 +744,9 @@ figure img {
   margin: 10px auto;
   height: 100%;
   /* background-color: aquamarine; */
+}
+.contact-wrap{
+  background: #ffe9882c !important;
 }
 
 .contact-row {

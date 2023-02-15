@@ -46,8 +46,8 @@ const Contact = () => {
       <div class="col-md-12">
         <div class="wrapper">
           <div class="contact_main_container row no-gutters mb-5">
-            <div class="col-md-7">
-              <div class="contact-wrap w-100 p-md-5 p-4">
+            <div class="col-md-6 ">
+              <div class="contact-wrap w-100 p-md-3 p-4 border rounded">
                 <h3 class="mb-4">Contact Us</h3>
                 <div id="form-message-warning" class="mb-4"></div>
                 <div id="form-message-success" class="mb-4">
