@@ -42,41 +42,42 @@ const Contact = () => {
   };
 
   return (
-    <div class="row justify-content-center">
-      <div class="col-md-12">
-        <div class="wrapper">
-          <div class="contact_main_container row no-gutters mb-5">
-            <div class="col-md-6 ">
-              <div class="contact-wrap w-100 p-md-3 p-4 border rounded">
-                <h3 class="mb-4">Contact Us</h3>
-                <div id="form-message-warning" class="mb-4"></div>
-                <div id="form-message-success" class="mb-4">
+    <div className="row justify-content-center">
+      <div className="col-md-12">
+        <div className="wrapper">
+          <div className="contact_main_container row no-gutters mb-5">
+            <div className="col-md-6 ">
+              <div className="contact-wrap w-100 p-md-3 p-4 border rounded">
+                <h3 className="mb-4">Contact Us</h3>
+                <div id="form-message-warning" className="mb-4"></div>
+                <div id="form-message-success" className="mb-4">
                   Your message was sent, thank you!
                 </div>
                 <form onSubmit={(e) => { onSubmitHandler(e); }}
                   method="POST"
                   id="contactForm"
                   name="contactForm"
-                  class="contactForm"
+                  className="contactForm"
                 >
-                  <div class="row"  >
-                    <div class="col-md-6">
-                      <div class="form-group" >
-                        <label class="label" for="name" >
+                  <div className="row"  >
+                    <div className="col-md-6">
+                      <div className="form-group" >
+                        <label className="label" for="name" >
                           Full Name
                         </label>
                         <input value={nombre} onChange={(e) => { onChangeHandler("nombre", e.target.value); }}
-                          type="text" required
+                          type="text" 
                           class="form-control"
                           name="name"
                           id="name"
                           placeholder="Name"
+                          required
                         />
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label class="label" for="email">
+                    <div className="col-md-6">
+                      <div className="form-group">
+                        <label className="label" for="email">
                           Email Address
                         </label>
                         <input value={email} onChange={(e) => { onChangeHandler("email", e.target.value); }}
@@ -117,21 +118,21 @@ const Contact = () => {
                           placeholder="Message" />
                       </div>
                     </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
+                    <div className="col-md-12">
+                      <div className="form-group">
                         <input id="contact-submit"
                           type="submit"
                           value="Send Message"
-                          className="btn-login btn"
+                          classNameName="btn-login btn"
                         />
-                        <div class="submitting"></div>
+                        <div className="submitting"></div>
                       </div>
                     </div>
                   </div>
                 </form>
               </div>
             </div>
-            <div class="container_map col-md-5 d-flex align-items-stretch">
+            <div className="container_map col-md-5 d-flex align-items-stretch">
               <div className="container_map" id="map">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.797523579702!2d-78.47663845039307!3d-0.18499463546593084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59080303a2eb1%3A0x523b5f69ac3065dd!2sKruger%20Corp!5e0!3m2!1ses-419!2sec!4v1675739142115!5m2!1ses-419!2sec"

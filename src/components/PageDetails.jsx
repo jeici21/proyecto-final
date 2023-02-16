@@ -3,8 +3,8 @@ import { Row, Col, Container, Image } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import { NavLink } from "react-router-dom";
-
 import { useParams } from "react-router-dom";
+import ReactImageMagnify from 'react-image-magnify';
 
 const PageDetails = ({ props, onAddToCart }) => {
     const id = useParams("id:").id.substring(3);
@@ -43,18 +43,37 @@ const PageDetails = ({ props, onAddToCart }) => {
         return formatter.format(value)
     }
 
+    // Filtrar productos por categoría
+    const filteredProducts = dataP
+        ? dataP.filter((product) => product.productCategory.id === data.productCategory.id)
+        : dataP;
+
     useEffect(() => {
         peticionGetProduct();
         peticionGetProductP();
-    }, [])
+    }, [id])
     return (
         <>
             {data &&
                 <Container className="mw-100">
-                    <Row className="ProductDetails justify-content-md-center">
-                        <Col xs={12} sm={12} md={4} lg={4} xl={4}>
-                            <Image src={data.img} className="DetailsImg" rounded />
-                        </Col >
+                    <Row className="ProductDetails justify-content-md-center border-bottom border-left border-right">
+                        <Col xs={12} sm={12} md={4} lg={4} xl={4} className="DetailsImg " rounded>
+                            {/* <Image src={data.img} alt="Publication" fluid className="DetailsImg" rounded /> */}
+                            <ReactImageMagnify  
+                                {...{
+                                    smallImage: {
+                                        alt: 'Wristwatch by Ted Baker London',
+                                        isFluidWidth: true,
+                                        src: data.img,
+                                    },
+                                    largeImage: {
+                                        src: data.img,
+                                        width: 1200,
+                                        height: 1800
+                                    }
+                                }}
+                                />
+                        </Col>
                         <Col xs={12} sm={12} md={7} lg={7} xl={7} className=''>
                             <Container className="justify-content-center mx-auto">
                                 <Row >
@@ -99,32 +118,32 @@ const PageDetails = ({ props, onAddToCart }) => {
 
                         </Col>
                     </Row>
-                    <Container>
-                        <Row className="d-flex flex-column align-items-center mb-4">
+                    <Container className="mt-5">
+                        <Row className="d-flex flex-column align-items-center mb-4 ">
                             <Col xs={12} sm={8} className="mx-auto">
-                                <h2 className="text-center">PRODUCTOS RELACIONADOS</h2>
+                                <h2 className="text-center text-black">PRODUCTOS RELACIONADOS</h2>
                             </Col>
                             <Col xs={12} sm={8} md={8} className="mx-auto">
-                                <h3 className="text-center">PROMOCIONES LIMITADAS ¡APROVÉCHALAS AHORA!</h3>
+                                <h3 className="text-center text-black">PROMOCIONES LIMITADAS ¡APROVÉCHALAS AHORA!</h3>
                             </Col>
                         </Row>
-                        <div className="row">
-                            {dataP.map((result) => {
+                        <Row className="">
+                            {filteredProducts.map((result) => {
                                 return (
-                                    <div className="floating col-sm-6 col-lg-3 " key={result.id}>
+                                    <Col className="floating col-sm-6 col-lg-3 " key={result.id}>
                                         <div className="single-publication border rounded">
                                             <figure>
-                                                <a href="#" className="product-image">
-                                                    <img src={result.img} alt="Publication" />
+                                                <a className="product-image">
+                                                    <Image src={result.img} alt="Publication" />
                                                 </a>
                                                 <ul>
                                                     <li>
-                                                        <a href="#" title="Añadir a Favoritos">
+                                                        <a title="Añadir a Favoritos" className="bg">
                                                             <i className="fa fa-heart" />
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido">
+                                                        <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido" className="bg">
                                                             <i className="fa fa-search" />
                                                         </NavLink>
                                                     </li>
@@ -133,7 +152,7 @@ const PageDetails = ({ props, onAddToCart }) => {
                                             <div className="publication-content m-0 p-0">
                                                 <span className="category">Productos</span>
                                                 <h3>
-                                                    <a className="text-decoration-none" href="#">{result.name}</a>
+                                                    <a className="text-decoration-none" >{result.name}</a>
                                                 </h3>
 
                                                 <h4 className="price">${result.price}</h4>
@@ -144,10 +163,10 @@ const PageDetails = ({ props, onAddToCart }) => {
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </Col>
                                 );
                             })}
-                        </div>
+                        </Row>
                     </Container>
                 </Container>
             }
