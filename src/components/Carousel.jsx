@@ -1,18 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { loadProducts } from "../api/loadProducts";
 
 const Carousel = () => {
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {//obteniendo los 3 primeros productos de la api
-        axios.get("http://localhost:8080/product").then(res => setProducts(res.data.slice(0, 3)))
-            .catch(error => console.error(error));
+    useEffect(() => {
+
+        getProductsFromDb();
     }, []);
+
+    const getProductsFromDb = async () => {
+        const resp = await (await loadProducts()).data;
+        if (resp) {
+            //obteniendo los 3 primeros productos de la api
+            setProducts(resp.slice(0, 3));
+        }
+        console.log(resp);
+    }
 
     return (
         <div id="template-mo-jassa-hero-carousel" className="carousel slide" data-bs-ride="carousel">
             <ol className="carousel-indicators">
-                {products.map((product, index) => (//mostrando un producto por página
+                {products?.map((product, index) => (//mostrando un producto por página
                     <li data-bs-target="#template-mo-jassa-hero-carousel" data-bs-slide-to={index}
                         className={index === 0 ? 'active' : ''} />
                 ))}
