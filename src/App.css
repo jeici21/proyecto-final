@@ -111,11 +111,11 @@ textarea:hover {
   height: 60px;
   bottom: 40px;
   right: 40px;
-  background-color: rgb(47, 182, 62);
+  background-color: #0ec144;
 }
 
 .float:hover {
-  background-color: rgb(70, 166, 81);
+  background-color: #0c9635;
 }
 
 .scroll-to-top-button {
@@ -786,16 +786,11 @@ figure img {
   font-weight: bold;
 }
 
-.contact-container input[type=text],
-.contact-container input[type=email],
-.contact-container textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  margin-top: 10px;
-  margin-bottom: 16px;
-  resize: vertical;
-  border-radius: 5px;
+.contact_main_container input[type=text],
+.contact_main_container input[type=email],
+.contact_main_container textarea,
+.contact_main_container label:not([for="name"]):not([for="email"]) {
+  margin-top: 30px;
 }
 
 .contact-container textarea {

@@ -13,7 +13,7 @@ import Aboutpage from './pages/Aboutpage';
 import Contactpage from './pages/Contactpage';
 import LoginPage from './pages/LoginPage';
 import { Dashboard } from './pages/dashboard/dashboard';
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Crud from './components/Crud';
 import Shop from './components/Shop';
 import ShoppingCart from './components/ShoppingCart';

@@ -264,19 +264,19 @@ const Login = ({ loading, error, ...props }) => {
               <div className="modal-body">
                 <div className="form-group  ">
                   <label for="nombres">Nombres:</label>
-                  <input type="text" className="form-control" id="nombres" />
+                  <input type="text" className="form-control" id="nombres" required />
                 </div>
                 <div className="form-group">
                   <label for="apellidos">Apellidos:</label>
-                  <input type="text" className="form-control" id="apellidos" />
+                  <input type="text" className="form-control" id="apellidos" required />
                 </div>
                 <div className="form-group">
                   <label for="usuario">Usuario:</label>
-                  <input type="text" className="form-control" id="usuario" />
+                  <input type="text" className="form-control" id="usuario" required />
                 </div>
                 <div className="form-group">
                   <label for="contraseña">Contraseña:</label>
-                  <input
+                  <input required
                     type="password"
                     className="form-control"
                     id="contraseña"
@@ -284,11 +284,11 @@ const Login = ({ loading, error, ...props }) => {
                 </div>
                 <div className="form-group">
                   <label for="email">Email:</label>
-                  <input type="email" className="form-control" id="email" />
+                  <input type="email" className="form-control" id="email" required />
                 </div>
                 <div className="form-group">
                   <label for="telefono">Teléfono:</label>
-                  <input type="text" className="form-control" id="telefono" />
+                  <input type="text" className="form-control" id="telefono" required />
                 </div>
 
                 <div className="modal-footer">

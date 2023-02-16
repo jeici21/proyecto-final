@@ -84,7 +84,7 @@ const NavbarMain = () => {
           </div>
         </div>
         <div>
-        <a className="nav-icon d-inline    position-relative text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+        <a className="nav-icon d-inline position-relative text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
           <i className="fa fa-fw fa-search text-dark mr-2" />
         </a>
           </div>
