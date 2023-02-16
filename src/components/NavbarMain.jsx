@@ -11,17 +11,9 @@ const NavbarMain = () => {
   const navigate = useNavigate();
   const [item, setItem] = useState(JSON.parse(localStorage.getItem('itemscart')) || 0);
   //const [linkImage, setlinkImage] = useState("");
-  console.log(item);
+
   useEffect(() => {
-    fetchUserData()
-      .then((response) => {
-        setData(response.data);
-        setState({ ...state, data: response.data });
-      })
-      .catch((e) => {
-        localStorage.clear();
-        navigate("/");
-      });
+   
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

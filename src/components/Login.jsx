@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import { authenticate, authFailure, authSuccess } from "../redux/authActions";
-import { userLogin, UserSave } from "../api/authenticationService";
+import { fetchUserData, userLogin, UserSave } from "../api/authenticationService";
 import { Alert, Spinner } from "react-bootstrap";
 import { useNavigate, NavLink } from "react-router-dom";
 
@@ -12,37 +12,23 @@ const Login = ({ loading, error, ...props }) => {
   });
   const navigate = useNavigate();
 
-  const handleSubmit = (evt) => {
+  const loadUserInfo=async (token)=>{
+    const resp= await fetchUserData(token);
+    return resp? resp : null;
+  }
+
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     props.authenticate();
 
-    userLogin(values)
-      .then((response) => {
-        console.log("response", response);
-        if (response.status === 200) {
-          props.setUser(response.data);
-          localStorage.setItem("currentUser", JSON.stringify(response.data));
-          navigate("/shop");
-        } else {
-          props.loginFailure("Something Wrong! Please Try Again");
-        }
-      })
-      .catch((err) => {
-        if (err && err.response) {
-          switch (err.response.status) {
-            case 401:
-              console.log("401 status");
-              props.loginFailure("Authentication Failed. Bad Credentials");
-              break;
-            default:
-              props.loginFailure("Something Wrong! Please Try Again");
-          }
-        } else {
-          props.loginFailure("Something Wrong! Please Try Again");
-          console.log(err);
-        }
-      });
-    //console.log("Loading again",loading);
+   const response=await userLogin(values);
+    console.log(response)
+    if (response.status === 200) {
+      localStorage.setItem("currentUser", JSON.stringify(response.data));
+      navigate("/shop");
+    } else {
+      props.loginFailure("Something Wrong! Please Try Again");
+    }
   };
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
