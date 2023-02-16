@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
 import Carousel from "../components/Carousel";
 import FeaturedProducts from "../components/FeaturedProducts";
 import MonthCategories from "../components/MonthCategories";

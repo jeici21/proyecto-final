@@ -1,8 +1,8 @@
-import axios from "axios";
+//import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import logo from "../images/K-Market-2.png";
 import Context from "../../src/redux/controlUsuario/Context";
-import { fetchUserData } from "../../src/api/authenticationService";
+//import { fetchUserData } from "../../src/api/authenticationService";
 import { useNavigate } from "react-router-dom";
 
 import { NavLink } from "react-router-dom";
@@ -184,12 +184,12 @@ const Shop = ({ onAddToCart }) => {
                     <div className="floating col-sm-6 col-lg-3 " key={result.id}>
                     <div className="single-publication border rounded">
                       <figure>
-                        <a className="product-image">
+                        <a href="#?" className="product-image">
                           <img src={result.img} alt="Publication" />
                         </a>
                         <ul>
                           <li >
-                            <a  title="Añadir a Favoritos" className="bg">
+                            <a href="#?" title="Añadir a Favoritos" className="bg">
                               <i className="fa fa-heart" />
                             </a>
                           </li>
@@ -203,7 +203,7 @@ const Shop = ({ onAddToCart }) => {
                       <div className="publication-content m-0 p-0">
                         <span className="category">Productos</span>
                         <h3>
-                          <a className="text-decoration-none" href="#">{result.name}</a>
+                          <a className="text-decoration-none" href="#?">{result.name}</a>
                         </h3>
                      
                         <h4 className="price">${result.price}</h4>

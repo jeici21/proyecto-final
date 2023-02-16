@@ -21,7 +21,7 @@ const MonthCategories = () => {
       </div>
       <div className="row">
         <div className="floating col-12 col-md-4 p-5 mt-3">
-          <a href="#">
+          <a href="#?">
             <img
               src="https://therichpost.com/wp-content/uploads/2021/05/category_img_01.jpg"
               className="rounded-circle img-fluid border"
@@ -41,7 +41,7 @@ const MonthCategories = () => {
           </p>
         </div>
         <div className="floating col-12 col-md-4 p-5 mt-3">
-          <a href="#">
+          <a href="#?">
             <img
               src="https://therichpost.com/wp-content/uploads/2021/05/category_img_02.jpg"
               className="rounded-circle img-fluid border"
@@ -61,7 +61,7 @@ const MonthCategories = () => {
           </p>
         </div>
         <div className="floating col-12 col-md-4 p-5 mt-3">
-          <a href="#">
+          <a href="#?">
             <img
               src="https://therichpost.com/wp-content/uploads/2021/05/category_img_03.jpg"
               className="rounded-circle img-fluid border"

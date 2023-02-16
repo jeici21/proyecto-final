@@ -15,7 +15,7 @@ const FeaturedProducts = () => {
                 <div className="row">
                     <div className="floating col-12 col-md-4 mb-4">
                         <div className="card h-100">
-                            <a href="#">
+                            <a href="#?">
                                 <img src="https://therichpost.com/wp-content/uploads/2021/05/feature_prod_01.jpg"
                                     className="card-img-top" alt="..." />
                             </a>
@@ -30,7 +30,7 @@ const FeaturedProducts = () => {
                                     </li>
                                     <li className="text-muted text-right">$240.00</li>
                                 </ul>
-                                <a href="#" className="h2 text-decoration-none text-dark">Lorem Ipsum</a>
+                                <a href="#?" className="h2 text-decoration-none text-dark">Lorem Ipsum</a>
                                 <p className="card-text">
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
                                 </p>
@@ -40,7 +40,7 @@ const FeaturedProducts = () => {
                     </div>
                     <div className="floating col-12 col-md-4 mb-4">
                         <div className="card h-100">
-                            <a href="#">
+                            <a href="#?">
                                 <img src="https://therichpost.com/wp-content/uploads/2021/05/feature_prod_02.jpg"
                                     className="card-img-top" alt="..." />
                             </a>
@@ -55,7 +55,7 @@ const FeaturedProducts = () => {
                                     </li>
                                     <li className="text-muted text-right">$480.00</li>
                                 </ul>
-                                <a href="#" className="h2 text-decoration-none text-dark">Lorem Ipsum</a>
+                                <a href="#?" className="h2 text-decoration-none text-dark">Lorem Ipsum</a>
                                 <p className="card-text">
                                     Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum
                                 </p>
@@ -65,7 +65,7 @@ const FeaturedProducts = () => {
                     </div>
                     <div className="floating col-12 col-md-4 mb-4">
                         <div className="card h-100">
-                            <a href="#">
+                            <a href="#?">
                                 <img src="https://therichpost.com/wp-content/uploads/2021/05/feature_prod_03.jpg"
                                     className="card-img-top" alt="..." />
                             </a>
@@ -80,7 +80,7 @@ const FeaturedProducts = () => {
                                     </li>
                                     <li className="text-muted text-right">$360.00</li>
                                 </ul>
-                                <a href="#" className="h2 text-decoration-none text-dark">Lorem Ipsum</a>
+                                <a href="#?" className="h2 text-decoration-none text-dark">Lorem Ipsum</a>
                                 <p className="card-text">
                                     Lorem Ipsum Lorem Ipsum Lorem IpsumLorem Ipsum Lorem Ipsum Lorem Ipsum.
                                 </p>

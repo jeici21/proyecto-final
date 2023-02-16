@@ -22,22 +22,22 @@ function Cart({ items }) {
             <div className="col-sm-6 col-lg-3" key={result.id}>
               <div className="single-publication">
                 <figure>
-                  <a href="#">
+                  <a href="#?">
                     <img src={result.img} alt="Publication" />
                   </a>
                   <ul>
                     <li>
-                      <a href="#" title="Añadir a Favoritos">
+                      <a href="#?" title="Añadir a Favoritos">
                         <i className="fa fa-heart"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="Añadir a comparación">
+                      <a href="#?" title="Añadir a comparación">
                         <i className="fa fa-refresh"></i>
                       </a>
                     </li>
                     <li>
-                      <a href="#" title="Vistazo Rápido">
+                      <a href="#?" title="Vistazo Rápido">
                         <i className="fa fa-search"></i>
                       </a>
                     </li>
@@ -46,7 +46,7 @@ function Cart({ items }) {
                 <div className="publication-content">
                   <span className="category">Productos</span>
                   <h3>
-                    <a href="#">{result.name}</a>
+                    <a href="#?">{result.name}</a>
                   </h3>
                   <ul>
                     <li>

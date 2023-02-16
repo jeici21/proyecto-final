@@ -23,8 +23,9 @@ textarea {
   font-weight: 300 !important;
   color: rgb(96, 96, 96) !important;
 }
-.bg{
-  color:rgb(255, 255, 255) !important;
+
+.bg {
+  color: rgb(255, 255, 255) !important;
 }
 
 a:hover,
@@ -35,8 +36,6 @@ textarea:hover {
 
   color: rgb(255, 157, 0) !important;
 }
-
-
 
 .h1 {
   font-family: 'Fira Sans', sans-serif;
@@ -748,7 +747,8 @@ figure img {
   height: 100%;
   /* background-color: aquamarine; */
 }
-.contact-wrap{
+
+.contact-wrap {
   background: #ffe9882c !important;
 }
 

@@ -12,16 +12,16 @@ const Login = ({ loading, error, ...props }) => {
   });
   const navigate = useNavigate();
 
-  const loadUserInfo=async (token)=>{
-    const resp= await fetchUserData(token);
-    return resp? resp : null;
+  const loadUserInfo = async (token) => {
+    const resp = await fetchUserData(token);
+    return resp ? resp : null;
   }
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     props.authenticate();
 
-   const response=await userLogin(values);
+    const response = await userLogin(values);
     console.log(response)
     if (response.status === 200) {
       localStorage.setItem("currentUser", JSON.stringify(response.data));
@@ -120,7 +120,7 @@ const Login = ({ loading, error, ...props }) => {
                       className="my-login-validation"
                       onSubmit={handleSubmit}
                       noValidate={false}
-                      style={{display:"flex",alignItems:"center", justifyContent:"center", gap:"1em", flexDirection:"column"}}
+                      style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1em", flexDirection: "column" }}
 
 
                     >
@@ -176,11 +176,11 @@ const Login = ({ loading, error, ...props }) => {
                         </div>
                       </div>
 
-                      <div className="form-group m-0 " style={{width: "100%", display:"flex",alignItems:"center", justifyContent:"center"}}>
+                      <div className="form-group m-0 " style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <button
                           type="submit"
                           className="btn-login btn btn-primary btn-lg"
-                          style={{width: "50%"}}
+                          style={{ width: "50%" }}
                         >
                           Login
                           {loading && (
@@ -204,7 +204,7 @@ const Login = ({ loading, error, ...props }) => {
                     <div className="d-flex gap-1 justify-content-center mt-1">
                       <div>Don't have an account?</div>
                       <a
-                        href="#"
+                        href="#?"
                         className="text-decoration-none fw-semibold"
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"
