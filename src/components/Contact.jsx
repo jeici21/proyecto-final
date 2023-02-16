@@ -66,13 +66,8 @@ const Contact = () => {
                           Full Name
                         </label>
                         <input value={nombre} onChange={(e) => { onChangeHandler("nombre", e.target.value); }}
-<<<<<<< HEAD
-                          type="text"
-                          className="form-control"
-=======
-                          type="text" required
+                          type="text" 
                           class="form-control"
->>>>>>> 01c94f255098ef2bd8a8ae4a99851837b97a1d2d
                           name="name"
                           id="name"
                           placeholder="Name"
@@ -86,13 +81,8 @@ const Contact = () => {
                           Email Address
                         </label>
                         <input value={email} onChange={(e) => { onChangeHandler("email", e.target.value); }}
-<<<<<<< HEAD
-                          type="email"
-                          className="form-control"
-=======
                           type="email" required
                           class="form-control"
->>>>>>> 01c94f255098ef2bd8a8ae4a99851837b97a1d2d
                           name="email"
                           id="email"
                           placeholder="Email"
@@ -100,16 +90,6 @@ const Contact = () => {
                         />
                       </div>
                     </div>
-<<<<<<< HEAD
-                    <div className="col-md-12" style={{ marginTop: "30px" }}>
-                      <div className="form-group">
-                        <label className="label" for="subject">
-                          Subject
-                        </label>
-                        <input value={asunto} onChange={(e) => { onChangeHandler("asunto", e.target.value); }}
-                          type="text"
-                          className="form-control"
-=======
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="label" for="subject">
@@ -118,23 +98,12 @@ const Contact = () => {
                         <input value={asunto} onChange={(e) => { onChangeHandler("asunto", e.target.value); }}
                           type="text" required
                           class="form-control"
->>>>>>> 01c94f255098ef2bd8a8ae4a99851837b97a1d2d
                           name="subject"
                           id="subject"
                           placeholder="Subject"
                         />
                       </div>
                     </div>
-<<<<<<< HEAD
-                    <div className="col-md-12" style={{ marginTop: "30px" }}>
-                      <div className="form-group">
-                        <label className="label" for="#">
-                          Message
-                        </label>
-                        <textarea value={textarea} onChange={(e) => { onChangeHandler("textarea", e.target.value); }}
-                          name="message"
-                          className="form-control"
-=======
                     <div class="col-md-12">
                       <div class="form-group">
                         <label class="label" for="#">
@@ -143,7 +112,6 @@ const Contact = () => {
                         <textarea value={textarea} onChange={(e) => { onChangeHandler("textarea", e.target.value); }}
                           name="message" required
                           class="form-control"
->>>>>>> 01c94f255098ef2bd8a8ae4a99851837b97a1d2d
                           id="message"
                           cols="30"
                           rows="4"
