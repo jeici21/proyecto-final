@@ -23,6 +23,9 @@ textarea {
   font-weight: 300 !important;
   color: rgb(96, 96, 96) !important;
 }
+.bg{
+  color:rgb(255, 255, 255) !important;
+}
 
 a:hover,
 .nav-link:hover,
@@ -1048,7 +1051,7 @@ figure img {
 
 .ProductDetails {
   background-color: rgb(255, 255, 255) !important;
-  color: rgb(16, 62, 53) !important;
+  color: rgb(0, 255, 204) !important;
   display: flex !important;
   flex-direction: row !important;
   font-size: 20px;
@@ -1071,6 +1074,25 @@ figure img {
 
 .backBtnContainer {
   text-align: center;
+}
+
+.ReactImageMagnify {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.ReactImageMagnify__SmallImage {
+  width: 100% !important;
+}
+
+.ReactImageMagnify__EnlargedImage {
+  z-index: 9999 !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+}
+
+.ReactImageMagnify__EnlargedImageContainer {
+  border-radius: 50% !important;
 }
 
 /* Extra large devices (large desktops, 1200px and up)*/

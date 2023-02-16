@@ -189,18 +189,18 @@ const Shop = ({ onAddToCart }) => {
                     <div className="floating col-sm-6 col-lg-3 " key={result.id}>
                     <div className="single-publication border rounded">
                       <figure>
-                        <a href="#" className="product-image">
+                        <a className="product-image">
                           <img src={result.img} alt="Publication" />
                         </a>
                         <ul>
-                          <li>
-                            <a href="#" title="Añadir a Favoritos">
+                          <li >
+                            <a  title="Añadir a Favoritos" className="bg">
                               <i className="fa fa-heart" />
                             </a>
                           </li>
-                          <li>
-                            <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido">
-                              <i className="fa fa-search" />
+                          <li >
+                            <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido" className="bg">
+                              <i className="fa fa-search " />
                             </NavLink>
                           </li>
                         </ul>
