@@ -1,89 +1,92 @@
-import axios from "axios";
+//import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import logo from "../images/K-Market-2.png";
 import Context from "../../src/redux/controlUsuario/Context";
-import { fetchUserData } from "../../src/api/authenticationService";
+//import { fetchUserData } from "../../src/api/authenticationService";
 import { useNavigate } from "react-router-dom";
-
 import { NavLink } from "react-router-dom";
+import { loadProducts } from "../api/loadProducts";
+import { loadCategories } from "../api/loadCategories";
 
 const Shop = ({ onAddToCart }) => {
-
-  const CategoryUrl = "http://localhost:8080/category";
   const [products, setProducts] = useState([]);
   const [dataCategory, setDataCategory] = useState([]);
   const { state, setState } = useContext(Context);
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState("all");
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
+    if (localStorage.getItem("currentUser")) {
+      setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
+    }
+    //carga todos los productos del base de datos al inicar este pagina
+    getProductsFromDb();
+    //carga todas las categorias al momento de iniciar esta pagina
+    getCategories();
   }, []);
 
-  useEffect(() => {
-    fetchUserData()
-      .then((response) => {
-        setData(response.data);
-        setState({ ...state, data: response.data });
-      })
-      .catch((e) => {
-        localStorage.clear();
-        navigate("/shop");
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const array = data.roles;
-  if (array) {
-    localStorage.setItem("rolUser", JSON.stringify(array[0].roleCode));
-    //console.log("Inicio de Session"+state[0].roleCode);
+  if (currentUser) {
+   // console.log(currentUser);
+    localStorage.setItem("rolUser", JSON.stringify(currentUser?.roles[0]?.roleCode));
+    // setState({ ...state, data: currentUser});
   } else {
-    console.log("Cerrado y sin datos desde nav");
+    console.log("Cerrado y sin datos desde SHop");
   }
 
-  let firstName;
+ /*  let firstName;
   let lastName;
   if (state && state.data) {
     firstName = state.data.firstName;
     lastName = state.data.lastName;
+    console.log("dese shop" + firstName);
   }
-
+ */
   const logOut = () => {
     localStorage.clear();
     setState("cerrado Sesion");
     navigate("/");
   };
+      // CObtener todos los Category
+      const peticionGetCategory = async () => {
+        const resp = await (await loadCategories()).data;
+        if (resp) {
+          setDataCategory(resp);
+          console.log(resp);
+        } else {
+          setDataCategory([]);
+        }
+    }
   useEffect(() => {
-    makeAPICall();
+    getProductsFromDb();
     peticionGetCategory();
     window.scrollTo(0, 0);
   }, []);
 
-  const makeAPICall = async () => {
-    try {
-      axios.get(
-        "http://localhost:8080/product" // , { mode: 'no-cors' // 'cors' by default}
-      ).then((res) => {
-        setProducts(res.data);
-      });
-    } catch (e) {
-      console.log(e);
+  const getProductsFromDb = async () => {
+    const resp = await (await loadProducts()).data;
+    if (resp) {
+      setProducts(resp);
+      console.log(resp);
+    } else {
+      setProducts([]);
     }
   };
 
-  const peticionGetCategory = async () => {
-    await axios.get(CategoryUrl)
-      .then(response => {
-        setDataCategory(response.data);
-      }).catch(error => {
-        console.log(error);
-      })
-  }
-
+  const getCategories = async () => {
+    const resp = await (await loadCategories()).data;
+    if (resp) {
+      setDataCategory(resp);
+    } else {
+      setDataCategory([]);
+    }
+  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const [dataPerPage, setDataPerPage] = useState(8);
@@ -95,21 +98,20 @@ const Shop = ({ onAddToCart }) => {
     setCurrentPage(1);
   };
 
-
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
     setCurrentPage(1);
   };
 
   // const filteredData = products.filter((item) => {
-  //   
+  //
   //   return item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.price.toString().includes(searchTerm.toLowerCase());
   // });
 
-  const filteredData = products.filter((item) => {
-    if (category !== 'all') {
+  const filteredData = products?.filter((item) => {
+    if (category !== "all") {
       // Si se ha seleccionado una categoría específica, filtrar solo los productos de esa categoría
-      if (searchTerm.trim() === '') {
+      if (searchTerm.trim() === "") {
         // Si el término de búsqueda está vacío, aplicar solo el filtro por categoría
         return item.productCategory.id === parseInt(category);
       } else {
@@ -122,7 +124,8 @@ const Shop = ({ onAddToCart }) => {
       }
     } else {
       return (
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.price.toString().includes(searchTerm.toLowerCase())
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.price.toString().includes(searchTerm.toLowerCase())
       );
     }
   });
@@ -146,8 +149,6 @@ const Shop = ({ onAddToCart }) => {
   });
   return (
     <div className="main_container">
-
-
       {loading ? (
         <div className="loader-container">
           <div className="spinner" />
@@ -157,8 +158,12 @@ const Shop = ({ onAddToCart }) => {
           <div className="container">
             <div className="section-header">
               {/* <i className="fa fa-cart-arrow-down" /> */}
-              <h2 className="m-0">Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
-              <p className="mt-0">Aquí podrá revisar nuestro catálogo de productos.</p>
+              <h2 className="m-0">
+                Productos <img src={logo} alt="KMarket" className="logo-shop" />
+              </h2>
+              <p className="mt-0">
+                Aquí podrá revisar nuestro catálogo de productos.
+              </p>
             </div>
             <div className="data-table-header pb-4 justify-content-between p-2">
               <div className="col-s-12 col-sm-10 col-md-4 col-lg-3">
@@ -195,7 +200,7 @@ const Shop = ({ onAddToCart }) => {
                   <div className="floating col-sm-6 col-lg-3 " key={result.id}>
                     <div className="single-publication border rounded">
                       <figure>
-                        <a className="product-image">
+                        <a href="#?" className="product-image">
                           <img src={result.img} alt="Publication" />
                         </a>
                         <ul>
@@ -204,8 +209,12 @@ const Shop = ({ onAddToCart }) => {
                               <i className="fa fa-heart" />
                             </a>
                           </li>
-                          <li >
-                            <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido" className="bg">
+                          <li>
+                            <NavLink
+                              to={`/details/id:${result.id}`}
+                              title="Vistazo Rápido"
+                              className="bg"
+                            >
                               <i className="fa fa-search " />
                             </NavLink>
                           </li>
@@ -220,7 +229,10 @@ const Shop = ({ onAddToCart }) => {
                         <h4 className="price">${result.price}</h4>
                       </div>
                       <div className="add-to-cart">
-                        <button className="default-btn" onClick={() => onAddToCart(result)}>
+                        <button
+                          className="default-btn"
+                          onClick={() => onAddToCart(result)}
+                        >
                           Añadir al Carro
                         </button>
                       </div>
@@ -230,10 +242,9 @@ const Shop = ({ onAddToCart }) => {
               })}
             </div>
           </div>
-          <div className='pagination'>{renderPageNumbers}</div>
+          <div className="pagination">{renderPageNumbers}</div>
         </section>
       )}
-
     </div>
   );
 };

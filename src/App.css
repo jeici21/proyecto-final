@@ -94,7 +94,12 @@ textarea:hover {
     transform: rotate(360deg);
   }
 }
-
+/*Style Login*/
+.nosotros{
+  Display: flex;
+Justify-content: right;
+Align-items: right;
+}
 /*Style Whatsapp and Scroll to top buttons*/
 
 .float,
@@ -762,7 +767,8 @@ figure img {
   height: 100%;
   /* background-color: aquamarine; */
 }
-.contact-wrap{
+
+.contact-wrap {
   background: #ffe9882c !important;
 }
 

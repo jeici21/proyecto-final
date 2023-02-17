@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { connect } from "react-redux";
 import { authenticate, authFailure, authSuccess } from "../redux/authActions";
-import { userLogin, UserSave } from "../api/authenticationService";
+import Context from "../../src/redux/controlUsuario/Context";
+import {
+  fetchUserData,
+  userLogin,
+  UserSave,
+} from "../api/authenticationService";
 import { Alert, Spinner } from "react-bootstrap";
 import { useNavigate, NavLink } from "react-router-dom";
 
@@ -10,39 +15,31 @@ const Login = ({ loading, error, ...props }) => {
     userName: "",
     password: "",
   });
+  const { state, setState } = useContext(Context);
   const navigate = useNavigate();
 
-  const handleSubmit = (evt) => {
+  const loadUserInfo = async (token) => {
+    const resp = await fetchUserData(token);
+    //  setState({ ...state, data: resp });
+    return resp ? resp : null;
+  };
+
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     props.authenticate();
 
-    userLogin(values)
-      .then((response) => {
-        console.log("response", response);
-        if (response.status === 200) {
-          props.setUser(response.data);
-          localStorage.setItem("currentUser", JSON.stringify(response.data));
-          navigate("/shop");
-        } else {
-          props.loginFailure("Something Wrong! Please Try Again");
-        }
-      })
-      .catch((err) => {
-        if (err && err.response) {
-          switch (err.response.status) {
-            case 401:
-              console.log("401 status");
-              props.loginFailure("Authentication Failed. Bad Credentials");
-              break;
-            default:
-              props.loginFailure("Something Wrong! Please Try Again");
-          }
-        } else {
-          props.loginFailure("Something Wrong! Please Try Again");
-          console.log(err);
-        }
-      });
-    //console.log("Loading again",loading);
+    const response = await userLogin(values);
+    console.log(response);
+    // setState(response.data);
+    setState({ ...state, data: response.data });
+    console.log("DATA desde login state " + state.roleDescription);
+    if (response.status === 200) {
+      localStorage.setItem("currentUser", JSON.stringify(response.data));
+
+      navigate("/shop");
+    } else {
+      props.loginFailure("Something Wrong! Please Try Again");
+    }
   };
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -71,7 +68,7 @@ const Login = ({ loading, error, ...props }) => {
       enabled: true,
       authorities: [
         {
-          roleCode: "ADMIN",
+          roleCode: "USER",
           roleDescription: "Admin role",
         },
       ],
@@ -123,121 +120,145 @@ const Login = ({ loading, error, ...props }) => {
           </div>
         </div>
       ) : (
-        <section className="h-100">
-          <div className="container h-100">
-            <div className="row justify-content-md-center h-100">
-              <div className="card-wrapper">
-                <div className="card fat">
-                  <div className="card-body">
-                    <h4 className="card-title">Login</h4>
-                    <form
-                      className="my-login-validation"
-                      onSubmit={handleSubmit}
-                      noValidate={false}
-                      style={{display:"flex",alignItems:"center", justifyContent:"center", gap:"1em", flexDirection:"column"}}
-
-
-                    >
-                      <div className="form-group">
-                        <label htmlFor="email">User Name</label>
-                        <input
-                          id="username"
-                          type="text"
-                          className="form-control"
-                          minLength={5}
-                          value={values.userName}
-                          onChange={handleChange}
-                          name="userName"
-                          required
-                        />
-                        <div className="invalid-feedback">
-                          UserId is invalid
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label>Password</label>
-                        <input
-                          id="password"
-                          type="password"
-                          className="form-control"
-                          minLength={8}
-                          value={values.password}
-                          onChange={handleChange}
-                          name="password"
-                          required
-                        />
-                        <a href="forgot.html" className="float-right">
-                          Forgot Password?
-                        </a>
-                        <div className="invalid-feedback">
-                          Password is required
-                        </div>
-                      </div>
-
-                      <div className="form-group">
-                        <div className="custom-control">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="customCheck1"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor="customCheck1"
-                          >
-                            Remember me
-                          </label>
-                        </div>
-                      </div>
-
-                      <div className="form-group m-0 " style={{width: "100%", display:"flex",alignItems:"center", justifyContent:"center"}}>
-                        <button
-                          type="submit"
-                          className="btn-login btn btn-primary btn-lg"
-                          style={{width: "50%"}}
+        <div className="row nosotros">
+          <div className="col-md-6 ">
+            <h1>Si tienes Whatsapp ya puedes comprar con Nosostros</h1>
+            <p>
+              "Únete a nuestra revolución de compras en línea y regístrate hoy
+              mismo para acceder a productos exclusivos, descuentos únicos y una
+              experiencia de compra en línea sin precedentes."
+            </p>
+          </div>
+          <div className="col-md-6">
+            <section className="h-100">
+              <div className="container h-100">
+                <div className="row justify-content-md-center h-100">
+                  <div className="card-wrapper">
+                    <div className="card fat">
+                      <div className="card-body">
+                        <h4 className="card-title">Iniciar Sesión</h4>
+                        <form
+                          className="my-login-validation"
+                          onSubmit={handleSubmit}
+                          noValidate={false}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "1em",
+                            flexDirection: "column",
+                          }}
                         >
-                          Login
-                          {loading && (
-                            <Spinner
-                              as="span"
-                              animation="border"
-                              size="sm"
-                              role="status"
-                              aria-hidden="true"
+                          <div className="form-group">
+                            <label htmlFor="email">Usuario</label>
+                            <input
+                              id="username"
+                              type="text"
+                              className="form-control"
+                              minLength={5}
+                              value={values.userName}
+                              onChange={handleChange}
+                              name="userName"
+                              required
                             />
-                          )}
-                          {/* <ClipLoader
+                            <div className="invalid-feedback">
+                              Usuario Incorrecto
+                            </div>
+                          </div>
+                          <div className="form-group">
+                            <label>Contraseña</label>
+                            <input
+                              id="password"
+                              type="password"
+                              className="form-control"
+                              minLength={8}
+                              value={values.password}
+                              onChange={handleChange}
+                              name="password"
+                              required
+                            />
+                            <a href="forgot.html" className="float-right">
+                              ¿Olvidaste tu contraseña?
+                            </a>
+                            <div className="invalid-feedback">
+                              Ingresa la Contraseña
+                            </div>
+                          </div>
+
+                          <div className="form-group">
+                            <div className="custom-control">
+                              <input
+                                type="checkbox"
+                                className="custom-control-input"
+                                id="customCheck1"
+                              />
+                              <label
+                                className="custom-control-label"
+                                htmlFor="customCheck1"
+                              >
+                                Recuérdame
+                              </label>
+                            </div>
+                          </div>
+
+                          <div
+                            className="form-group m-0 "
+                            style={{
+                              width: "100%",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <button
+                              type="submit"
+                              className="btn-login btn btn-primary btn-lg"
+                              style={{ width: "50%" }}
+                            >
+                              Login
+                              {loading && (
+                                <Spinner
+                                  as="span"
+                                  animation="border"
+                                  size="sm"
+                                  role="status"
+                                  aria-hidden="true"
+                                />
+                              )}
+                              {/* <ClipLoader
                                         //css={override}
                                         size={20}
                                         color={"#123abc"}
                                         loading={loading}
                                         /> */}
-                        </button>
+                            </button>
+                          </div>
+                        </form>
+                        <div className="d-flex gap-1 justify-content-center mt-1">
+                          <div>No tienes una Cuenta?</div>
+                          <a
+                            href="#?"
+                            className="text-decoration-none fw-semibold"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                            data-bs-whatever="@mdo"
+                          >
+                            Registrarse{" "}
+                          </a>
+                        </div>
+                        {error && (
+                          <Alert className="login-alert" variant="danger">
+                            {error}
+                          </Alert>
+                        )}
                       </div>
-                    </form>
-                    <div className="d-flex gap-1 justify-content-center mt-1">
-                      <div>Don't have an account?</div>
-                      <a
-                        href="#"
-                        className="text-decoration-none fw-semibold"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
-                        data-bs-whatever="@mdo"
-                      >
-                        Registrar{" "}
-                      </a>
                     </div>
-                    {error && (
-                      <Alert className="login-alert" variant="danger">
-                        {error}
-                      </Alert>
-                    )}
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
           </div>
-        </section>
+        </div>
       )}
       <div
         className="modal fade"
@@ -264,19 +285,35 @@ const Login = ({ loading, error, ...props }) => {
               <div className="modal-body">
                 <div className="form-group  ">
                   <label for="nombres">Nombres:</label>
-                  <input type="text" className="form-control" id="nombres" required />
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="nombres"
+                    required
+                  />
                 </div>
                 <div className="form-group">
                   <label for="apellidos">Apellidos:</label>
-                  <input type="text" className="form-control" id="apellidos" required />
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="apellidos"
+                    required
+                  />
                 </div>
                 <div className="form-group">
                   <label for="usuario">Usuario:</label>
-                  <input type="text" className="form-control" id="usuario" required />
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="usuario"
+                    required
+                  />
                 </div>
                 <div className="form-group">
                   <label for="contraseña">Contraseña:</label>
-                  <input required
+                  <input
+                    required
                     type="password"
                     className="form-control"
                     id="contraseña"
@@ -284,11 +321,21 @@ const Login = ({ loading, error, ...props }) => {
                 </div>
                 <div className="form-group">
                   <label for="email">Email:</label>
-                  <input type="email" className="form-control" id="email" required />
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    required
+                  />
                 </div>
                 <div className="form-group">
                   <label for="telefono">Teléfono:</label>
-                  <input type="text" className="form-control" id="telefono" required />
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="telefono"
+                    required
+                  />
                 </div>
 
                 <div className="modal-footer">
@@ -300,11 +347,7 @@ const Login = ({ loading, error, ...props }) => {
                     Close
                   </button>
 
-                  <button
-                    type="submit"
-                    className="btn-login btn btn-primary"
-                    data-bs-dismiss="modal"
-                  >
+                  <button type="submit" className="btn-login btn btn-primary">
                     Guardar
                   </button>
                 </div>
