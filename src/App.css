@@ -370,6 +370,11 @@ table {
   height: 100%;
 }
 
+.product-images img {
+  width: 75%;
+  height: 75%;
+}
+
 .product-wap {
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.10);
 }
