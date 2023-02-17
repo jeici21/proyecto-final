@@ -2,14 +2,10 @@ import { useState, useContext } from "react";
 import { connect } from "react-redux";
 import { authenticate, authFailure, authSuccess } from "../redux/authActions";
 import Context from "../../src/redux/controlUsuario/Context";
-import {
-  fetchUserData,
-  userLogin,
-  UserSave,
-} from "../api/authenticationService";
+import { fetchUserData, userLogin, UserSave, } from "../api/authenticationService";
 import { Alert, Spinner } from "react-bootstrap";
 import { useNavigate, NavLink } from "react-router-dom";
-
+import logo from "../images/K-Market-Campus.png";
 const Login = ({ loading, error, ...props }) => {
   const [values, setValues] = useState({
     userName: "",
@@ -103,6 +99,13 @@ const Login = ({ loading, error, ...props }) => {
       });
   };
 
+  const [passwordType, setPasswordType] = useState('password');
+
+  const togglePasswordVisibility = () => {
+    setPasswordType(passwordType === 'password' ? 'text' : 'password');
+  };
+
+
   return (
     <div className="login-page">
       {currentUser ? (
@@ -120,144 +123,110 @@ const Login = ({ loading, error, ...props }) => {
           </div>
         </div>
       ) : (
-        <div className="row nosotros">
-          <div className="col-md-6 ">
-            <h1>Si tienes Whatsapp ya puedes comprar con Nosostros</h1>
+        <div className="row nosotros justify-content-center">
+          <div class="col-md-4 d-flex flex-column justify-content-center align-items-center text-center">
+            <img src={logo} alt="Descripción de tu imagen" class="mx-auto img-fluid" width="150PX" />
+            <h2>Si tienes Whatsapp ya puedes comprar con Nosostros</h2>
             <p>
               "Únete a nuestra revolución de compras en línea y regístrate hoy
               mismo para acceder a productos exclusivos, descuentos únicos y una
               experiencia de compra en línea sin precedentes."
             </p>
           </div>
-          <div className="col-md-6">
-            <section className="h-100">
-              <div className="container h-100">
-                <div className="row justify-content-md-center h-100">
-                  <div className="card-wrapper">
-                    <div className="card fat">
-                      <div className="card-body">
-                        <h4 className="card-title">Iniciar Sesión</h4>
-                        <form
-                          className="my-login-validation"
-                          onSubmit={handleSubmit}
-                          noValidate={false}
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            gap: "1em",
-                            flexDirection: "column",
-                          }}
-                        >
-                          <div className="form-group">
-                            <label htmlFor="email">Usuario</label>
-                            <input
-                              id="username"
-                              type="text"
-                              className="form-control"
-                              minLength={5}
-                              value={values.userName}
-                              onChange={handleChange}
-                              name="userName"
-                              required
-                            />
-                            <div className="invalid-feedback">
-                              Usuario Incorrecto
-                            </div>
-                          </div>
-                          <div className="form-group">
-                            <label>Contraseña</label>
-                            <input
-                              id="password"
-                              type="password"
-                              className="form-control"
-                              minLength={8}
-                              value={values.password}
-                              onChange={handleChange}
-                              name="password"
-                              required
-                            />
-                            <a href="forgot.html" className="float-right">
-                              ¿Olvidaste tu contraseña?
-                            </a>
-                            <div className="invalid-feedback">
-                              Ingresa la Contraseña
-                            </div>
-                          </div>
 
-                          <div className="form-group">
-                            <div className="custom-control">
-                              <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                id="customCheck1"
-                              />
-                              <label
-                                className="custom-control-label"
-                                htmlFor="customCheck1"
-                              >
-                                Recuérdame
-                              </label>
-                            </div>
-                          </div>
-
-                          <div
-                            className="form-group m-0 "
-                            style={{
-                              width: "100%",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <button
-                              type="submit"
-                              className="btn-login btn btn-primary btn-lg"
-                              style={{ width: "50%" }}
-                            >
-                              Login
-                              {loading && (
-                                <Spinner
-                                  as="span"
-                                  animation="border"
-                                  size="sm"
-                                  role="status"
-                                  aria-hidden="true"
-                                />
-                              )}
-                              {/* <ClipLoader
-                                        //css={override}
-                                        size={20}
-                                        color={"#123abc"}
-                                        loading={loading}
-                                        /> */}
-                            </button>
-                          </div>
-                        </form>
-                        <div className="d-flex gap-1 justify-content-center mt-1">
-                          <div>No tienes una Cuenta?</div>
-                          <a
-                            href="#?"
-                            className="text-decoration-none fw-semibold"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
-                            data-bs-whatever="@mdo"
-                          >
-                            Registrarse{" "}
-                          </a>
-                        </div>
-                        {error && (
-                          <Alert className="login-alert" variant="danger">
-                            {error}
-                          </Alert>
-                        )}
-                      </div>
+          <div className="col-md-6 d-flex justify-content-center align-items-center ">
+            <div className="card p-0 m-4 col-md-6 bgbtn">
+              <h4 className="card-title text-center mb-4">Iniciar Sesión</h4>
+              <form onSubmit={handleSubmit} className="">
+                <div className="form-group mb-3 ">
+                  <label htmlFor="username" className="form-label">Usuario</label>
+                  <input
+                    id="username"
+                    type="text"
+                    className={`form-control ${values.userName ? 'is-valid' : 'is-invalid'}`}
+                    minLength={5}
+                    value={values.userName}
+                    onChange={handleChange}
+                    name="userName"
+                    required
+                  />
+                  <div className="invalid-feedback">
+                    Ingresa tu usuario
+                  </div>
+                </div>
+                <div className="form-group mb-3 ">
+                  <label htmlFor="password" className="form-label">Contraseña</label>
+                  <div className="input-group">
+                    <input
+                      id="password"
+                      type={passwordType}
+                      className={`form-control ${values.password ? 'is-valid' : 'is-invalid'}`}
+                      minLength={8}
+                      value={values.password}
+                      onChange={handleChange}
+                      name="password"
+                      required
+                    />
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary input-group-text"
+                      onClick={() => setPasswordType(passwordType === 'password' ? 'text' : 'password')}
+                    >
+                      {passwordType === 'password' ? <i className="bi bi-eye"></i> : <i className="bi bi-eye-slash"></i>}
+                    </button>
+                    <div className="invalid-feedback">
+                      Ingresa tu contraseña
                     </div>
                   </div>
                 </div>
+                <div className="form-group mb-3">
+                  <div className="form-check">
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      id="rememberMe"
+                      name="rememberMe"
+                      value={values.rememberMe}
+                      onChange={handleChange}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="rememberMe"
+                    >
+                      Recuérdame
+                    </label>
+                  </div>
+                </div>
+                <div className="form-group d-grid gap-2 mb-3">
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-lg"
+                    disabled={loading}
+                  >
+                    {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
+                  </button>
+                </div>
+              </form>
+              <div className="d-flex justify-content-center">
+                <div>No tienes una cuenta?</div>
+                <a
+                  href="#?"
+                  className="text-decoration-none fw-semibold ms-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  data-bs-whatever="@mdo"
+                >
+                  Regístrate
+                </a>
               </div>
-            </section>
+              {error && (
+                <div className="alert alert-danger mt-3" role="alert">
+                  {error}
+                </div>
+              )}
+            </div>
           </div>
+
         </div>
       )}
       <div
