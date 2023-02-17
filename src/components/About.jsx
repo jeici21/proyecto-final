@@ -35,7 +35,7 @@ const About = () => {
                         <div className="container">
                             <h2>Luis Anrrango</h2>
                             <p className="title">Programador</p>
-                            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                            <p>Soy una persona emprendedora con mente abierta a prender nuevas herramientas y tecnologías, mi sueño es crear una StartUp</p>
                             <p>luisitoylag@gmail.com</p>
                             <p className="about-github-container">
                                 <a className="btn btn-success" href='https://github.com/LuisRAnrrango'

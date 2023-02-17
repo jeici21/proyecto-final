@@ -10,75 +10,69 @@ import { loadProducts } from "../api/loadProducts";
 import { loadCategories } from "../api/loadCategories";
 
 const Shop = ({ onAddToCart }) => {
-
-  
   const [products, setProducts] = useState([]);
   const [dataCategory, setDataCategory] = useState([]);
   const { state, setState } = useContext(Context);
-  const [currentUser,setCurrentUser]=useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState("all");
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-    if(localStorage.getItem("currentUser")){
+    if (localStorage.getItem("currentUser")) {
       setCurrentUser(JSON.parse(localStorage.getItem("currentUser")));
     }
     //carga todos los productos del base de datos al inicar este pagina
     getProductsFromDb();
     //carga todas las categorias al momento de iniciar esta pagina
     getCategories();
-   
-   
   }, []);
 
-
- 
   if (currentUser) {
-    console.log(currentUser);
+   // console.log(currentUser);
     localStorage.setItem("rolUser", JSON.stringify(currentUser?.roles[0]?.roleCode));
+    // setState({ ...state, data: currentUser});
   } else {
-    console.log("Cerrado y sin datos desde nav");
+    console.log("Cerrado y sin datos desde SHop");
   }
 
-  let firstName;
+ /*  let firstName;
   let lastName;
   if (state && state.data) {
     firstName = state.data.firstName;
     lastName = state.data.lastName;
+    console.log("dese shop" + firstName);
   }
-
+ */
   const logOut = () => {
     localStorage.clear();
     setState("cerrado Sesion");
     navigate("/");
   };
 
-
   const getProductsFromDb = async () => {
-      const resp= await (await loadProducts()).data;
-      if(resp){
-        setProducts(resp);
-        console.log(resp);
-      }else{
-        setProducts([]);
-      }
+    const resp = await (await loadProducts()).data;
+    if (resp) {
+      setProducts(resp);
+      console.log(resp);
+    } else {
+      setProducts([]);
+    }
   };
 
   const getCategories = async () => {
-    const resp =await (await loadCategories()).data
-    if(resp){
+    const resp = await (await loadCategories()).data;
+    if (resp) {
       setDataCategory(resp);
-    }else{
+    } else {
       setDataCategory([]);
     }
-  }
-
+  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const [dataPerPage, setDataPerPage] = useState(5);
@@ -90,21 +84,20 @@ const Shop = ({ onAddToCart }) => {
     setCurrentPage(1);
   };
 
-
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
     setCurrentPage(1);
   };
 
   // const filteredData = products.filter((item) => {
-  //   
+  //
   //   return item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.price.toString().includes(searchTerm.toLowerCase());
   // });
 
   const filteredData = products?.filter((item) => {
-    if (category !== 'all') {
+    if (category !== "all") {
       // Si se ha seleccionado una categoría específica, filtrar solo los productos de esa categoría
-      if (searchTerm.trim() === '') {
+      if (searchTerm.trim() === "") {
         // Si el término de búsqueda está vacío, aplicar solo el filtro por categoría
         return item.productCategory.id === parseInt(category);
       } else {
@@ -117,7 +110,8 @@ const Shop = ({ onAddToCart }) => {
       }
     } else {
       return (
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.price.toString().includes(searchTerm.toLowerCase())
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.price.toString().includes(searchTerm.toLowerCase())
       );
     }
   });
@@ -141,8 +135,6 @@ const Shop = ({ onAddToCart }) => {
   });
   return (
     <div className="main_container">
-
-
       {loading ? (
         <div className="loader-container">
           <div className="spinner" />
@@ -152,17 +144,27 @@ const Shop = ({ onAddToCart }) => {
           <div className="container">
             <div className="section-header">
               {/* <i className="fa fa-cart-arrow-down" /> */}
-              <h2 className="m-0">Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
-              <p className="mt-0">Aquí podrá revisar nuestro catálogo de productos.</p>
+              <h2 className="m-0">
+                Productos <img src={logo} alt="KMarket" className="logo-shop" />
+              </h2>
+              <p className="mt-0">
+                Aquí podrá revisar nuestro catálogo de productos.
+              </p>
             </div>
             <div className="data-table-header pb-4">
-              <select name="category" id="selCategory" value={category} onChange={(e) => setCategory(e.target.value)} >
-                <option value="all" >Seleccione una categoría: </option>
-                {
-                  dataCategory.map((category) => (
-                    <option key={category.id} value={category.id}> {category.name}</option>
-                  ))
-                }
+              <select
+                name="category"
+                id="selCategory"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="all">Seleccione una categoría: </option>
+                {dataCategory.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {" "}
+                    {category.name}
+                  </option>
+                ))}
               </select>
               <select value={dataPerPage} onChange={handleChangepage}>
                 <option value={5}>5</option>
@@ -176,25 +178,32 @@ const Shop = ({ onAddToCart }) => {
                 onChange={handleSearch}
                 className=""
               />
-
             </div>
             <div className="row">
               {currentData.map((result) => {
                 return (
-                    <div className="floating col-sm-6 col-lg-3 " key={result.id}>
+                  <div className="floating col-sm-6 col-lg-3 " key={result.id}>
                     <div className="single-publication border rounded">
                       <figure>
                         <a href="#?" className="product-image">
                           <img src={result.img} alt="Publication" />
                         </a>
                         <ul>
-                          <li >
-                            <a href="#?" title="Añadir a Favoritos" className="bg">
+                          <li>
+                            <a
+                              href="#?"
+                              title="Añadir a Favoritos"
+                              className="bg"
+                            >
                               <i className="fa fa-heart" />
                             </a>
                           </li>
-                          <li >
-                            <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido" className="bg">
+                          <li>
+                            <NavLink
+                              to={`/details/id:${result.id}`}
+                              title="Vistazo Rápido"
+                              className="bg"
+                            >
                               <i className="fa fa-search " />
                             </NavLink>
                           </li>
@@ -203,13 +212,18 @@ const Shop = ({ onAddToCart }) => {
                       <div className="publication-content m-0 p-0">
                         <span className="category">Productos</span>
                         <h3>
-                          <a className="text-decoration-none" href="#?">{result.name}</a>
+                          <a className="text-decoration-none" href="#?">
+                            {result.name}
+                          </a>
                         </h3>
-                     
+
                         <h4 className="price">${result.price}</h4>
                       </div>
                       <div className="add-to-cart">
-                        <button className="default-btn" onClick={() => onAddToCart(result)}>
+                        <button
+                          className="default-btn"
+                          onClick={() => onAddToCart(result)}
+                        >
                           Añadir al Carro
                         </button>
                       </div>
@@ -219,10 +233,10 @@ const Shop = ({ onAddToCart }) => {
               })}
             </div>
           </div>
-          <div className='pagination'>{renderPageNumbers}</div>
+          <div className="pagination">{renderPageNumbers}</div>
         </section>
-      )};
-
+      )}
+      ;
     </div>
   );
 };
