@@ -3,9 +3,27 @@ import { useEffect, useState } from "react";
 
 const Carousel = () => {
     const [products, setProducts] = useState([]);
-
+    function shuffle(array) {
+        let currentIndex = array.length,
+          temporaryValue,
+          randomIndex;
+      
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+      
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+      
+        return array;
+      }
     useEffect(() => {//obteniendo los 3 primeros productos de la api
-        axios.get("http://localhost:8080/product").then(res => setProducts(res.data.slice(0, 3)))
+        axios.get("http://localhost:8080/product").then(res => setProducts(shuffle(res.data).slice(0, 3)))
             .catch(error => console.error(error));
     }, []);
 

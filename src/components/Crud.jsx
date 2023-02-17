@@ -582,463 +582,473 @@ const Crud = () => {
 
     return (
         <>
-        {rolUser === '"ADMIN"' ? (
-        <Container className='text-center cont' >
-            <br />
-            <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
-            <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>Agregar categoría</button>
-            <button className="btn btn-warning  m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>Agregar descuento</button>
-            <br /><br />
-            <div className='d-flex justify-content-center'>
-                <div className='m-2 form-check'>
-                    <input type="radio" name="table" id='productos' className="btn-check" value="1"
-                        onChange={handleRadioChange} checked={selectedTable === 1} />
-                    <label htmlFor="productos" className='btn btn-outline-success'>Productos</label>
-                </div>
-                <div className='m-2 form-check'>
-                    <input type="radio" name="table" id='descuentos' className="btn-check" value="2"
-                        onChange={handleRadioChange} checked={selectedTable === 2} />
-                    <label htmlFor="descuentos" className='btn btn-outline-success'>Descuentos</label>
-                </div>
-                <div className='m-2 form-check'>
-                    <input type="radio" name="table" id='categorias' className="btn-check" value="3"
-                        onChange={handleRadioChange} checked={selectedTable === 3} />
-                    <label htmlFor="categorias" className='btn btn-outline-success'>Categorías</label>
-                </div>
-            </div>
-            {selectedTable === 1 && (
-                <div className='p-2'>
-                    {/* <h2> Tabla de productos</h2> */}
-                    <div className="data-table-header">
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            value={searchTerm}
-                            onChange={handleSearch}
-                        />
-                        <select value={dataPerPage} onChange={handleChangepage}>
-                            <option value={5}>5</option>
-                            <option value={10}>10</option>
-                            <option value={20}>20</option>
-                        </select>
-                    </div>
-                    <table className="table table-responsive table-striped tablebg mt-3">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Categoría</th>
-                                <th>Inventario</th>
-                                <th>Precio</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {currentData.map(product => (
-                                <tr key={product.id}>
-                                    <td> <img src={product.img} alt="Publication" width="50" height="50" /></td>
-                                    <td>{product.name}</td>
-                                    <td>{product.description}</td>
-                                    <td>{product.productCategory.name}</td>
-                                    <td>{product.productInventory.quantity}</td>
-                                    <td>{currencyFormatter(product.price)}</td>
-                                    <td>
-                                        <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}>
-                                                <PencilSquare size={15} />
-                                            </button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}>
-                                                <Trash3 size={15} />
-                                            </button>
-                                        </div>
-
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-
-                    </table>
-                    <div className='pagination'>{renderPageNumbers}</div>
-                </div>
-            )}
-            {selectedTable === 3 && (
-                <div className='p-2'>
-                    {/* <h2> Tabla de categorias</h2> */}
-                    <div className="data-table-header">
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            value={searchTerm}
-                            onChange={handleSearch}
-                        />
-                        <select value={dataPerPageCat} onChange={handleChangepageCat}>
-                            <option value={5}>5</option>
-                            <option value={10}>10</option>
-                            <option value={20}>20</option>
-                        </select>
-                    </div>
-                    <table className="table table-responsive table-striped tablebg mt-3">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {currentDataCat.map(product => (
-                                <tr key={product.id}>
-                                    <td>{product.id}</td>
-                                    <td>{product.name}</td>
-                                    <td>{product.longDesc}</td>
-                                    <td>
-                                        <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}>
-                                                <PencilSquare size={15} />
-                                            </button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}>
-                                                <Trash3 size={15} />
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-
-                        </tbody>
-                    </table>
-                    <div className="pagination">{renderPageNumbersCat}</div>
-                </div>
-            )}
-            {selectedTable === 2 && (
-                <div className='p-2'>
-                    {/* <h2> Tabla de descuento</h2> */}
-                    <div className="data-table-header">
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            value={searchTerm}
-                            onChange={handleSearch}
-                        />
-                        <select value={dataPerPageDesc} onChange={handleChangepageDesc}>
-                            <option value={5}>5</option>
-                            <option value={10}>10</option>
-                            <option value={20}>20</option>
-                        </select>
-                    </div>
-                    <table className="table table-responsive table-striped tablebg mt-3">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th>Descuento</th>
-                                <th>Acciones</th>
-                                {/* <th>Activo</th> */}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {currentDataDesc.map(product => (
-                                <tr key={product.id}>
-                                    <td>{product.id}</td>
-                                    <td>{product.name}</td>
-                                    <td>{product.longDesc}</td>
-                                    <td>{product.discount_percent}</td>
-                                    {/* <td>{product.active}</td> */}
-                                    <td>
-                                        <div className='d-flex text-center'>
-                                            <button className="btn btn-primary m-1" onClick={() => seleccionarModaldesc(product, "Editar")}>
-                                                <PencilSquare size={15} />
-                                            </button>
-                                            <button className="btn btn-danger m-1" onClick={() => seleccionarModaldesc(product, "Eliminar")}>
-                                                <Trash3 size={15} />
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-
-                        </tbody>
-                    </table>
-                    <div className="pagination">{renderPageNumbersDesc}</div>
-                </div>
-            )}
-
-            {/*  MODALES REFERENTES A PRODUCTOS ========================================================================== */}
-            <Modal isOpen={modalInsertar}>
-                <ModalHeader>Insertar Producto</ModalHeader>
-                <ModalBody>
-                    <div className="form-group">
-                        <label>Nombre: </label>
-                        <br />
-                        <input type="text" className="form-control" name="name" onChange={handleChangeProduct} />
-                        <br />
-                        <label>Descripción: </label>
-                        <br />
-                        <textarea type="text" className="form-control" name="description" onChange={handleChangeProduct} />
-                        <br />
-                        <label>Descripción larga: </label>
-                        <br />
-                        <textarea type="text" className="form-control" name="longdesc" onChange={handleChangeProduct} />
-                        <br />
-                        <label>Precio: </label>
-                        <br />
-                        <input type="text" className="form-control" name="price" onChange={handleChangeProduct} />
-                        <br />
-                        <label>Categoría: </label>
-                        <br />
-                        <select name="category" id="selCategory" onClick={handleChangeProduct} >
-                            <option>Seleccione una categoría: </option>
-                            {
-                                dataCategory.map((category) => (
-                                    <option key={category.id} value={category.id}> {category.name}</option>
-                                ))
-                            }
-                        </select>
-                        <br /><br />
-                        <label>Ofertas y descuentos: </label>
-                        <br />
-                        <select name="discount" id="selDiscount" onClick={handleChangeProduct} >
-                            <option>Seleccione un descuento: </option>
-                            {
-                                dataDiscount.map((discount) => (
-                                    <option key={discount.id} value={discount.id}> {discount.name}</option>
-                                ))
-                            }
-                        </select>
-                        <br /><br />
-                        <label>Stock: </label>
-                        <br />
-                        <input type="text" className="form-control" name="Inventory" onChange={handleChangeProduct} />
-                        <label>Dimensiones: </label>
-                        <br />
-                        <input type="text" className="form-control" name="dimensions" onChange={handleChangeProduct} />
-                        <label>Peso: </label>
-                        <br />
-                        <input type="text" className="form-control" name="weight" onChange={handleChangeProduct} />
-                        <label>Ruta de Imagen: </label>
-                        <br />
-                        <input type="text" className="form-control" name="img" onChange={handleChangeProduct} />
+            {rolUser === '"ADMIN"' ? (
+                <Container className='text-center cont' >
+                    <br />
+                    <button className="btn btn-succes m-2" onClick={() => abrirCerrarModalInsertar()}>Agregar producto</button>
+                    <button className="btn btn-info m-2" onClick={() => abrirCerrarModalInsertarCategoria()}>Agregar categoría</button>
+                    <button className="btn btn-warning  m-2" onClick={() => abrirCerrarModalInsertarDescuento()}>Agregar descuento</button>
+                    <br /><br />
+                    <div className='d-flex justify-content-center'>
+                        <ul className="nav nav-tabs">
+                            <li className="nav-item">
+                                <label className={`nav-link ${selectedTable === 1 ? 'active' : ''}`} htmlFor="productos">
+                                    Productos
+                                    <input type="radio" name="table" id="productos" className="visually-hidden" value="1"
+                                        onChange={handleRadioChange} checked={selectedTable === 1} />
+                                </label>
+                            </li>
+                            <li className="nav-item">
+                                <label className={`nav-link ${selectedTable === 2 ? 'active' : ''}`} htmlFor="descuentos">
+                                Descuentos
+                                    <input type="radio" name="table" id="descuentos" className="visually-hidden" value="2"
+                                        onChange={handleRadioChange} checked={selectedTable === 2} />
+                                </label>
+                            </li>
+                            <li className="nav-item">
+                                <label className={`nav-link ${selectedTable === 3 ? 'active' : ''}`} htmlFor="categorias">
+                                Categorías
+                                    <input type="radio" name="table" id="categorias" className="visually-hidden" value="3"
+                                        onChange={handleRadioChange} checked={selectedTable === 3} />
+                                </label>
+                            </li>
+                        </ul>
 
                     </div>
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-primary m-1" onClick={() => peticionPost()}>Registrar</button>
-                    <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertar()}>Cancelar</button>
-                </ModalFooter>
-            </Modal>
+                    {selectedTable === 1 && (
+                        <div className='p-2'>
+                            {/* <h2> Tabla de productos</h2> */}
+                            <div className="data-table-header justify-content-between p-2">
+                                
+                                <select value={dataPerPage} onChange={handleChangepage}>
+                                    <option value={5}>5</option>
+                                    <option value={10}>10</option>
+                                    <option value={20}>20</option>
+                                </select>
+                                <input
+                                    type="text"
+                                    placeholder="Search"
+                                    value={searchTerm}
+                                    onChange={handleSearch}
+                                />
+                            </div>
+                            <table className="table table-responsive table-striped tablebg mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Categoría</th>
+                                        <th>Inventario</th>
+                                        <th>Precio</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {currentData.map(product => (
+                                        <tr key={product.id}>
+                                            <td> <img src={product.img} alt="Publication" width="50" height="50" /></td>
+                                            <td>{product.name}</td>
+                                            <td>{product.description}</td>
+                                            <td>{product.productCategory.name}</td>
+                                            <td>{product.productInventory.quantity}</td>
+                                            <td>{currencyFormatter(product.price)}</td>
+                                            <td>
+                                                <div className='d-flex text-center'>
+                                                    <button className="btn btn-primary m-1" onClick={() => seleccionarModal(product, "Editar")}>
+                                                        <PencilSquare size={15} />
+                                                    </button>
+                                                    <button className="btn btn-danger m-1" onClick={() => seleccionarModal(product, "Eliminar")}>
+                                                        <Trash3 size={15} />
+                                                    </button>
+                                                </div>
 
-            <Modal isOpen={modalEditar}>
-                <ModalHeader>Editar Producto</ModalHeader>
-                <ModalBody>
-                    <div className="form-group">
-                        <label>Nombre: </label>
-                        <br />
-                        <input type="text" className="form-control" name="name" onChange={handleChange} value={SelectedProduct.name} />
-                        <br />
-                        <label>Descripción: </label>
-                        <br />
-                        <textarea type="text" className="form-control" name="description" onChange={handleChange} value={SelectedProduct.description} />
-                        <br />
-                        <label>Descripción larga: </label>
-                        <br />
-                        <textarea type="text" className="form-control" name="longdesc" onChange={handleChange} value={SelectedProduct.longdesc} />
-                        <br />
-                        <label>Precio: </label>
-                        <br />
-                        <input type="text" className="form-control" name="price" onChange={handleChange} value={SelectedProduct.price} />
-                        <br />
-                        <label>Stock: </label>
-                        <br />
-                        <input type="text" className="form-control" name="quantity" onChange={handleChange} value={SelectedProduct.productInventory.quantity} />
-                        <br />
-                        <label>Categoría: </label>
-                        <br />
-                        <select name="Category" id="selCategory" onChange={handleChange} value={SelectedProduct.productCategory.id}>
-                            <option value={-1}>Seleccione una opción: </option>
-                            {
-                                dataCategory.map((category) => (
-                                    <option key={category.id} value={category.id}> {category.name} </option>
-                                ))
-                            }
-                        </select>
-                        <br /><br />
-                        <label>Ofertas y descuentos: </label>
-                        <br />
-                        <select name="discount" id="selDiscount" onChange={handleChange} value={SelectedProduct.discount.id} >
-                            {/*  */}
-                            <option>Seleccione un descuento: </option>
-                            {
-                                dataDiscount.map((discount) => (
-                                    <option key={discount.id} value={discount.id}> {discount.name}</option>
-                                ))
-                            }
-                        </select>
-                        <br /><br />
-                        <label>Dimensiones: </label>
-                        <br />
-                        <input type="text" className="form-control" name="dimensions" onChange={handleChange} value={SelectedProduct && SelectedProduct.dimensions} />
-                        <label>Peso: </label>
-                        <br />
-                        <input type="text" className="form-control" name="weight" onChange={handleChange} value={SelectedProduct && SelectedProduct.weight} />
-                        <label>Ruta de Imagen: </label>
-                        <br />
-                        <input type="text" className="form-control" name="img" onChange={handleChange} value={SelectedProduct && SelectedProduct.img} />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
 
-                    </div>
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-primary m-1" onClick={() => peticionPut()}>Editar</button>
-                    <button className="btn btn-danger" onClick={() => abrirCerrarModalEditar()}>Cancelar</button>
-                </ModalFooter>
-            </Modal>
+                            </table>
+                            <div className='pagination'>{renderPageNumbers}</div>
+                        </div>
+                    )}
+                    {selectedTable === 3 && (
+                        <div className='p-2'>
+                            {/* <h2> Tabla de categorias</h2> */}
+                            <div className="data-table-header justify-content-between p-2">                               
+                                <select value={dataPerPageCat} onChange={handleChangepageCat}>
+                                    <option value={5}>5</option>
+                                    <option value={10}>10</option>
+                                    <option value={20}>20</option>
+                                </select>
+                                <input
+                                    type="text"
+                                    placeholder="Search"
+                                    value={searchTerm}
+                                    onChange={handleSearch}
+                                />
+                            </div>
+                            <table className="table table-responsive table-striped tablebg mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {currentDataCat.map(product => (
+                                        <tr key={product.id}>
+                                            <td>{product.id}</td>
+                                            <td>{product.name}</td>
+                                            <td>{product.longDesc}</td>
+                                            <td>
+                                                <div className='d-flex text-center'>
+                                                    <button className="btn btn-primary m-1" onClick={() => seleccionarModalcate(product, "Editar")}>
+                                                        <PencilSquare size={15} />
+                                                    </button>
+                                                    <button className="btn btn-danger m-1" onClick={() => seleccionarModalcate(product, "Eliminar")}>
+                                                        <Trash3 size={15} />
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
 
-            <Modal isOpen={modalEliminar}>
-                <ModalBody>
-                    <div>
-                        ¿Estás seguro de que deseas eliminar el producto {SelectedProduct && SelectedProduct.name}?
-                    </div>
+                                </tbody>
+                            </table>
+                            <div className="pagination">{renderPageNumbersCat}</div>
+                        </div>
+                    )}
+                    {selectedTable === 2 && (
+                        <div className='p-2'>
+                            {/* <h2> Tabla de descuento</h2> */}
+                            <div className="data-table-header justify-content-between p-2">                               
+                                <select value={dataPerPageDesc} onChange={handleChangepageDesc}>
+                                    <option value={5}>5</option>
+                                    <option value={10}>10</option>
+                                    <option value={20}>20</option>
+                                </select>
+                                <input
+                                    type="text"
+                                    placeholder="Search"
+                                    value={searchTerm}
+                                    onChange={handleSearch}
+                                />
+                            </div>
+                            <table className="table table-responsive table-striped tablebg mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Descuento</th>
+                                        <th>Acciones</th>
+                                        {/* <th>Activo</th> */}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {currentDataDesc.map(product => (
+                                        <tr key={product.id}>
+                                            <td>{product.id}</td>
+                                            <td>{product.name}</td>
+                                            <td>{product.longDesc}</td>
+                                            <td>{product.discount_percent}</td>
+                                            {/* <td>{product.active}</td> */}
+                                            <td>
+                                                <div className='d-flex text-center'>
+                                                    <button className="btn btn-primary m-1" onClick={() => seleccionarModaldesc(product, "Editar")}>
+                                                        <PencilSquare size={15} />
+                                                    </button>
+                                                    <button className="btn btn-danger m-1" onClick={() => seleccionarModaldesc(product, "Eliminar")}>
+                                                        <Trash3 size={15} />
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
 
-                    <div className='text-center'>
-                        <img src={SelectedProduct.img} alt="Publication" width="250" height="250" />
-                    </div>
+                                </tbody>
+                            </table>
+                            <div className="pagination">{renderPageNumbersDesc}</div>
+                        </div>
+                    )}
 
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-danger" onClick={() => peticionDelete()}>
-                        Sí
-                    </button>
-                    <button
-                        className="btn btn-secondary"
-                        onClick={() => abrirCerrarModalEliminar()}>
-                        No
-                    </button>
-                </ModalFooter>
-            </Modal>
+                    {/*  MODALES REFERENTES A PRODUCTOS ========================================================================== */}
+                    <Modal isOpen={modalInsertar}>
+                        <ModalHeader>Insertar Producto</ModalHeader>
+                        <ModalBody>
+                            <div className="form-group">
+                                <label>Nombre: </label>
+                                <br />
+                                <input type="text" className="form-control" name="name" onChange={handleChangeProduct} />
+                                <br />
+                                <label>Descripción: </label>
+                                <br />
+                                <textarea type="text" className="form-control" name="description" onChange={handleChangeProduct} />
+                                <br />
+                                <label>Descripción larga: </label>
+                                <br />
+                                <textarea type="text" className="form-control" name="longdesc" onChange={handleChangeProduct} />
+                                <br />
+                                <label>Precio: </label>
+                                <br />
+                                <input type="text" className="form-control" name="price" onChange={handleChangeProduct} />
+                                <br />
+                                <label>Categoría: </label>
+                                <br />
+                                <select name="category" id="selCategory" onClick={handleChangeProduct} >
+                                    <option>Seleccione una categoría: </option>
+                                    {
+                                        dataCategory.map((category) => (
+                                            <option key={category.id} value={category.id}> {category.name}</option>
+                                        ))
+                                    }
+                                </select>
+                                <br /><br />
+                                <label>Ofertas y descuentos: </label>
+                                <br />
+                                <select name="discount" id="selDiscount" onClick={handleChangeProduct} >
+                                    <option>Seleccione un descuento: </option>
+                                    {
+                                        dataDiscount.map((discount) => (
+                                            <option key={discount.id} value={discount.id}> {discount.name}</option>
+                                        ))
+                                    }
+                                </select>
+                                <br /><br />
+                                <label>Stock: </label>
+                                <br />
+                                <input type="text" className="form-control" name="Inventory" onChange={handleChangeProduct} />
+                                <label>Dimensiones: </label>
+                                <br />
+                                <input type="text" className="form-control" name="dimensions" onChange={handleChangeProduct} />
+                                <label>Peso: </label>
+                                <br />
+                                <input type="text" className="form-control" name="weight" onChange={handleChangeProduct} />
+                                <label>Ruta de Imagen: </label>
+                                <br />
+                                <input type="text" className="form-control" name="img" onChange={handleChangeProduct} />
 
-            {/*  MODALES REFERENTES A CATEGORIA ========================================================================== */}
-            <Modal isOpen={modalInsertarCategoria}>
-                <ModalHeader>Insertar Categoria</ModalHeader>
-                <ModalBody>
-                    <div className="form-group">
-                        <label>Nombre: </label>
-                        <br />
-                        <input type="text" className="form-control" name="name" onChange={handleChangeProduct} />
-                        <br />
-                        <label>description: </label>
-                        <br />
-                        <textarea type="text" className="form-control" name="description" onChange={handleChangeProduct} />
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <button className="btn btn-primary m-1" onClick={() => peticionPost()}>Registrar</button>
+                            <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertar()}>Cancelar</button>
+                        </ModalFooter>
+                    </Modal>
 
-                    </div>
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-primary m-1" onClick={() => peticionPostCategoria()}>Registrar    </button>
-                    <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertarCategoria()}>Cancelar</button>
-                </ModalFooter>
-            </Modal>
+                    <Modal isOpen={modalEditar}>
+                        <ModalHeader>Editar Producto</ModalHeader>
+                        <ModalBody>
+                            <div className="form-group">
+                                <label>Nombre: </label>
+                                <br />
+                                <input type="text" className="form-control" name="name" onChange={handleChange} value={SelectedProduct.name} />
+                                <br />
+                                <label>Descripción: </label>
+                                <br />
+                                <textarea type="text" className="form-control" name="description" onChange={handleChange} value={SelectedProduct.description} />
+                                <br />
+                                <label>Descripción larga: </label>
+                                <br />
+                                <textarea type="text" className="form-control" name="longdesc" onChange={handleChange} value={SelectedProduct.longdesc} />
+                                <br />
+                                <label>Precio: </label>
+                                <br />
+                                <input type="text" className="form-control" name="price" onChange={handleChange} value={SelectedProduct.price} />
+                                <br />
+                                <label>Stock: </label>
+                                <br />
+                                <input type="text" className="form-control" name="quantity" onChange={handleChange} value={SelectedProduct.productInventory.quantity} />
+                                <br />
+                                <label>Categoría: </label>
+                                <br />
+                                <select name="Category" id="selCategory" onChange={handleChange} value={SelectedProduct.productCategory.id}>
+                                    <option value={-1}>Seleccione una opción: </option>
+                                    {
+                                        dataCategory.map((category) => (
+                                            <option key={category.id} value={category.id}> {category.name} </option>
+                                        ))
+                                    }
+                                </select>
+                                <br /><br />
+                                <label>Ofertas y descuentos: </label>
+                                <br />
+                                <select name="discount" id="selDiscount" onChange={handleChange} value={SelectedProduct.discount.id} >
+                                    {/*  */}
+                                    <option>Seleccione un descuento: </option>
+                                    {
+                                        dataDiscount.map((discount) => (
+                                            <option key={discount.id} value={discount.id}> {discount.name}</option>
+                                        ))
+                                    }
+                                </select>
+                                <br /><br />
+                                <label>Dimensiones: </label>
+                                <br />
+                                <input type="text" className="form-control" name="dimensions" onChange={handleChange} value={SelectedProduct && SelectedProduct.dimensions} />
+                                <label>Peso: </label>
+                                <br />
+                                <input type="text" className="form-control" name="weight" onChange={handleChange} value={SelectedProduct && SelectedProduct.weight} />
+                                <label>Ruta de Imagen: </label>
+                                <br />
+                                <input type="text" className="form-control" name="img" onChange={handleChange} value={SelectedProduct && SelectedProduct.img} />
 
-            <Modal isOpen={modalEliminarcate}>
-                <ModalBody>
-                    <div>
-                        ¿Estás seguro de que deseas eliminar la categoria {SelectedProduct && SelectedProduct.name}?
-                    </div>
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-danger" onClick={() => peticionDeletecate()}>
-                        Sí
-                    </button>
-                    <button
-                        className="btn btn-secondary"
-                        onClick={() => abrirCerrarModalEliminarcate()}>
-                        No
-                    </button>
-                </ModalFooter>
-            </Modal>
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <button className="btn btn-primary m-1" onClick={() => peticionPut()}>Editar</button>
+                            <button className="btn btn-danger" onClick={() => abrirCerrarModalEditar()}>Cancelar</button>
+                        </ModalFooter>
+                    </Modal>
 
-            <Modal isOpen={modalEditarcate}>
-                <ModalHeader>Editar Categoria</ModalHeader>
-                <ModalBody>
-                    <div className="form-group">
-                        <label>Nombre: </label>
-                        <br />
-                        <input type="text" className="form-control" name="name" onChange={handleChangecate} value={SelectedCate.name} />
-                        <br />
-                        <label>Descripción: </label>
-                        <textarea type="text" className="form-control" name="longDesc" onChange={handleChangecate} value={SelectedCate.longDesc} />
-                        <br />
-                    </div>
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-primary m-1" onClick={() => peticionPutcate()}>Editar</button>
-                    <button className="btn btn-danger" onClick={() => abrirCerrarModalEditarcate()}>Cancelar</button>
-                </ModalFooter>
-            </Modal>
-            {/*  MODALES REFERENTES A DESCUENTO ========================================================================== */}
-            <Modal isOpen={modalInsertarDescuento}>
-                <ModalHeader>Insertar Descuento</ModalHeader>
-                <ModalBody>
-                    <div className="form-group">
-                        <label>Nombre: </label>
-                        <br />
-                        <input type="text" className="form-control" name="name" onChange={handleChangeProduct} />
-                        <br />
-                        <label>description: </label>
-                        <br />
-                        <textarea type="text" className="form-control" name="description" onChange={handleChangeProduct} />
-                        <label>Descuento: </label>
-                        <br />
-                        <input type="text" className="form-control" name="discount" onChange={handleChangeProduct} />
-                    </div>
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-primary m-1" onClick={() => peticionPostDescuento()}>Registrar    </button>
-                    <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertarDescuento()}>Cancelar</button>
-                </ModalFooter>
-            </Modal>
+                    <Modal isOpen={modalEliminar}>
+                        <ModalBody>
+                            <div>
+                                ¿Estás seguro de que deseas eliminar el producto {SelectedProduct && SelectedProduct.name}?
+                            </div>
 
-            <Modal isOpen={modalEditardesc}>
-                <ModalHeader>Editar Producto</ModalHeader>
-                <ModalBody>
-                    <div className="form-group">
-                        <label>Nombre: </label>
-                        <br />
-                        <input type="text" className="form-control" name="name" onChange={handleChangeDesc} value={SelectedDesc.name} />
-                        <br />
-                        <label>Descripción: </label>
-                        <textarea type="text" className="form-control" name="longDesc" onChange={handleChangeDesc} value={SelectedDesc.longDesc} />
-                        <br />
-                        <label>Descripción: </label>
-                        <input type="text" className="form-control" name="discount_percent" onChange={handleChangeDesc} value={SelectedDesc.discount_percent} />
-                        <br />
-                    </div>
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-primary m-1" onClick={() => peticionPutdesc()}>Editar</button>
-                    <button className="btn btn-danger" onClick={() => abrirCerrarModalEditarDesc()}>Cancelar</button>
-                </ModalFooter>
-            </Modal>
+                            <div className='text-center'>
+                                <img src={SelectedProduct.img} alt="Publication" width="250" height="250" />
+                            </div>
 
-            <Modal isOpen={modalEliminardesc}>
-                <ModalBody>
-                    <div>
-                        ¿Estás seguro de que deseas eliminar la categoria {SelectedDesc && SelectedDesc.name}?
-                    </div>
-                </ModalBody>
-                <ModalFooter>
-                    <button className="btn btn-danger" onClick={() => peticionDeletedesc()}>
-                        Sí
-                    </button>
-                    <button
-                        className="btn btn-secondary"
-                        onClick={() => abrirCerrarModalEliminarDesc()}>
-                        No
-                    </button>
-                </ModalFooter>
-            </Modal>
-        </Container>
- ) : null}
- </>
+                        </ModalBody>
+                        <ModalFooter>
+                            <button className="btn btn-danger" onClick={() => peticionDelete()}>
+                                Sí
+                            </button>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={() => abrirCerrarModalEliminar()}>
+                                No
+                            </button>
+                        </ModalFooter>
+                    </Modal>
+
+                    {/*  MODALES REFERENTES A CATEGORIA ========================================================================== */}
+                    <Modal isOpen={modalInsertarCategoria}>
+                        <ModalHeader>Insertar Categoria</ModalHeader>
+                        <ModalBody>
+                            <div className="form-group">
+                                <label>Nombre: </label>
+                                <br />
+                                <input type="text" className="form-control" name="name" onChange={handleChangeProduct} />
+                                <br />
+                                <label>description: </label>
+                                <br />
+                                <textarea type="text" className="form-control" name="description" onChange={handleChangeProduct} />
+
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <button className="btn btn-primary m-1" onClick={() => peticionPostCategoria()}>Registrar    </button>
+                            <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertarCategoria()}>Cancelar</button>
+                        </ModalFooter>
+                    </Modal>
+
+                    <Modal isOpen={modalEliminarcate}>
+                        <ModalBody>
+                            <div>
+                                ¿Estás seguro de que deseas eliminar la categoria {SelectedProduct && SelectedProduct.name}?
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <button className="btn btn-danger" onClick={() => peticionDeletecate()}>
+                                Sí
+                            </button>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={() => abrirCerrarModalEliminarcate()}>
+                                No
+                            </button>
+                        </ModalFooter>
+                    </Modal>
+
+                    <Modal isOpen={modalEditarcate}>
+                        <ModalHeader>Editar Categoria</ModalHeader>
+                        <ModalBody>
+                            <div className="form-group">
+                                <label>Nombre: </label>
+                                <br />
+                                <input type="text" className="form-control" name="name" onChange={handleChangecate} value={SelectedCate.name} />
+                                <br />
+                                <label>Descripción: </label>
+                                <textarea type="text" className="form-control" name="longDesc" onChange={handleChangecate} value={SelectedCate.longDesc} />
+                                <br />
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <button className="btn btn-primary m-1" onClick={() => peticionPutcate()}>Editar</button>
+                            <button className="btn btn-danger" onClick={() => abrirCerrarModalEditarcate()}>Cancelar</button>
+                        </ModalFooter>
+                    </Modal>
+                    {/*  MODALES REFERENTES A DESCUENTO ========================================================================== */}
+                    <Modal isOpen={modalInsertarDescuento}>
+                        <ModalHeader>Insertar Descuento</ModalHeader>
+                        <ModalBody>
+                            <div className="form-group">
+                                <label>Nombre: </label>
+                                <br />
+                                <input type="text" className="form-control" name="name" onChange={handleChangeProduct} />
+                                <br />
+                                <label>description: </label>
+                                <br />
+                                <textarea type="text" className="form-control" name="description" onChange={handleChangeProduct} />
+                                <label>Descuento: </label>
+                                <br />
+                                <input type="text" className="form-control" name="discount" onChange={handleChangeProduct} />
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <button className="btn btn-primary m-1" onClick={() => peticionPostDescuento()}>Registrar    </button>
+                            <button className="btn btn-danger" onClick={() => abrirCerrarModalInsertarDescuento()}>Cancelar</button>
+                        </ModalFooter>
+                    </Modal>
+
+                    <Modal isOpen={modalEditardesc}>
+                        <ModalHeader>Editar Producto</ModalHeader>
+                        <ModalBody>
+                            <div className="form-group">
+                                <label>Nombre: </label>
+                                <br />
+                                <input type="text" className="form-control" name="name" onChange={handleChangeDesc} value={SelectedDesc.name} />
+                                <br />
+                                <label>Descripción: </label>
+                                <textarea type="text" className="form-control" name="longDesc" onChange={handleChangeDesc} value={SelectedDesc.longDesc} />
+                                <br />
+                                <label>Descripción: </label>
+                                <input type="text" className="form-control" name="discount_percent" onChange={handleChangeDesc} value={SelectedDesc.discount_percent} />
+                                <br />
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <button className="btn btn-primary m-1" onClick={() => peticionPutdesc()}>Editar</button>
+                            <button className="btn btn-danger" onClick={() => abrirCerrarModalEditarDesc()}>Cancelar</button>
+                        </ModalFooter>
+                    </Modal>
+
+                    <Modal isOpen={modalEliminardesc}>
+                        <ModalBody>
+                            <div>
+                                ¿Estás seguro de que deseas eliminar la categoria {SelectedDesc && SelectedDesc.name}?
+                            </div>
+                        </ModalBody>
+                        <ModalFooter>
+                            <button className="btn btn-danger" onClick={() => peticionDeletedesc()}>
+                                Sí
+                            </button>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={() => abrirCerrarModalEliminarDesc()}>
+                                No
+                            </button>
+                        </ModalFooter>
+                    </Modal>
+                </Container>
+            ) : null}
+        </>
     );
 }
 

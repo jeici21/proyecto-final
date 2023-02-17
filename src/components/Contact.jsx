@@ -46,11 +46,11 @@ const Contact = () => {
       <div className="col-md-12">
         <div className="wrapper">
           <div className="contact_main_container row no-gutters mb-5">
-            <div className="col-md-6 ">
-              <div className="contact-wrap w-100 p-md-3 p-4 border rounded">
-                <h3 className="mb-4">Contact Us</h3>
-                <div id="form-message-warning" className="mb-4"></div>
-                <div id="form-message-success" className="mb-4">
+            <div className="col-md-5 ">
+              <div className="contact-wrap w-100 p-md-3 p-2 border rounded">
+                <h3 className="mb-2">Contact Us</h3>
+                <div id="form-message-warning" className="mb-2"></div>
+                <div id="form-message-success" className="mb-2">
                   Your message was sent, thank you!
                 </div>
                 <form onSubmit={(e) => { onSubmitHandler(e); }}
@@ -67,7 +67,7 @@ const Contact = () => {
                         </label>
                         <input value={nombre} onChange={(e) => { onChangeHandler("nombre", e.target.value); }}
                           type="text" 
-                          class="form-control"
+                          className="form-control p-1 my-1"
                           name="name"
                           id="name"
                           placeholder="Name"
@@ -82,7 +82,7 @@ const Contact = () => {
                         </label>
                         <input value={email} onChange={(e) => { onChangeHandler("email", e.target.value); }}
                           type="email" required
-                          class="form-control"
+                          className="form-control p-1 my-1"
                           name="email"
                           id="email"
                           placeholder="Email"
@@ -90,28 +90,28 @@ const Contact = () => {
                         />
                       </div>
                     </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label class="label" for="subject">
+                    <div className="col-md-12">
+                      <div className="form-group">
+                        <label className="label" for="subject">
                           Subject
                         </label>
                         <input value={asunto} onChange={(e) => { onChangeHandler("asunto", e.target.value); }}
                           type="text" required
-                          class="form-control"
+                          className="form-control p-1 my-1"
                           name="subject"
                           id="subject"
                           placeholder="Subject"
                         />
                       </div>
                     </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label class="label" for="#">
+                    <div className="col-md-12">
+                      <div className="form-group">
+                        <label className="label" for="#">
                           Message
                         </label>
                         <textarea value={textarea} onChange={(e) => { onChangeHandler("textarea", e.target.value); }}
                           name="message" required
-                          class="form-control"
+                          className="form-control p-1 my-1"
                           id="message"
                           cols="30"
                           rows="4"
@@ -123,7 +123,7 @@ const Contact = () => {
                         <input id="contact-submit"
                           type="submit"
                           value="Send Message"
-                          classNameName="btn-login btn"
+                          className="btn-login btn"
                         />
                         <div className="submitting"></div>
                       </div>

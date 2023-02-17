@@ -23,6 +23,11 @@ textarea {
   font-weight: 300 !important;
   color: rgb(96, 96, 96) !important;
 }
+
+.bdcart{
+  background-color: rgb(129, 253, 255);
+  color: rgb(255, 255, 255) !important;
+}
 .bg{
   color:rgb(255, 255, 255) !important;
 }
@@ -33,9 +38,12 @@ label:hover,
 input:hover,
 textarea:hover {
 
-  color: rgb(255, 157, 0) !important;
+  color: rgb(0, 0, 0) !important;
 }
 
+.bgbtn{
+  background: rgb(244, 230, 170);
+}
 
 
 .h1 {
@@ -186,8 +194,10 @@ textarea:hover {
 }
 
 .btn-success {
-  background-color: #ffa500 !important;
-  border-color: #f6b132 !important;
+  background-color: #30fa84 !important;
+  border-color: #0c470e !important;
+  color: #000 !important;
+  
 }
 
 
@@ -715,6 +725,10 @@ figure img {
   width: 100%;
 }
 
+.about-container .btn-warning,
+.about-container div {
+  width: 100%;
+}
 .about-container img {
   width: 75%;
   height: 75%;
@@ -1089,6 +1103,23 @@ figure img {
 .ReactImageMagnify__EnlargedImageContainer {
   border-radius: 50% !important;
 }
+
+
+.nav-tabs .nav-item .nav-link {
+  background-color: #fcd9a199;
+  color: rgba(0, 0, 0, 0.737)!important;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+  color: rgb(255, 132, 0) !important;
+}
+
+.tab-content {
+  border: 1px solid rgb(103, 255, 194) !important;
+  border-top: transparent !important;
+  padding: 15px !important;
+}
+
 
 /* Extra large devices (large desktops, 1200px and up)*/
 @media (min-width: 1200px) {}

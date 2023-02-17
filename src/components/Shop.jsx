@@ -60,6 +60,7 @@ const Shop = ({ onAddToCart }) => {
   useEffect(() => {
     makeAPICall();
     peticionGetCategory();
+    window.scrollTo(0, 0);
   }, []);
 
   const makeAPICall = async () => {
@@ -85,7 +86,7 @@ const Shop = ({ onAddToCart }) => {
 
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [dataPerPage, setDataPerPage] = useState(5);
+  const [dataPerPage, setDataPerPage] = useState(8);
   const [searchTerm, setSearchTerm] = useState("");
   const indexOfLastData = currentPage * dataPerPage;
   const indexOfFirstData = indexOfLastData - dataPerPage;
@@ -159,33 +160,39 @@ const Shop = ({ onAddToCart }) => {
               <h2 className="m-0">Productos <img src={logo} alt="KMarket" className="logo-shop" /></h2>
               <p className="mt-0">Aquí podrá revisar nuestro catálogo de productos.</p>
             </div>
-            <div className="data-table-header pb-4">
-              <select name="category" id="selCategory" value={category} onChange={(e) => setCategory(e.target.value)} >
-                <option value="all" >Seleccione una categoría: </option>
-                {
-                  dataCategory.map((category) => (
-                    <option key={category.id} value={category.id}> {category.name}</option>
-                  ))
-                }
-              </select>
-              <select value={dataPerPage} onChange={handleChangepage}>
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-                <option value={20}>20</option>
-              </select>
-              <input
-                type="text"
-                placeholder="Search"
-                value={searchTerm}
-                onChange={handleSearch}
-                className=""
-              />
+            <div className="data-table-header pb-4 justify-content-between p-2">
+              <div className="col-s-12 col-sm-10 col-md-4 col-lg-3">
+                <select value={dataPerPage} onChange={handleChangepage}>
+                  <option value={10}>10</option>
+                  <option value={20}>20</option>
+                  <option value={50}>50</option>
+                </select>
+              </div>
+              <div className="col-s-12 col-sm-10 col-md-4 col-lg-3">
+                <select name="category" className="form-control" id="selCategory" value={category} onChange={(e) => setCategory(e.target.value)} >
+                  <option value="all" >Seleccione una categoría: </option>
+                  {
+                    dataCategory.map((category) => (
+                      <option key={category.id} value={category.id}> {category.name}</option>
+                    ))
+                  }
+                </select>
+              </div>
+              <div className="col-s-12 col-sm-10 col-md-4 col-lg-3">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  value={searchTerm}
+                  onChange={handleSearch}
+                  className="form-control"
+                />
+              </div>
 
             </div>
             <div className="row">
               {currentData.map((result) => {
                 return (
-                    <div className="floating col-sm-6 col-lg-3 " key={result.id}>
+                  <div className="floating col-sm-6 col-lg-3 " key={result.id}>
                     <div className="single-publication border rounded">
                       <figure>
                         <a className="product-image">
@@ -193,7 +200,7 @@ const Shop = ({ onAddToCart }) => {
                         </a>
                         <ul>
                           <li >
-                            <a  title="Añadir a Favoritos" className="bg">
+                            <a title="Añadir a Favoritos" className="bg">
                               <i className="fa fa-heart" />
                             </a>
                           </li>
@@ -204,12 +211,12 @@ const Shop = ({ onAddToCart }) => {
                           </li>
                         </ul>
                       </figure>
-                      <div className="publication-content m-0 p-0">
-                        <span className="category">Productos</span>
-                        <h3>
-                          <a className="text-decoration-none" href="#">{result.name}</a>
+                      <div className="publication-content m-0 p-0 flex-wrap">
+                        <span className="category">{result.productCategory.name}</span>
+                        <h3 className="text-truncate">
+                          <a className="text-decoration-none" style={{ whiteSpace: 'nowrap' }}>{result.name}</a>
                         </h3>
-                     
+
                         <h4 className="price">${result.price}</h4>
                       </div>
                       <div className="add-to-cart">
@@ -225,7 +232,7 @@ const Shop = ({ onAddToCart }) => {
           </div>
           <div className='pagination'>{renderPageNumbers}</div>
         </section>
-      )};
+      )}
 
     </div>
   );

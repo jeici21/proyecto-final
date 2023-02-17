@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ReactImageMagnify from 'react-image-magnify';
 
+
 const PageDetails = ({ props, onAddToCart }) => {
     const id = useParams("id:").id.substring(3);
     console.log(id);
@@ -43,14 +44,39 @@ const PageDetails = ({ props, onAddToCart }) => {
         return formatter.format(value)
     }
 
-    // Filtrar productos por categoría
+    function shuffle(array) {
+        let currentIndex = array.length,
+          temporaryValue,
+          randomIndex;
+      
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+      
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+      
+        return array;
+      }
+    // Filtrar productos por categoría y eliminar duplicados
     const filteredProducts = dataP
-        ? dataP.filter((product) => product.productCategory.id === data.productCategory.id)
+        ? shuffle(dataP.filter((product) =>
+            product.productCategory.id === data.productCategory.id &&
+            product.id !== data.id)).slice(0, 4)
         : dataP;
+        
+
+        
 
     useEffect(() => {
         peticionGetProduct();
         peticionGetProductP();
+        window.scrollTo(0, 0);
     }, [id])
     return (
         <>
@@ -59,7 +85,7 @@ const PageDetails = ({ props, onAddToCart }) => {
                     <Row className="ProductDetails justify-content-md-center border-bottom border-left border-right">
                         <Col xs={12} sm={12} md={4} lg={4} xl={4} className="DetailsImg " rounded>
                             {/* <Image src={data.img} alt="Publication" fluid className="DetailsImg" rounded /> */}
-                            <ReactImageMagnify  
+                            <ReactImageMagnify
                                 {...{
                                     smallImage: {
                                         alt: 'Wristwatch by Ted Baker London',
@@ -72,7 +98,7 @@ const PageDetails = ({ props, onAddToCart }) => {
                                         height: 1800
                                     }
                                 }}
-                                />
+                            />
                         </Col>
                         <Col xs={12} sm={12} md={7} lg={7} xl={7} className=''>
                             <Container className="justify-content-center mx-auto">
@@ -118,56 +144,59 @@ const PageDetails = ({ props, onAddToCart }) => {
 
                         </Col>
                     </Row>
-                    <Container className="mt-5">
-                        <Row className="d-flex flex-column align-items-center mb-4 ">
-                            <Col xs={12} sm={8} className="mx-auto">
-                                <h2 className="text-center text-black">PRODUCTOS RELACIONADOS</h2>
-                            </Col>
-                            <Col xs={12} sm={8} md={8} className="mx-auto">
-                                <h3 className="text-center text-black">PROMOCIONES LIMITADAS ¡APROVÉCHALAS AHORA!</h3>
-                            </Col>
-                        </Row>
-                        <Row className="">
-                            {filteredProducts.map((result) => {
-                                return (
-                                    <Col className="floating col-sm-6 col-lg-3 " key={result.id}>
-                                        <div className="single-publication border rounded">
-                                            <figure>
-                                                <a className="product-image">
-                                                    <Image src={result.img} alt="Publication" />
-                                                </a>
-                                                <ul>
-                                                    <li>
-                                                        <a title="Añadir a Favoritos" className="bg">
-                                                            <i className="fa fa-heart" />
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido" className="bg">
-                                                            <i className="fa fa-search" />
-                                                        </NavLink>
-                                                    </li>
-                                                </ul>
-                                            </figure>
-                                            <div className="publication-content m-0 p-0">
-                                                <span className="category">Productos</span>
-                                                <h3>
-                                                    <a className="text-decoration-none" >{result.name}</a>
-                                                </h3>
+                    {filteredProducts.length!=0 ? (
+                        <Container className="mt-5">
+                            <Row className="d-flex flex-column align-items-center mb-4 ">
+                                <Col xs={12} sm={8} className="mx-auto">
+                                    <h2 className="text-center text-black">PRODUCTOS RELACIONADOS</h2>
+                                </Col>
+                                <Col xs={12} sm={8} md={8} className="mx-auto">
+                                    <h3 className="text-center text-black">PROMOCIONES LIMITADAS ¡APROVÉCHALAS AHORA!</h3>
+                                </Col>
+                            </Row>
+                            <Row className="">
+                                {filteredProducts.map((result) => {
+                                    return (
+                                        <Col className="floating col-sm-6 col-lg-3 " key={result.id}>
+                                            <div className="single-publication border rounded">
+                                                <figure>
+                                                    <a className="product-image">
+                                                        <Image src={result.img} alt="Publication" />
+                                                    </a>
+                                                    <ul>
+                                                        <li>
+                                                            <a title="Añadir a Favoritos" className="bg">
+                                                                <i className="fa fa-heart" />
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <NavLink to={`/details/id:${result.id}`} title="Vistazo Rápido" className="bg">
+                                                                <i className="fa fa-search" />
+                                                            </NavLink>
+                                                        </li>
+                                                    </ul>
+                                                </figure>
+                                                <div className="publication-content m-0 p-0">
+                                                    <span className="category">Productos</span>
+                                                    <h3>
+                                                        <a className="text-decoration-none" >{result.name}</a>
+                                                    </h3>
 
-                                                <h4 className="price">${result.price}</h4>
+                                                    <h4 className="price">${result.price}</h4>
+                                                </div>
+                                                <div className="add-to-cart">
+                                                    <button className="default-btn" onClick={() => onAddToCart(result)}>
+                                                        Añadir al Carro
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div className="add-to-cart">
-                                                <button className="default-btn" onClick={() => onAddToCart(result)}>
-                                                    Añadir al Carro
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                );
-                            })}
-                        </Row>
-                    </Container>
+                                        </Col>
+                                    );
+                                })}
+                            </Row>
+                        </Container>) : (
+                        <div className=""></div>
+                    )}
                 </Container>
             }
 
