@@ -2,8 +2,8 @@ import { useState, useContext } from "react";
 import { connect } from "react-redux";
 import { authenticate, authFailure, authSuccess } from "../redux/authActions";
 import Context from "../../src/redux/controlUsuario/Context";
-import { fetchUserData, userLogin, UserSave, } from "../api/authenticationService";
-import { Alert, Spinner } from "react-bootstrap";
+import { userLogin, UserSave } from "../api/authenticationService";
+//import { Alert, Spinner } from "react-bootstrap";
 import { useNavigate, NavLink } from "react-router-dom";
 import logo from "../images/K-Market-Campus.png";
 const Login = ({ loading, error, ...props }) => {
@@ -14,11 +14,11 @@ const Login = ({ loading, error, ...props }) => {
   const { state, setState } = useContext(Context);
   const navigate = useNavigate();
 
-  const loadUserInfo = async (token) => {
+  /* const loadUserInfo = async (token) => {
     const resp = await fetchUserData(token);
     //  setState({ ...state, data: resp });
     return resp ? resp : null;
-  };
+  }; */
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
@@ -101,9 +101,9 @@ const Login = ({ loading, error, ...props }) => {
 
   const [passwordType, setPasswordType] = useState('password');
 
-  const togglePasswordVisibility = () => {
+  /* const togglePasswordVisibility = () => {
     setPasswordType(passwordType === 'password' ? 'text' : 'password');
-  };
+  }; */
 
 
   return (
