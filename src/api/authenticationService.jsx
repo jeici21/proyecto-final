@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const getToken = () => {
+/* const getToken = () => {
     return localStorage.getItem('USER_KEY');
-}
+} */
 
 export const userLogin = async (authRequest) => {
     let url = `${process.env.hostUrl || 'http://localhost:8080'}/api/v1/auth/login`;

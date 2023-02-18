@@ -93,7 +93,7 @@ const TableCateory = () => {
 
             })
                 .then(response => {
-                    var newdata = data;
+                    //var newdata = data;
                     abrirCerrarModalEditarcate();
                     peticionGetCategory();
                 }).catch(error => {
