@@ -7,7 +7,7 @@
 </div>
 Un sitio web para un supermercado con funciones de agregar, modificar y eliminar productos junto a sus respectivas categorías. También es posible revisar más detalles sobre los productos y agregarlo a un carrito.
 <details>
-    <summary markdown="span" style="font-size: 20px;">📖Tabla de contenidos</summary>
+    <summary markdown="span" style="font-size: 20px">📖Tabla de contenidos</summary>
 <!-- markdownlint-disable MD051-->
 
 - [📃Requisitos](#📃requisitos)
