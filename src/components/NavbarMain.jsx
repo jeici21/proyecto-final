@@ -7,7 +7,7 @@ import Context from "../../src/redux/controlUsuario/Context";
 
 const NavbarMain = () => {
   const { state, setState } = useContext(Context);
-  const [data, setData] = useState({});
+  //const [data, setData] = useState({});
   const navigate = useNavigate();
   const [item, setItem] = useState(
     JSON.parse(localStorage.getItem("itemscart")) || 0
@@ -19,7 +19,7 @@ const NavbarMain = () => {
     borderRadius: "20px", // Hace que los bordes sean redondeados
   };
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  let activeClassName = "underline";
+  //let activeClassName = "underline";
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -47,7 +47,7 @@ const NavbarMain = () => {
    }
   let firstName;
   let lastName;
-  let userROl;
+  //let userROl;
   if (state && state.data) {
     console.log("desde Navbar state" + state.data.roles);
     firstName = state.data.firstName;

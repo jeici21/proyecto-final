@@ -14,7 +14,7 @@ const TableCateory = () => {
     const [modalInsertarCategoria, setModalInsertarCategoria] = useState(false);
 
 
-    const [SelectedProductAdd, setSelectedProductAdd] = useState({});
+    //const [SelectedProductAdd, setSelectedProductAdd] = useState({});
     const [SelectedProduct, setSelectedProduct] = useState({});
     //  const [SelectedCategory, setSelectedCategory] = useState({});
     // const [SelectedInventory, setSelectedInventory] = useState({});
@@ -93,7 +93,7 @@ const TableCateory = () => {
 
             })
                 .then(response => {
-                    var newdata = data;
+                    //var newdata = data;
                     abrirCerrarModalEditarcate();
                     peticionGetCategory();
                 }).catch(error => {

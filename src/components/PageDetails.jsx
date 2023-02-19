@@ -77,6 +77,7 @@ const PageDetails = ({ props, onAddToCart }) => {
         peticionGetProduct();
         peticionGetProductP();
         window.scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
     return (
         <>
@@ -144,7 +145,7 @@ const PageDetails = ({ props, onAddToCart }) => {
 
                         </Col>
                     </Row>
-                    {filteredProducts.length!=0 ? (
+                    {filteredProducts.length!==0 ? (
                         <Container className="mt-5">
                             <Row className="d-flex flex-column align-items-center mb-4 ">
                                 <Col xs={12} sm={8} className="mx-auto">
@@ -160,12 +161,12 @@ const PageDetails = ({ props, onAddToCart }) => {
                                         <Col className="floating col-sm-6 col-lg-3 " key={result.id}>
                                             <div className="single-publication border rounded">
                                                 <figure>
-                                                    <a className="product-image">
+                                                    <a href="#?" className="product-image">
                                                         <Image src={result.img} alt="Publication" />
                                                     </a>
                                                     <ul>
                                                         <li>
-                                                            <a title="Añadir a Favoritos" className="bg">
+                                                            <a href="#?" title="Añadir a Favoritos" className="bg">
                                                                 <i className="fa fa-heart" />
                                                             </a>
                                                         </li>
@@ -179,7 +180,7 @@ const PageDetails = ({ props, onAddToCart }) => {
                                                 <div className="publication-content m-0 p-0">
                                                     <span className="category">Productos</span>
                                                     <h3>
-                                                        <a className="text-decoration-none" >{result.name}</a>
+                                                        <a href="#?" className="text-decoration-none" >{result.name}</a>
                                                     </h3>
 
                                                     <h4 className="price">${result.price}</h4>

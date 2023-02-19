@@ -86,7 +86,7 @@ useEffect(() => {
         {dataCategory.map((result) => {
           return (
             <div className="floating col-12 col-md-4 p-5 mt-3" key={result.id} >
-              <a href="#">
+              <a href="#?">
                 <img
                   src={getRandomCategoryImage(result.name)} alt={result.name}
                   className="rounded-circle img-fluid border"

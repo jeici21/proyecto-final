@@ -14,7 +14,7 @@ const Shop = ({ onAddToCart }) => {
   const { state, setState } = useContext(Context);
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
-  const [data, setData] = useState({});
+  //const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState("all");
 
@@ -33,36 +33,36 @@ const Shop = ({ onAddToCart }) => {
   }, []);
 
   if (currentUser) {
-   // console.log(currentUser);
+    // console.log(currentUser);
     localStorage.setItem("rolUser", JSON.stringify(currentUser?.roles[0]?.roleCode));
     // setState({ ...state, data: currentUser});
   } else {
     console.log("Cerrado y sin datos desde SHop");
   }
 
- /*  let firstName;
-  let lastName;
-  if (state && state.data) {
-    firstName = state.data.firstName;
-    lastName = state.data.lastName;
-    console.log("dese shop" + firstName);
-  }
- */
+  /*  let firstName;
+   let lastName;
+   if (state && state.data) {
+     firstName = state.data.firstName;
+     lastName = state.data.lastName;
+     console.log("dese shop" + firstName);
+   }
+  */
   const logOut = () => {
     localStorage.clear();
     setState("cerrado Sesion");
     navigate("/");
   };
-      // CObtener todos los Category
-      const peticionGetCategory = async () => {
-        const resp = await (await loadCategories()).data;
-        if (resp) {
-          setDataCategory(resp);
-          console.log(resp);
-        } else {
-          setDataCategory([]);
-        }
+  // CObtener todos los Category
+  const peticionGetCategory = async () => {
+    const resp = await (await loadCategories()).data;
+    if (resp) {
+      setDataCategory(resp);
+      console.log(resp);
+    } else {
+      setDataCategory([]);
     }
+  }
   useEffect(() => {
     getProductsFromDb();
     peticionGetCategory();
@@ -205,7 +205,7 @@ const Shop = ({ onAddToCart }) => {
                         </a>
                         <ul>
                           <li >
-                            <a title="Añadir a Favoritos" className="bg">
+                            <a href="#?" title="Añadir a Favoritos" className="bg">
                               <i className="fa fa-heart" />
                             </a>
                           </li>
@@ -223,7 +223,9 @@ const Shop = ({ onAddToCart }) => {
                       <div className="publication-content m-0 p-0 flex-wrap">
                         <span className="category">{result.productCategory.name}</span>
                         <h3 className="text-truncate">
-                          <a className="text-decoration-none" style={{ whiteSpace: 'nowrap' }}>{result.name}</a>
+                          <a href="#?" className="text-decoration-none" style={{ whiteSpace: 'nowrap' }}>
+                            {result.name}
+                          </a>
                         </h3>
 
                         <h4 className="price">${result.price}</h4>

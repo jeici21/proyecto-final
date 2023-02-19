@@ -42,7 +42,7 @@ const FeaturedProducts = () => {
                                                 title="Vistazo Rápido"
                                                 className="bg"
                                             >
-                                                <img src={result.img} className="" width="300px" />
+                                                <img src={result.img} className="" width="300px" alt="" />
                                             </NavLink>
                                         </div>
                                     </div>
