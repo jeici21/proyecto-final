@@ -1,36 +1,13 @@
 # 🛒KMarket Ecommerce
 
-<style>
-    img {
-        width: 50%; height: 50%;
-    }
-    .badgen {
-        display: flex; flex-direction: row; align-items: center; justify-content: center;
-    }
-    .logo-kmarket {
-        width: 15%; height: 15%;
-    }
-    .logo-react, .logo-springboot {
-        width: auto; height: auto; margin: 0;
-    }
-    img, .logo-kmarket {
-        display: block; margin-left: auto; margin-right: auto;
-    }
-    h1, h3 {
-        text-align: center;
-    }
-    summary {
-        font-size: 20px;
-    }
-</style>
-<img src="./src/images/k-Market.png" class="logo-kmarket">
-<div class="badgen">
-    <img src="https://badgen.net/badge/Hecho%20con/React/blue?icon=https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" class="logo-react">
-    <img src="https://badgen.net/badge/Hecho%20con/Spring%20Boot/green?icon=https://www.vectorlogo.zone/logos/springio/springio-icon.svg" class="logo-springboot">
+<img src="./src/images/k-Market.png" width="15%" height="15%" style="display: block; margin-left: auto; margin-right: auto;">
+<div class="badgen" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+    <img src="https://badgen.net/badge/Hecho%20con/React/blue?icon=https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" style="width: auto; height: auto; margin: 0;">
+    <img src="https://badgen.net/badge/Hecho%20con/Spring%20Boot/green?icon=https://www.vectorlogo.zone/logos/springio/springio-icon.svg" style="width: auto; height: auto; margin: 0;">
 </div>
 Un sitio web para un supermercado con funciones de agregar, modificar y eliminar productos junto a sus respectivas categorías. También es posible revisar más detalles sobre los productos y agregarlo a un carrito.
 <details>
-    <summary markdown="span">📖Tabla de contenidos</summary>
+    <summary markdown="span" style="font-size: 20px;">📖Tabla de contenidos</summary>
 <!-- markdownlint-disable MD051-->
 
 - [📃Requisitos](#📃requisitos)
@@ -75,15 +52,15 @@ Un sitio web para un supermercado con funciones de agregar, modificar y eliminar
 
 ### Página de inicio
 
-![Inicio](src/images/image1.jpeg)
+<img src="./src/images/image1.jpeg" width="50%" height="50%" style="display: block; margin-left: auto; margin-right: auto;">
 
 ### Página de la tienda
 
-![Tienda](src/images/image2.jpeg)
+<img src="./src/images/image2.jpeg" width="50%" height="50%" style="display: block; margin-left: auto; margin-right: auto;">
 
 ### Página de inicio de sesión
 
-![Login](src/images/image3.png)
+<img src="./src/images/image3.png" width="50%" height="50%" style="display: block; margin-left: auto; margin-right: auto;">
 
 ## 💻Deploy
 
