@@ -1,7 +1,9 @@
 # 🛒KMarket Ecommerce
 
-<img src="./src/images/k-Market.png" width="15%" height="15%" style="display: block; margin-left: auto; margin-right: auto;">
-<div class="badgen" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+<div align="center">
+<img src="./src/images/k-Market.png" width="15%" height="15%">
+</div>
+<div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
     <img src="https://badgen.net/badge/Hecho%20con/React/blue?icon=https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" style="width: auto; height: auto; margin: 0;">
     <img src="https://badgen.net/badge/Hecho%20con/Spring%20Boot/green?icon=https://www.vectorlogo.zone/logos/springio/springio-icon.svg" style="width: auto; height: auto; margin: 0;">
 </div>
