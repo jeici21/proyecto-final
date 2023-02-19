@@ -1,22 +1,56 @@
-# KMarket Ecommerce
+# 🛒KMarket Ecommerce
 
+<style>
+    img {
+        width: 50%; height: 50%;
+    }
+    .badgen {
+        display: flex; flex-direction: row; align-items: center; justify-content: center;
+    }
+    .logo-kmarket {
+        width: 15%; height: 15%;
+    }
+    .logo-react, .logo-springboot {
+        width: auto; height: auto; margin: 0;
+    }
+    img, .logo-kmarket {
+        display: block; margin-left: auto; margin-right: auto;
+    }
+    h1, h3 {
+        text-align: center;
+    }
+    summary {
+        font-size: 20px;
+    }
+</style>
+<img src="./src/images/k-Market.png" class="logo-kmarket">
+<div class="badgen">
+    <img src="https://badgen.net/badge/Hecho%20con/React/blue?icon=https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" class="logo-react">
+    <img src="https://badgen.net/badge/Hecho%20con/Spring%20Boot/green?icon=https://www.vectorlogo.zone/logos/springio/springio-icon.svg" class="logo-springboot">
+</div>
 Un sitio web para un supermercado con funciones de agregar, modificar y eliminar productos junto a sus respectivas categorías. También es posible revisar más detalles sobre los productos y agregarlo a un carrito.
+<details>
+    <summary markdown="span">📖Tabla de contenidos</summary>
+<!-- markdownlint-disable MD051-->
 
-## Table de contenidos
+- [📃Requisitos](#📃requisitos)
+- [🛠️Instalación](#🛠️instalación)
+- [🎞️Capturas](#🎞️capturas)
+- [💻Deploy](#💻deploy)
+- [🤝Contacto](#🤝contacto)
+- [🙏Agradecimientos](#🙏agradecimientos)
+<!-- markdownlint-enable MD051-->
+</details>
 
-- [Requisitos](#requisitos)
-- [Instalación](#instalación)
-- [Capturas](#capturas)
-- [Desarrolladores](#desarrolladores)
+## 📃Requisitos
 
-## Requisitos
+- Node.js
+- Java 17 o mayor
+- Maven
+- Git
+- Un editor de código o IDE compatible con los lenguajes mencionados anteriormente.
 
-- Node.js 16 o mayor
-- Java SDK 17 o mayor
-- Maven 3 o mayor
-- Un editor de código o IDE compatible con el proyecto.
-
-## Instalación
+## 🛠️Instalación
 
 1. Descarga el código entero, o bien, ejecuta el siguiente comando en el directorio donde ubicarás el código:
 
@@ -31,23 +65,39 @@ Un sitio web para un supermercado con funciones de agregar, modificar y eliminar
     npm install
     ```
 
-4. Ejecuta el proyecto:
+4. Usa este comando para ejecutar el proyecto:
 
     ```bash
     npm start
     ```
 
-## Capturas
+## 🎞️Capturas
 
-<h3 style="text-align: center;">Página de inicio</h3>
-<img src="image1.jpeg" width="50%" height="50%" style="display: block; margin-left: auto; margin-right: auto;">
-<h3 style="text-align: center;">Página de la tienda</h3>
-<img src="image2.jpeg" width="50%" height="50%" style="display: block; margin-left: auto; margin-right: auto;">
-<h3 style="text-align: center;">Página de inicio de sesión</h3>
-<img src="image3.png" width="50%" height="50%" style="display: block; margin-left: auto; margin-right: auto;">
+### Página de inicio
 
-## Desarrolladores
+![Inicio](src/images/image1.jpeg)
+
+### Página de la tienda
+
+![Tienda](src/images/image2.jpeg)
+
+### Página de inicio de sesión
+
+![Login](src/images/image3.png)
+
+## 💻Deploy
+
+[Página desplegada](https://k-market-ten.vercel.app/)
+
+## 🤝Contacto
 
 - [Jorge Castro](https://github.com/jeici21)
 - [Luis Anrrango](https://github.com/LuisRAnrrango)
 - [Ariel Piguave](https://github.com/Piguave)
+
+## 🙏Agradecimientos
+
+- [José Gavilanes](https://github.com/joseandresgavilanes), por su inestimable ayuda en el front-end.
+- [Kenan Al-jaber](https://github.com/KenanAljaber), por su valiosa ayuda en el back-end.
+- [Juan Sotomayor](https://github.com/Juanse7793), por las clases de React que nos permitieron prepararnos para nuestro futuro profesional.
+- [Jaime Sayago](https://github.com/jaimepsayago), por las enseñanzas de Spring Boot tan valiosas para volvernos desarrolladores full-stack.
