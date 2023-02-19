@@ -6,7 +6,7 @@
 </div>
 Un sitio web para un supermercado con funciones de agregar, modificar y eliminar productos junto a sus respectivas categorías. También es posible revisar más detalles sobre los productos y agregarlo a un carrito.
 <details>
-    <summary markdown="span" style="font-size: 20px">📖Tabla de contenidos</summary>
+    <summary markdown="span"><font color="orange" size="4">📖Tabla de contenidos</font></summary>
 <!-- markdownlint-disable MD051-->
 
 - [📃Requisitos](#📃requisitos)
@@ -51,15 +51,15 @@ Un sitio web para un supermercado con funciones de agregar, modificar y eliminar
 
 ### Página de inicio
 
-<img src="./src/images/image1.jpeg" width="50%" height="50%" style="display: block; margin-left: auto; margin-right: auto;">
+<img src="./src/images/image1.jpeg" width="50%" height="50%" align="center">
 
 ### Página de la tienda
 
-<img src="./src/images/image2.jpeg" width="50%" height="50%" style="display: block; margin-left: auto; margin-right: auto;">
+<img src="./src/images/image2.jpeg" width="50%" height="50%" align="center">
 
 ### Página de inicio de sesión
 
-<img src="./src/images/image3.png" width="50%" height="50%" style="display: block; margin-left: auto; margin-right: auto;">
+<img src="./src/images/image3.png" width="50%" height="50%" align="center">
 
 ## 💻Deploy
 
@@ -73,7 +73,7 @@ Un sitio web para un supermercado con funciones de agregar, modificar y eliminar
 
 ## 🙏Agradecimientos
 
-- [José Gavilanes](https://github.com/joseandresgavilanes), por su inestimable ayuda en el front-end.
-- [Kenan Al-jaber](https://github.com/KenanAljaber), por su valiosa ayuda en el back-end.
-- [Juan Sotomayor](https://github.com/Juanse7793), por las clases de React que nos permitieron prepararnos para nuestro futuro profesional.
-- [Jaime Sayago](https://github.com/jaimepsayago), por las enseñanzas de Spring Boot tan valiosas para volvernos desarrolladores full-stack.
+- [José Gavilanes](https://github.com/joseandresgavilanes), por su inestimable ayuda embelleciendo la página web.
+- [Kenan Al-jaber](https://github.com/KenanAljaber), por ayudarnos a resolver los problemas que teníamos en nuestros microservicios.
+- [Ing. Juan Sotomayor](https://github.com/Juanse7793), por las clases de React que nos permitieron prepararnos para nuestro futuro profesional.
+- [Ing. Jaime Sayago](https://github.com/jaimepsayago), por las enseñanzas de Spring Boot tan valiosas para volvernos desarrolladores full-stack.
