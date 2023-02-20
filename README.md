@@ -49,17 +49,22 @@ Un sitio web para un supermercado con funciones de agregar, modificar y eliminar
 
 ## 🎞️Capturas
 
-### Página de inicio
-
-<img src="./src/images/image1.jpeg" width="50%" height="50%" align="center">
-
-### Página de la tienda
-
-<img src="./src/images/image2.jpeg" width="50%" height="50%" align="center">
-
-### Página de inicio de sesión
-
-<img src="./src/images/image3.png" width="50%" height="50%" align="center">
+<table>
+    <tr>
+        <th><p align="center">Página de inicio</p></th>
+        <th><p align="center">Página de la tienda</p></th>
+    </tr>
+    <tr>
+        <td rowspan="3"><img src="./src/images/image1.jpeg" align="center"></td>
+        <td><img src="./src/images/image2.jpeg" align="center"></td>
+    </tr>
+    <tr>
+        <th><p align="center">Página de inicio de sesión</p></th>
+    </tr>
+    <tr>
+        <td><img src="./src/images/image3.png" align="center"></td>
+    </tr>
+</table>
 
 ## 💻Deploy
 
