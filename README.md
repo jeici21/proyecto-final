@@ -18,6 +18,16 @@ Un sitio web para un supermercado con funciones de agregar, modificar y eliminar
 <!-- markdownlint-enable MD051-->
 </details>
 
+## Funciones
+
+<table>
+    <tr><td><strong>Rápido</strong></td><td>La carga de los productos toma tan solo un segundo.</td></tr>
+    <tr><td><strong>Escalable</strong></td><td>El rendimiento es óptimo sin importar cuánto incrementen las funciones de la página.</td></tr>
+    <tr><td><strong>Productos</strong></td><td>Permite ingresar, modificar y eliminar productos.</td></tr>
+    <tr><td><strong>Carrito</strong></td><td>Incluye un carrito de compras funcional.</td></tr>
+    <tr><td><strong>Login</strong></td><td>Es posible iniciar sesión como usuario o admin y también permite registro.</td></tr>
+</table>
+
 ## 📃Requisitos
 
 - Node.js
