@@ -4,11 +4,12 @@
     <img src="https://badgen.net/badge/Hecho%20con/React/blue?icon=https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg">
     <img src="https://badgen.net/badge/Hecho%20con/Spring%20Boot/green?icon=https://www.vectorlogo.zone/logos/springio/springio-icon.svg">
 </div>
-Un sitio web para un supermercado con funciones de agregar, modificar y eliminar productos junto a sus respectivas categorías. También es posible revisar más detalles sobre los productos y agregarlo a un carrito.
+Un sitio web para un supermercado con funciones de agregar, modificar y eliminar productos junto a sus respectivas categorías. También es posible revisar más detalles sobre los productos y agregarlos al carrito de compras.
 <details>
-    <summary markdown="span">📖Tabla de contenidos</summary>
+    <summary markdown="span"><strong>📖Tabla de contenidos</strong></summary>
 <!-- markdownlint-disable MD051-->
 
+- [🖥️Funciones](#🖥️funciones)
 - [📃Requisitos](#📃requisitos)
 - [🛠️Instalación](#🛠️instalación)
 - [🎞️Capturas](#🎞️capturas)
@@ -18,7 +19,7 @@ Un sitio web para un supermercado con funciones de agregar, modificar y eliminar
 <!-- markdownlint-enable MD051-->
 </details>
 
-## Funciones
+## 🖥️Funciones
 
 <table>
     <tr><td><strong>Rápido</strong></td><td>La carga de los productos toma tan solo un segundo.</td></tr>
