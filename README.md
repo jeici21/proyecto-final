@@ -1,5 +1,6 @@
 <h1 align="center"><img src="./src/images/k-Market.png" width="15%" height="15%"></h1>
 <h1 align="center">🛒KMarket Ecommerce</h1>
+<div align="center"><img src="./src/KMarket.png" width="75%" height="75%"></div>
 <div align="center">
     <img src="https://badgen.net/badge/Hecho%20con/React/blue?icon=https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg">
     <img src="https://badgen.net/badge/Hecho%20con/Spring%20Boot/green?icon=https://www.vectorlogo.zone/logos/springio/springio-icon.svg">
